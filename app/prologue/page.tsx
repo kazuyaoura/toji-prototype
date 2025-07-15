@@ -1,24 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import dialogue from './dialogueData';
 
-const dialogue = [
-  {
-    speaker: '吉左衛門',
-    text: 'よう来てくれたな。',
-    image: '/images/kichizaemon_character.png',
-  },
-  {
-    speaker: '吉左衛門',
-    text: '杜氏としての腕、見せてもらおうか。',
-    image: '/images/kichizaemon_character.png',
-  },
-  {
-    speaker: '吉左衛門',
-    text: 'まずは、この蔵の様子を見て回るがいい。',
-    image: '/images/kichizaemon_character.png',
-  },
-];
+// ✅ ① キャラ名と画像を紐づけるマッピングを追加
+const characterImages: Record<string, string> = {
+  吉左衛門: '/images/kichizaemon_character.png',
+  隆介: '/images/ryusuke_character.png',
+  鈴: '/images/suzu_character.png',
+};
 
 export default function ProloguePage() {
   const [index, setIndex] = useState(0);
@@ -26,30 +16,20 @@ export default function ProloguePage() {
 
   return (
     <main style={{ padding: '2rem', fontFamily: 'sans-serif', background: '#f9f9f9', minHeight: '100vh' }}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '1rem',
-          border: '1px solid #ccc',
-          padding: '1rem',
-          borderRadius: '8px',
-          background: '#fff',
-        }}
-      >
+      <div style={{ border: '1px solid #ccc', padding: '1rem', borderRadius: '8px', background: '#fff' }}>
+        {/* ✅ ② キャラクター画像を表示 */}
         <img
-          src={current.image}
+          src={characterImages[current.speaker]}
           alt={current.speaker}
-          width={100}
-          height={100}
-          style={{ borderRadius: '8px' }}
+          style={{ width: '150px', height: 'auto', marginBottom: '1rem' }}
         />
-        <div>
-          <p><strong>{current.speaker}</strong></p>
-          <p style={{ fontSize: '1.2rem' }}>{current.text}</p>
-        </div>
+
+        {/* ✅ ③ セリフの表示 */}
+        <p><strong>{current.speaker}</strong></p>
+        <p style={{ fontSize: '1.2rem' }}>{current.text}</p>
       </div>
 
+      {/* ✅ ④ ボタン or つづく */}
       {index < dialogue.length - 1 ? (
         <button
           onClick={() => setIndex(index + 1)}
