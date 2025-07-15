@@ -1,18 +1,11 @@
-// app/prologue/dialogueData.ts
-
-const dialogue = [
+export const dialogue = [
+  { speaker: '吉左衛門', text: 'さて、まずは誰としてこの蔵で働くか、決めてもらおう。' },
   {
-    speaker: '吉左衛門',
-    text: 'よう来てくれたな。',
+    speaker: 'system',
+    choices: [
+      { label: '隆介として働く', value: '隆介' },
+      { label: '鈴として働く', value: '鈴' }
+    ]
   },
-  {
-    speaker: '吉左衛門',
-    text: '杜氏としての腕、見せてもらおうか。',
-  },
-  {
-    speaker: '吉左衛門',
-    text: 'まずは、この蔵の様子を見て回るがいい。',
-  },
+  { speaker: '頭', text: 'よろしく頼むぞ、杜氏殿！' }
 ];
-
-export default dialogue;
