@@ -17,6 +17,21 @@ export default function Home() {
 
   return (
     <main style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
+      
+      {/* ✅ ここに画像表示を追加 */}
+      {selectedCharacter && (
+        <img
+          src={
+            selectedCharacter === '隆介'
+              ? '/characters/ryusuke.png'
+              : '/characters/suzu.png'
+          }
+          alt={selectedCharacter}
+          style={{ width: '150px', height: 'auto', marginBottom: '1rem' }}
+        />
+      )}
+
+      {/* セリフボックス */}
       <div style={{ border: '1px solid #ccc', padding: '1rem', borderRadius: '8px', background: '#fef9e7' }}>
         {current.choices ? (
           <>
@@ -39,8 +54,11 @@ export default function Home() {
           </>
         )}
       </div>
+
       {selectedCharacter && (
-        <p style={{ marginTop: '1rem' }}>あなたは <strong>{selectedCharacter}</strong> として選ばれました。</p>
+        <p style={{ marginTop: '1rem' }}>
+          あなたは <strong>{selectedCharacter}</strong> として選ばれました。
+        </p>
       )}
     </main>
   );
