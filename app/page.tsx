@@ -1,33 +1,28 @@
 'use client';
 
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const router = useRouter();
 
   const handleStart = () => {
-    router.push('/intro'); // introページに遷移
+    router.push('/intro');
   };
 
   return (
-    <main style={{ textAlign: 'center' }}>
-      <Image
-        src="/images/title-image.png"
-        alt="タイトル画像"
-        width={800}
-        height={600}
-        style={{ maxWidth: '100%', height: 'auto' }}
-      />
+    <main style={{ textAlign: 'center', padding: '2rem' }}>
+      <img src="/images/title-image.png" alt="今日から杜氏！" style={{ width: '100%', height: 'auto' }} />
+
       <button
         onClick={handleStart}
         style={{
-          fontSize: '1.5rem',
-          padding: '0.75rem 2rem',
           marginTop: '1rem',
-          backgroundColor: '#f5f5dc',
-          border: '2px solid #000',
-          borderRadius: '8px',
+          padding: '1rem 2rem',
+          fontSize: '1.2rem',
+          backgroundColor: '#f4e4b5',
+          border: 'none',
+          borderRadius: '0.5rem',
+          cursor: 'pointer',
         }}
       >
         はじめる
