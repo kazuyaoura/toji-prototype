@@ -1,46 +1,41 @@
-'use client';
-import { useRouter } from 'next/navigation';
+// app/page.tsx
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
-  const router = useRouter();
-
   return (
-    <main style={{ textAlign: 'center', padding: '2rem' }}>
+    <main className="flex flex-col items-center justify-center min-h-screen p-4 bg-white">
+      {/* タイトル画像 */}
       <Image
-        src="/images/title_visual.png"
-        alt="今日から杜氏！"
-        width={600}
-        height={300}
-        style={{ marginBottom: '1.5rem' }}
+        src="/images/title-image.png"
+        alt="今日から杜氏！タイトル"
+        width={800}
+        height={500}
+        priority
       />
 
-      <h1>今日から杜氏！</h1>
-
-      <section style={{ margin: '2rem auto', maxWidth: '600px', textAlign: 'left' }}>
-        <h2>はじめに</h2>
-        <p>
+      {/* はじめにテキスト */}
+      <div className="mt-6 text-center max-w-xl">
+        <h2 className="text-xl font-bold">はじめに</h2>
+        <p className="mt-2 text-sm">
           このゲームは、昭和初期の酒蔵を舞台に、あなたが杜氏として酒造りを体験する物語です。
         </p>
 
-        <h2>注意事項</h2>
-        <ul>
-          <li>このゲームはフィクションです。実際の工程や製品とは異なる場合があります。</li>
-          <li>プレイ中にセーブは自動的に行われます。</li>
+        {/* 注意事項 */}
+        <h3 className="mt-4 font-semibold">注意事項</h3>
+        <ul className="mt-1 text-sm text-left list-disc list-inside">
+          <li>このゲームはフィクションです。実際の工程や製法とは異なる場合があります。</li>
+          <li>プレイ中にセーブ機能は行われません。</li>
           <li>スマートフォン推奨です。</li>
         </ul>
-      </section>
+      </div>
 
-      <button
-        onClick={() => router.push('/prologue')}
-        style={{
-          marginTop: '2rem',
-          fontSize: '1.2rem',
-          padding: '0.5rem 1rem',
-        }}
-      >
-        はじめる
-      </button>
+      {/* はじめるボタン */}
+      <Link href="/character-select" className="mt-6">
+        <button className="bg-orange-500 text-white px-6 py-2 rounded-lg shadow hover:bg-orange-600">
+          はじめる
+        </button>
+      </Link>
     </main>
   );
 }
