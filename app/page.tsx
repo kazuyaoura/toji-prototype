@@ -1,49 +1,46 @@
-'use client'
-
-import { useRouter } from 'next/navigation'
+'use client';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function Home() {
-  const router = useRouter()
-
-  const handleStart = () => {
-    router.push('/prologue')
-  }
+  const router = useRouter();
 
   return (
-    <div style={{ maxWidth: 640, margin: '0 auto', padding: '2rem', textAlign: 'center' }}>
-      <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>今日から杜氏！</h1>
+    <main style={{ textAlign: 'center', padding: '2rem' }}>
+      <Image
+        src="/images/title_visual.png"
+        alt="今日から杜氏！"
+        width={600}
+        height={300}
+        style={{ marginBottom: '1.5rem' }}
+      />
 
-      <div style={{ marginBottom: '2rem', background: '#fff8e1', padding: '1rem', borderRadius: '8px' }}>
-        <h2 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>はじめに</h2>
-        <p>
-          このゲームは、酒ミュージアムにある「本蔵」を舞台に、酒造りを体験できる物語です。
-          あなたは今年、新たに杜氏として選ばれました。
-          伝統と工夫が交差する本蔵で、最高の酒を目指しましょう。
-        </p>
-      </div>
+      <h1>今日から杜氏！</h1>
 
-      <div style={{ marginBottom: '2rem', background: '#ffebee', padding: '1rem', borderRadius: '8px' }}>
-        <h2 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>注意事項</h2>
+      <section style={{ margin: '2rem auto', maxWidth: '600px', textAlign: 'left' }}>
+        <h2>はじめに</h2>
         <p>
-          実際の酒造りとは異なる点もありますが、展示と連動しながら楽しめるよう工夫しています。
-          スマートフォンを使用する際は、まわりの方のご迷惑にならないようご注意ください。
+          このゲームは、昭和初期の酒蔵を舞台に、あなたが杜氏として酒造りを体験する物語です。
         </p>
-      </div>
+
+        <h2>注意事項</h2>
+        <ul>
+          <li>このゲームはフィクションです。実際の工程や製品とは異なる場合があります。</li>
+          <li>プレイ中にセーブは自動的に行われます。</li>
+          <li>スマートフォン推奨です。</li>
+        </ul>
+      </section>
 
       <button
-        onClick={handleStart}
+        onClick={() => router.push('/prologue')}
         style={{
-          padding: '0.75rem 2rem',
+          marginTop: '2rem',
           fontSize: '1.2rem',
-          backgroundColor: '#1976d2',
-          color: 'white',
-          border: 'none',
-          borderRadius: '8px',
-          cursor: 'pointer',
+          padding: '0.5rem 1rem',
         }}
       >
         はじめる
       </button>
-    </div>
-  )
+    </main>
+  );
 }
