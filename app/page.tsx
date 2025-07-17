@@ -1,32 +1,29 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
+'use client'
+import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 export default function Home() {
-  const router = useRouter();
+  const router = useRouter()
 
   const handleStart = () => {
-    router.push('/intro');
-  };
+    router.push('/select-character')
+  }
 
   return (
-    <main style={{ textAlign: 'center', padding: '2rem' }}>
-      <img src="/images/title-image.png" alt="今日から杜氏！" style={{ width: '100%', height: 'auto' }} />
-
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 py-8 bg-white">
+      <Image
+        src="/images/title-image.png"
+        alt="今日から杜氏！"
+        width={600}
+        height={800}
+        priority
+      />
       <button
+        className="mt-6 px-6 py-3 text-lg font-semibold text-black bg-yellow-200 rounded-lg shadow"
         onClick={handleStart}
-        style={{
-          marginTop: '1rem',
-          padding: '1rem 2rem',
-          fontSize: '1.2rem',
-          backgroundColor: '#f4e4b5',
-          border: 'none',
-          borderRadius: '0.5rem',
-          cursor: 'pointer',
-        }}
       >
         はじめる
       </button>
-    </main>
-  );
+    </div>
+  )
 }
