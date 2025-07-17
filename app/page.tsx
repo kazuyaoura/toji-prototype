@@ -1,29 +1,16 @@
-'use client'
-import { useRouter } from 'next/navigation'
-import Image from 'next/image'
+'use client';
+
+import { useState } from 'react';
+import IntroNarration from './components/IntroNarration';
+import CharacterSelect from './components/CharacterSelect'; // ※まだ未実装なら一旦コメントアウトでOK
 
 export default function Home() {
-  const router = useRouter()
-
-  const handleStart = () => {
-    router.push('/select-character')
-  }
+  const [scene, setScene] = useState<'intro' | 'select'>('intro');
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 py-8 bg-white">
-      <Image
-        src="/images/title-image.png"
-        alt="今日から杜氏！"
-        width={600}
-        height={800}
-        priority
-      />
-      <button
-        className="mt-6 px-6 py-3 text-lg font-semibold text-black bg-yellow-200 rounded-lg shadow"
-        onClick={handleStart}
-      >
-        はじめる
-      </button>
-    </div>
-  )
+    <>
+      {scene === 'intro' && <IntroNarration onFinish={() => setScene('select')} />}
+      {scene === 'select' && <CharacterSelect />} {/* 仮で入れています */}
+    </>
+  );
 }
