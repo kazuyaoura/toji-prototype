@@ -1,16 +1,29 @@
 'use client';
 
 import { useState } from 'react';
+import TitleScreen from './components/TitleScreen';
 import IntroNarration from './components/IntroNarration';
-import CharacterSelect from './components/CharacterSelect'; // ※まだ未実装なら一旦コメントアウトでOK
+import KichizaemonIntro from './components/KichizaemonIntro';
 
 export default function Home() {
-  const [scene, setScene] = useState<'intro' | 'select'>('intro');
+  const [step, setStep] = useState<'title' | 'intro' | 'kichizaemon'>('title');
 
   return (
-    <>
-      {scene === 'intro' && <IntroNarration onFinish={() => setScene('select')} />}
-      {scene === 'select' && <CharacterSelect />} {/* 仮で入れています */}
-    </>
+    <main style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
+      {step === 'title' && (
+        <TitleScreen onStart={() => setStep('intro')} />
+      )}
+
+      {step === 'intro' && (
+        <IntroNarration onFinish={() => setStep('kichizaemon')} />
+      )}
+
+      {step === 'kichizaemon' && (
+        <KichizaemonIntro onFinish={() => {
+          // ここで次の画面（キャラ選択など）に進む準備をする
+          console.log('吉左衛門パート終了！');
+        }} />
+      )}
+    </main>
   );
 }
