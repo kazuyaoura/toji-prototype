@@ -1,15 +1,31 @@
 'use client';
-import { useState } from 'react';
-import TitleScreen from './components/TitleScreen';
-import KichizaemonIntro from './components/KichizaemonIntro'; // 次の画面（仮）
 
-export default function HomePage() {
-  const [step, setStep] = useState<'title' | 'intro'>('title');
+import React, { useState } from 'react';
+import Image from 'next/image';
+import IntroNarration from './components/IntroNarration';
+
+export default function Home() {
+  const [started, setStarted] = useState(false);
+
+  if (started) {
+    return <IntroNarration />;
+  }
 
   return (
-    <main style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      {step === 'title' && <TitleScreen onStart={() => setStep('intro')} />}
-      {step === 'intro' && <KichizaemonIntro onFinish={() => {}} />}
-    </main>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white p-4">
+      <Image
+        src="/images/title_image.png" // 実際のパスに合わせて調整
+        alt="タイトル画像"
+        width={400}
+        height={300}
+        className="mb-4"
+      />
+      <button
+        className="bg-red-600 text-white px-6 py-2 rounded-full text-lg hover:bg-red-700"
+        onClick={() => setStarted(true)}
+      >
+        はじめる
+      </button>
+    </div>
   );
 }
