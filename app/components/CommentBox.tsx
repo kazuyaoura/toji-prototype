@@ -1,25 +1,16 @@
 // components/CommentBox.tsx
-
-import Image from "next/image";
+import React from 'react';
 
 type CommentBoxProps = {
-  character: string;
-  text: string;
-  imageSrc?: string;
+  speaker: string;
+  message: string;
 };
 
-export const CommentBox = ({ character, text, imageSrc }: CommentBoxProps) => {
+export default function CommentBox({ speaker, message }: CommentBoxProps) {
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md rounded-xl bg-amber-50 p-4 shadow-md">
-      <div className="flex items-center space-x-3">
-        {imageSrc && (
-          <Image src={imageSrc} alt={character} width={64} height={64} className="rounded-full" />
-        )}
-        <div>
-          <p className="font-bold">{character}：</p>
-          <p className="text-base">{text}</p>
-        </div>
-      </div>
+    <div className="bg-white border rounded-lg p-4 shadow-md max-w-md mx-auto my-4">
+      <p className="text-sm text-gray-500">{speaker}</p>
+      <p className="text-lg font-medium text-gray-800">{message}</p>
     </div>
   );
-};
+}
