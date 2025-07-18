@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import DialogueBox from './DialogueBox';
 import KichizaemonIntro from './KichizaemonIntro';
-import CharacterSelection from './CharacterSelection'; // あらかじめ作成済みのコンポーネント
+import CharacterSelection from '../select-character/CharacterSelection';
 
 const IntroNarration = () => {
   const [step, setStep] = useState(0);
