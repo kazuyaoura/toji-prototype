@@ -1,26 +1,29 @@
-'use client';
-import React from 'react';
+// app/components/DialogueBox.tsx
+
+import React, { useState } from 'react';
 
 type DialogueBoxProps = {
-  speaker: 'ryusuke' | 'suzu' | 'kichizaemon';
-  text: string;
+  dialogues: string[];
+  onComplete?: () => void;
 };
 
-const speakerImages: Record<DialogueBoxProps['speaker'], string> = {
-  ryusuke: '/images/ryusuke_character.png',
-  suzu: '/images/suzu_character.png',
-  kichizaemon: '/images/kichizaemon_character.png',
-};
+const DialogueBox: React.FC<DialogueBoxProps> = ({ dialogues, onComplete }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-const DialogueBox = ({ speaker, text }: DialogueBoxProps) => {
+  const handleClick = () => {
+    if (currentIndex < dialogues.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    } else {
+      onComplete?.();
+    }
+  };
+
   return (
-    <div className="flex items-start space-x-4 bg-white p-4 rounded-xl shadow-md border border-gray-300 max-w-2xl">
-      <img
-        src={speakerImages[speaker]}
-        alt={speaker}
-        className="w-24 h-24 object-contain"
-      />
-      <div className="flex-1 text-lg leading-relaxed">{text}</div>
+    <div
+      onClick={handleClick}
+      className="fixed bottom-0 left-0 right-0 bg-white border-t-4 border-blue-600 p-4 text-lg cursor-pointer text-center shadow-lg"
+    >
+      {dialogues[currentIndex]}
     </div>
   );
 };
