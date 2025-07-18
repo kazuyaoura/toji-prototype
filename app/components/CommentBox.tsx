@@ -1,4 +1,4 @@
-// components/CommentBox.tsx
+toji-prototype / components / CommentBox.tsx
 import React from 'react';
 
 type CommentBoxProps = {
