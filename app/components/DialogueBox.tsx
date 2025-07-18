@@ -1,4 +1,4 @@
-// app/components/DialogueBox.tsx
+toji-prototype / components / CommentBox.tsx
 
 import React, { useState } from 'react';
 
