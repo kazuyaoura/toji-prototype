@@ -1,32 +1,40 @@
-type Props = {
-  onFinish: () => void;
-};
+// app/components/KichizaemonIntro.tsx
 
-export default function KichizaemonIntro({ onFinish }: Props) {
-  const lines = [
-    '──今津の杜氏が倒れたそうじゃ。',
-    '急きょ、本蔵の杜氏としてお前に働いてもらいたい。',
-    '大丈夫じゃ。頭には鈴がおる。',
-    'この蔵のことは、よう知っとる。',
-    'さ、準備はええか？',
+import React, { useState } from 'react';
+import DialogueBox from './DialogueBox';
+import Image from 'next/image';
+
+const KichizaemonIntro = ({ onComplete }: { onComplete: () => void }) => {
+  const [showDialogue, setShowDialogue] = useState(true);
+
+  const dialogues = [
+    '隆介（鈴）くん、よう来てくれた。',
+    '今津の杜氏が倒れてな、本蔵の造りを任せたいのだ。',
+    'うちの蔵のことは鈴（隆介）が支えてくれるで安心してええ。',
+    'まずは蔵の構造を頭に入れておいてくれ。',
   ];
 
   return (
-    <div className="p-4">
-      {lines.map((line, index) => (
-        <div key={index} className="mb-4">
-          <div className="text-sm font-bold mb-1">吉左衛門</div>
-          <div className="bg-gray-100 border border-gray-300 rounded-lg p-3">
-            {line}
-          </div>
-        </div>
-      ))}
-      <button
-        onClick={onFinish}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-      >
-        はい（次へ）
-      </button>
+    <div className="relative w-full h-full flex items-center justify-center bg-gray-100">
+      <Image
+        src="/images/kichizaemon_character.png"
+        alt="吉左衛門"
+        width={200}
+        height={200}
+        className="absolute bottom-32 left-4"
+      />
+
+      {showDialogue && (
+        <DialogueBox
+          dialogues={dialogues}
+          onComplete={() => {
+            setShowDialogue(false);
+            onComplete(); // 次のコンポーネントへ進める処理（例：IntroNarrationへ）
+          }}
+        />
+      )}
     </div>
   );
-}
+};
+
+export default KichizaemonIntro;
