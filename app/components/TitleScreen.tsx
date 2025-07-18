@@ -1,4 +1,4 @@
-// app/components/TitleScreen.tsx
+toji-prototype / components / CommentBox.tsx
 
 export default function TitleScreen({ onStart }: { onStart: () => void }) {
   return (
