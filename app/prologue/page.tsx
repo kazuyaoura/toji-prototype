@@ -1,65 +1,49 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { dialogue } from './dialogueData';
+import { useState } from "react";
+import { CommentBox } from "@/components/CommentBox";
 
-export default function Home() {
-  const [index, setIndex] = useState(0);
-  const [selectedCharacter, setSelectedCharacter] = useState<string | null>(null);
-  const current = dialogue[index];
+export default function ProloguePage() {
+  const [step, setStep] = useState(0);
 
-  const handleChoice = (value: string) => {
-    setSelectedCharacter(value);
-    setIndex(index + 1);
+  const dialogue = [
+    {
+      character: "吉左衛門",
+      text: "よう来てくれたのう、今日からあんたが杜氏じゃ。",
+      imageSrc: "/images/kichizaemon.png",
+    },
+    {
+      character: "鈴",
+      text: "わたしがしっかり支えますから、安心してください！",
+      imageSrc: "/images/suzu.png",
+    },
+    {
+      character: "吉左衛門",
+      text: "本蔵の未来はあんたにかかっとるんじゃ。",
+      imageSrc: "/images/kichizaemon.png",
+    },
+  ];
+
+  const handleClick = () => {
+    if (step < dialogue.length - 1) {
+      setStep(step + 1);
+    } else {
+      // 次の画面へ遷移など（必要に応じて）
+      console.log("プロローグ終了 → 次のステップへ");
+    }
   };
 
-  const handleNext = () => setIndex(index + 1);
-
   return (
-    <main style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      
-      {/* ✅ ここに画像表示を追加 */}
-      {selectedCharacter && (
-        <img
-          src={
-            selectedCharacter === '隆介'
-              ? '/characters/ryusuke.png'
-              : '/characters/suzu.png'
-          }
-          alt={selectedCharacter}
-          style={{ width: '150px', height: 'auto', marginBottom: '1rem' }}
-        />
-      )}
+    <div className="min-h-screen bg-[#f9f9f9]" onClick={handleClick}>
+      {/* 背景画像などがある場合ここに表示 */}
+      <div className="pt-32 text-center text-xl font-bold">プロローグ</div>
 
-      {/* セリフボックス */}
-      <div style={{ border: '1px solid #ccc', padding: '1rem', borderRadius: '8px', background: '#fef9e7' }}>
-        {current.choices ? (
-          <>
-            <p><strong>吉左衛門：</strong>さて、どちらを選ぶ？</p>
-            {current.choices.map((choice: any, i: number) => (
-              <button key={i} onClick={() => handleChoice(choice.value)} style={{ margin: '0.5rem' }}>
-                {choice.label}
-              </button>
-            ))}
-          </>
-        ) : (
-          <>
-            <p><strong>{current.speaker}：</strong></p>
-            <p style={{ fontSize: '1.2rem' }}>{current.text}</p>
-            {index < dialogue.length - 1 ? (
-              <button onClick={handleNext} style={{ marginTop: '1rem', padding: '0.5rem 1rem' }}>▶ 次へ</button>
-            ) : (
-              <p style={{ marginTop: '1rem' }}>（つづく）</p>
-            )}
-          </>
-        )}
-      </div>
-
-      {selectedCharacter && (
-        <p style={{ marginTop: '1rem' }}>
-          あなたは <strong>{selectedCharacter}</strong> として選ばれました。
-        </p>
-      )}
-    </main>
+      {/* コメントボックス（タップで進行） */}
+      <CommentBox
+        character={dialogue[step].character}
+        text={dialogue[step].text}
+        imageSrc={dialogue[step].imageSrc}
+      />
+    </div>
   );
 }
