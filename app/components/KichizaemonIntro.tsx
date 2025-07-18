@@ -1,4 +1,4 @@
-// app/components/KichizaemonIntro.tsx
+toji-prototype / components / CommentBox.tsx
 
 import React, { useState } from 'react';
 import DialogueBox from './DialogueBox';
