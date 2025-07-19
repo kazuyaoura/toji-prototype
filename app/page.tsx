@@ -1,3 +1,4 @@
+'use client';
 import { useState } from "react";
 import TitleScreen from "@/components/TitleScreen";
 import Instructions from "@/components/Instructions";
