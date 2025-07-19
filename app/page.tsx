@@ -1,31 +1,18 @@
-'use client';
-
-import { useState } from 'react';
-import Image from 'next/image';
-import IntroNarration from '../components/IntroNarration';
+import { useState } from "react";
+import TitleScreen from "@/components/TitleScreen";
+import Instructions from "@/components/Instructions";
+import CharacterSelect from "@/components/CharacterSelect"; // 次に作る
+import IntroNarration from "@/components/IntroNarration"; // すでにある
 
 export default function Home() {
-  const [started, setStarted] = useState(false);
-
-  if (started) {
-    return <IntroNarration text="これはナレーションです。" />;
-  }
+  const [step, setStep] = useState(0);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white p-4">
-      <Image
-        src="/title.png"
-        alt="タイトル画像"
-        width={300}
-        height={200}
-        className="mb-4"
-      />
-      <button
-        onClick={() => setStarted(true)}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-      >
-        はじめる
-      </button>
-    </div>
+    <>
+      {step === 0 && <TitleScreen onStart={() => setStep(1)} />}
+      {step === 1 && <Instructions onNext={() => setStep(2)} />}
+      {step === 2 && <CharacterSelect onNext={() => setStep(3)} />}
+      {step === 3 && <IntroNarration onNext={() => setStep(4)} />}
+    </>
   );
 }
