@@ -2,8 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import IntroNarration from './components/IntroNarration';
-
+import IntroNarration from '../components/IntroNarration';
 export default function Home() {
   const [started, setStarted] = useState(false);
 
