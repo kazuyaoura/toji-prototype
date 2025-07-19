@@ -7,7 +7,9 @@ export default function Home() {
   const [started, setStarted] = useState(false);
 
   if (started) {
-    return <IntroNarration />;
+  return (
+    <IntroNarration text="これはナレーションです。" />
+  );
   }
 
   return (
