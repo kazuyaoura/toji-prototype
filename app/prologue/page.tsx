@@ -1,49 +1,43 @@
 "use client";
 
 import { useState } from "react";
-import { CommentBox } from "@/components/CommentBox";
+import TitleScreen from "@/components/TitleScreen";
+import CommentBox from "@/components/CommentBox";
+import DialogueBox from "@/components/DialogueBox";
+import IntroNarration from "@/components/IntroNarration";
+import KichizaemonIntro from "@/components/KichizaemonIntro";
 
 export default function ProloguePage() {
   const [step, setStep] = useState(0);
 
-  const dialogue = [
-    {
-      character: "吉左衛門",
-      text: "よう来てくれたのう、今日からあんたが杜氏じゃ。",
-      imageSrc: "/images/kichizaemon.png",
-    },
-    {
-      character: "鈴",
-      text: "わたしがしっかり支えますから、安心してください！",
-      imageSrc: "/images/suzu.png",
-    },
-    {
-      character: "吉左衛門",
-      text: "本蔵の未来はあんたにかかっとるんじゃ。",
-      imageSrc: "/images/kichizaemon.png",
-    },
-  ];
-
-  const handleClick = () => {
-    if (step < dialogue.length - 1) {
-      setStep(step + 1);
-    } else {
-      // 次の画面へ遷移など（必要に応じて）
-      console.log("プロローグ終了 → 次のステップへ");
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#f9f9f9]" onClick={handleClick}>
-      {/* 背景画像などがある場合ここに表示 */}
-      <div className="pt-32 text-center text-xl font-bold">プロローグ</div>
+    <main className="p-4">
+      {/* ステップ0：タイトル画面 */}
+      {step === 0 && <TitleScreen onStart={() => setStep(1)} />}
 
-      {/* コメントボックス（タップで進行） */}
-      <CommentBox
-        character={dialogue[step].character}
-        text={dialogue[step].text}
-        imageSrc={dialogue[step].imageSrc}
-      />
-    </div>
+      {/* ステップ1：ナレーション */}
+      {step === 1 && (
+        <>
+          <IntroNarration text="これは杜氏としての第一歩である……" />
+          <button onClick={() => setStep(2)}>▶️ 続ける</button>
+        </>
+      )}
+
+      {/* ステップ2：キャラセリフ */}
+      {step === 2 && (
+        <>
+          <DialogueBox speaker="鈴" text="ようこそ本蔵へ。これからの案内はわたしが担当しますね。" />
+          <button onClick={() => setStep(3)}>▶️ 続ける</button>
+        </>
+      )}
+
+      {/* ステップ3：吉左衛門の登場 */}
+      {step === 3 && <KichizaemonIntro onNext={() => setStep(4)} />}
+
+      {/* ステップ4：コメントボックス */}
+      {step === 4 && (
+        <CommentBox comment="まずはこの蔵の構造を頭に入れておくのじゃ！" />
+      )}
+    </main>
   );
 }
