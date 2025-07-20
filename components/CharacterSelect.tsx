@@ -1,39 +1,25 @@
-"use client";
-
-import React from "react";
-
 type Props = {
-  onNext: () => void;
+  onSelect: (name: string) => void;
 };
 
-export default function CharacterSelect({ onNext }: Props) {
-  const handleSelect = (character: string) => {
-    // キャラクター名を一時的にログ出力（本実装では状態管理に記録）
-    console.log("選ばれたキャラクター:", character);
-    onNext();
-  };
-
+export default function CharacterSelect({ onSelect }: Props) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#fefefe] text-center px-4">
-      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-800">キャラクターを選んでください</h2>
-
-      <div className="flex flex-col md:flex-row gap-6 mb-6">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-blue-50 text-center space-y-6">
+      <h2 className="text-2xl font-bold">キャラクター選択</h2>
+      <div className="flex gap-6">
         <button
-          onClick={() => handleSelect("隆介")}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-6 rounded-lg font-bold"
+          onClick={() => onSelect("隆介")}
+          className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
         >
-          隆介（男性）
+          隆介で始める
         </button>
-
         <button
-          onClick={() => handleSelect("鈴")}
-          className="bg-pink-500 hover:bg-pink-600 text-white py-3 px-6 rounded-lg font-bold"
+          onClick={() => onSelect("鈴")}
+          className="px-6 py-3 bg-pink-500 text-white rounded-xl hover:bg-pink-600"
         >
-          鈴（女性）
+          鈴で始める
         </button>
       </div>
-
-      <p className="text-sm text-gray-600">選択後、物語が始まります。</p>
     </div>
   );
 }
