@@ -23,9 +23,11 @@ export default function Home() {
         />
       )}
       {step === 3 && (
-        <IntroNarration
-          text={`ようこそ本蔵へ、${character}さん。これからあなたの酒造りが始まります。`}
-          onNext={() => setStep(4)}
+  <IntroNarration
+    text={`ようこそ本蔵へ、${character}さん。これからあなたの酒造りが始まります。`}
+    onNext={() => setStep(4)}
+  />
+)}
         />
       )}
     </>
