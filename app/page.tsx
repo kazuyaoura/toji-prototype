@@ -5,6 +5,7 @@ import TitleScreen from "@/components/TitleScreen";
 import Instructions from "@/components/Instructions";
 import CharacterSelect from "@/components/CharacterSelect";
 import IntroNarration from "@/components/IntroNarration";
+import FloorMap from '@/components/FloorMap';
 
 export default function Home() {
   const [step, setStep] = useState(0);
