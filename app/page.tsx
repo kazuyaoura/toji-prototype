@@ -32,7 +32,6 @@ export default function Home() {
     　{step === 4 && (
   <FloorMap onNext={() => setStep(5)} />
 )}
-      )}
     </>
   );
 }
