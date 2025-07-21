@@ -17,11 +17,11 @@ export default function ProloguePage() {
 
       {/* ステップ1：ナレーション */}
       {step === 1 && (
-        <>
-          <IntroNarration text="これは杜氏としての第一歩である……" />
-          <button onClick={() => setStep(2)}>▶️ 続ける</button>
-        </>
-      )}
+  <IntroNarration
+    text="これは杜氏としての第一歩である……"
+    onNext={() => setStep(2)}
+  />
+)}
 
       {/* ステップ2：キャラセリフ */}
       {step === 2 && (
