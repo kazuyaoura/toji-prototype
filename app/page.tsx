@@ -28,6 +28,9 @@ export default function Home() {
     onNext={() => setStep(4)}
   />
 )}
+    　{step === 4 && (
+  <FloorMap onNext={() => setStep(5)} />
+)}
         />
       )}
     </>
