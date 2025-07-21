@@ -1,24 +1,35 @@
 'use client';
 
-export default function FloorMap({ onNext }: { onNext: () => void }) {
+import React from 'react';
+import { Button } from '@/components/ui/button';
+
+type FloorMapProps = {
+  onNext: () => void;
+};
+
+export default function FloorMap({ onNext }: FloorMapProps) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-white text-center">
-      <h2 className="text-2xl font-bold mb-4">本蔵フロアマップ</h2>
-      <img
-        src="/map-placeholder.jpg"
-        alt="本蔵マップ"
-        className="w-full max-w-md mb-6 rounded shadow"
-      />
-      <p className="mb-4 text-lg">
-        この本蔵の構造をしっかり覚えておこう。<br />
-        スマホのカメラで撮影しておくと便利だぞ！
+    <div className="p-4 text-center space-y-6">
+      <h2 className="text-xl font-bold">本蔵フロアマップ</h2>
+      <p className="text-base">
+        まずはこれから働く「本蔵」の構造を頭に入れておこう！
+        <br />
+        カメラで撮ってもいいぞ！
       </p>
-      <button
-        onClick={onNext}
-        className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
-      >
-        撮影した！次へ進む
-      </button>
+
+      {/* フロアマップ画像を入れる場所（後で差し替え可能） */}
+      <div className="w-full max-w-md mx-auto border rounded-lg overflow-hidden shadow">
+        <img
+          src="/floor-map.jpg"
+          alt="本蔵フロアマップ"
+          className="w-full object-contain"
+        />
+      </div>
+
+      {/* 次へ進むボタン */}
+      <Button onClick={onNext}>
+        理解した！次へ進む
+      </Button>
     </div>
   );
 }
