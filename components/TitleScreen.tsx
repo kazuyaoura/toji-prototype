@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
-export default function TitleScreen() {
-  const router = useRouter();
+type Props = {
+  onStart: () => void;
+};
 
+export default function TitleScreen({ onStart }: Props) {
   return (
     <div style={{ position: "relative", width: "100%", height: "100vh" }}>
       <Image
@@ -16,7 +17,7 @@ export default function TitleScreen() {
         priority
       />
       <button
-        onClick={() => router.push("/intro")}
+        onClick={onStart}
         style={{
           position: "absolute",
           bottom: "8%",
