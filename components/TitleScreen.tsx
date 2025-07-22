@@ -25,7 +25,7 @@ export default function TitleScreen({ onStart }: Props) {
           transform: "translateX(-50%)",
           padding: "12px 28px",
           fontSize: "1.5rem",
-          backgroundColor: "#fff",
+          backgroundColor: "#ffffff",
           borderRadius: "12px",
           border: "none",
           boxShadow: "2px 2px 8px rgba(0,0,0,0.3)",
