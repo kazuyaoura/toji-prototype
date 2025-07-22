@@ -1,27 +1,38 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import "./TitleScreen.css";
+"use client";
 
-const TitleScreen = () => {
-  const navigate = useNavigate();
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-  const handleStart = () => {
-    navigate("/notice"); // 注意画面など次のページへ
-  };
+export default function TitleScreen() {
+  const router = useRouter();
 
   return (
-    <div className="title-screen">
-      <img
+    <div style={{ position: "relative", width: "100%", height: "100vh" }}>
+      <Image
         src="/images/title_main_with_start.png"
-        alt="タイトル背景"
-        className="title-background"
+        alt="タイトル画面"
+        fill
+        style={{ objectFit: "cover" }}
+        priority
       />
-      {/* 画像内にSTARTボタンが描かれているので、実際のボタンは透明で配置 */}
-      <button className="start-overlay-button" onClick={handleStart}>
-        はじめる
+      <button
+        onClick={() => router.push("/intro")}
+        style={{
+          position: "absolute",
+          bottom: "8%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          padding: "12px 28px",
+          fontSize: "1.5rem",
+          backgroundColor: "#fff",
+          borderRadius: "12px",
+          border: "none",
+          boxShadow: "2px 2px 8px rgba(0,0,0,0.3)",
+          cursor: "pointer",
+        }}
+      >
+        ▶ はじめる
       </button>
     </div>
   );
-};
-
-export default TitleScreen;
+}
