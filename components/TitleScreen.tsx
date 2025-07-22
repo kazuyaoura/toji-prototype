@@ -1,14 +1,27 @@
-type Props = {
-  onStart: () => void;
-};
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./TitleScreen.css";
 
-export default function TitleScreen({ onStart }: Props) {
+const TitleScreen = () => {
+  const navigate = useNavigate();
+
+  const handleStart = () => {
+    navigate("/notice"); // 注意画面など次のページへ
+  };
+
   return (
-    <div className="text-center p-4">
-      <h1 className="text-2xl">今日から杜氏！</h1>
-      <button onClick={onStart} className="mt-4 p-2 bg-blue-500 text-white rounded">
+    <div className="title-screen">
+      <img
+        src="/images/title_main_with_start.png"
+        alt="タイトル背景"
+        className="title-background"
+      />
+      {/* 画像内にSTARTボタンが描かれているので、実際のボタンは透明で配置 */}
+      <button className="start-overlay-button" onClick={handleStart}>
         はじめる
       </button>
     </div>
   );
-}
+};
+
+export default TitleScreen;
