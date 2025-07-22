@@ -1,24 +1,53 @@
+"use client";
+
 type Props = {
   onSelect: (name: string) => void;
 };
 
 export default function CharacterSelect({ onSelect }: Props) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-blue-50 text-center space-y-6">
-      <h2 className="text-2xl font-bold">キャラクター選択</h2>
-      <div className="flex gap-6">
-        <button
+    <div
+      style={{
+        height: "100vh",
+        backgroundColor: "#fef6e4",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "1rem",
+      }}
+    >
+      <h1 style={{ fontSize: "1.8rem", marginBottom: "1rem" }}>
+        主人公を選んでください
+      </h1>
+      <div
+        style={{
+          display: "flex",
+          gap: "2rem",
+        }}
+      >
+        <div
           onClick={() => onSelect("隆介")}
-          className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
+          style={{ textAlign: "center", cursor: "pointer" }}
         >
-          隆介で始める
-        </button>
-        <button
+          <img
+            src="/images/ryusuke_character.png"
+            alt="隆介"
+            style={{ width: "140px", height: "auto" }}
+          />
+          <p style={{ marginTop: "0.5rem", fontSize: "1.2rem" }}>隆介</p>
+        </div>
+        <div
           onClick={() => onSelect("鈴")}
-          className="px-6 py-3 bg-pink-500 text-white rounded-xl hover:bg-pink-600"
+          style={{ textAlign: "center", cursor: "pointer" }}
         >
-          鈴で始める
-        </button>
+          <img
+            src="/images/suzu_character.png"
+            alt="鈴"
+            style={{ width: "140px", height: "auto" }}
+          />
+          <p style={{ marginTop: "0.5rem", fontSize: "1.2rem" }}>鈴</p>
+        </div>
       </div>
     </div>
   );
