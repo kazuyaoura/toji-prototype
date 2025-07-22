@@ -9,45 +9,81 @@ export default function CharacterSelect({ onSelect }: Props) {
     <div
       style={{
         height: "100vh",
+        width: "100vw",
         backgroundColor: "#fef6e4",
         display: "flex",
-        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        padding: "1rem",
       }}
     >
-      <h1 style={{ fontSize: "1.8rem", marginBottom: "1rem" }}>
-        主人公を選んでください
-      </h1>
       <div
         style={{
-          display: "flex",
-          gap: "2rem",
+          position: "relative",
+          width: "90%",
+          maxWidth: "400px",
+          aspectRatio: "1 / 1",
         }}
       >
+        {/* 背景画像 */}
+        <img
+          src="/images/ui_choices_panel_2options.png"
+          alt="キャラ選択パネル"
+          style={{ position: "absolute", width: "100%", height: "100%" }}
+        />
+
+        {/* テキスト部分 */}
         <div
+          style={{
+            position: "absolute",
+            top: "12%",
+            width: "100%",
+            textAlign: "center",
+            fontSize: "1.2rem",
+            fontWeight: "bold",
+          }}
+        >
+          主人公を選んでください
+        </div>
+
+        {/* ボタン1：隆介 */}
+        <button
           onClick={() => onSelect("隆介")}
-          style={{ textAlign: "center", cursor: "pointer" }}
+          style={{
+            position: "absolute",
+            top: "42%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "60%",
+            padding: "10px 0",
+            background: "transparent",
+            border: "none",
+            fontSize: "1.1rem",
+            fontWeight: "bold",
+            color: "#004080",
+          }}
         >
-          <img
-            src="/images/ryusuke_character.png"
-            alt="隆介"
-            style={{ width: "140px", height: "auto" }}
-          />
-          <p style={{ marginTop: "0.5rem", fontSize: "1.2rem" }}>隆介</p>
-        </div>
-        <div
+          隆介
+        </button>
+
+        {/* ボタン2：鈴 */}
+        <button
           onClick={() => onSelect("鈴")}
-          style={{ textAlign: "center", cursor: "pointer" }}
+          style={{
+            position: "absolute",
+            top: "66%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "60%",
+            padding: "10px 0",
+            background: "transparent",
+            border: "none",
+            fontSize: "1.1rem",
+            fontWeight: "bold",
+            color: "#004080",
+          }}
         >
-          <img
-            src="/images/suzu_character.png"
-            alt="鈴"
-            style={{ width: "140px", height: "auto" }}
-          />
-          <p style={{ marginTop: "0.5rem", fontSize: "1.2rem" }}>鈴</p>
-        </div>
+          鈴
+        </button>
       </div>
     </div>
   );
