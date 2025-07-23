@@ -1,62 +1,52 @@
-"use client";
+'use client';
+
+import Image from 'next/image';
 
 type Props = {
-  text: string;
   onNext: () => void;
+  character: string;
 };
 
-export default function IntroNarration({ text, onNext }: Props) {
+export default function IntroNarration({ onNext, character }: Props) {
+  const characterName = character === '隆介' ? '隆介' : '鈴';
+
+  const message = `いよいよ今日から、杜氏として本蔵に入ることになった。
+西宮の老舗酒蔵「本蔵」で、日本一の酒を目指すんや。`;
+
   return (
-    <div
-      onClick={onNext}
-      style={{
-        width: "100vw",
-        height: "100vh",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
+    <div className="relative w-screen h-screen overflow-hidden">
       {/* 背景画像 */}
-      <img
-        src="/images/bg_narration_kichizaemon_intro.png"
-        alt="ナレーション背景"
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          position: "absolute",
-        }}
+      <Image
+        src="/backgrounds/bg_narration_kichizaemon_intro.png"
+        alt="本蔵"
+        fill
+        style={{ objectFit: 'cover' }}
+        priority
       />
 
       {/* コメントウィンドウ */}
-      <img
-        src="/images/ui_comment_window_base.png"
-        alt="コメントボックス"
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          width: "100%",
-          height: "25vh",
-          objectFit: "cover",
-        }}
-      />
+      <div className="absolute bottom-0 w-full flex justify-center items-end z-20">
+        <div className="relative w-[90%] max-w-2xl">
+          <Image
+            src="/ui/ui_comment_window_base.png"
+            alt="コメントウィンドウ"
+            width={800}
+            height={200}
+          />
+          <p className="absolute top-6 left-6 right-6 text-lg font-bold leading-relaxed text-black whitespace-pre-line drop-shadow">
+            {message}
+          </p>
+        </div>
+      </div>
 
-      {/* テキスト表示 */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "6vh",
-          left: "5vw",
-          right: "5vw",
-          color: "#222",
-          fontSize: "1.2rem",
-          lineHeight: "1.8",
-          fontWeight: "bold",
-          textShadow: "1px 1px 2px rgba(255,255,255,0.8)",
-        }}
-      >
-        {text}
+      {/* 次へボタン */}
+      <div className="absolute bottom-4 right-4 z-30">
+        <button
+          onClick={onNext}
+          className="bg-white text-black text-lg font-bold px-4 py-2 rounded shadow hover:bg-gray-200"
+        >
+          ▶
+        </button>
       </div>
     </div>
   );
