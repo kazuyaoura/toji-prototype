@@ -9,7 +9,7 @@ type Props = {
 export default function CharacterSelect({ onSelect }: Props) {
   return (
     <div className="relative w-screen h-screen bg-black text-white overflow-hidden flex flex-col items-center justify-center space-y-6 p-4">
-      <h1 className="text-2xl font-bold">杜氏に就任する人物を選んでください</h1>
+      <h1 className="text-2xl font-bold">主人公を選んでください</h1>
 
       <div className="flex flex-row items-end justify-center space-x-8">
         {/* 隆介 */}
