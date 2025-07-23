@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { MoneyContext } from '@/contexts/MoneyContext';
 
 interface WaterChoiceProps {
   onSelect: (source: string) => void;
@@ -10,6 +11,7 @@ interface WaterChoiceProps {
 
 export default function WaterChoice({ onSelect }: WaterChoiceProps) {
   const [step, setStep] = useState(0);
+  const { money, spend } = useContext(MoneyContext);
 
   const dialogues = [
     '西宮の酒造りには、「宮水」みたいな名水が欠かせへん。',
@@ -23,6 +25,15 @@ export default function WaterChoice({ onSelect }: WaterChoiceProps) {
   ];
 
   const handleNext = () => setStep((prev) => prev + 1);
+
+  const handleSelect = (source: string, cost: number) => {
+    if (money >= cost) {
+      spend(cost);
+      onSelect(source);
+    } else {
+      alert('お金が足りません！');
+    }
+  };
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
@@ -52,7 +63,7 @@ export default function WaterChoice({ onSelect }: WaterChoiceProps) {
             width={800}
             height={200}
           />
-          <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center px-6 text-base font-bold leading-relaxed text-black">
+          <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center px-6 text-base font-bold leading-relaxed text-black whitespace-pre-line">
             {dialogues[step]}
           </div>
         </div>
@@ -73,9 +84,15 @@ export default function WaterChoice({ onSelect }: WaterChoiceProps) {
             height={200}
           />
           <div className="absolute flex flex-col space-y-2">
-            <Button onClick={() => onSelect('宮水井戸')}>宮水井戸（高コスト 💰💰💰）</Button>
-            <Button onClick={() => onSelect('酒蔵の井戸')}>酒蔵の井戸（中コスト 💰💰）</Button>
-            <Button onClick={() => onSelect('夙川の水')}>夙川の水（低コスト 💰）</Button>
+            <Button onClick={() => handleSelect('宮水井戸', 1500)}>
+              宮水井戸（¥1500）
+            </Button>
+            <Button onClick={() => handleSelect('酒蔵の井戸', 800)}>
+              酒蔵の井戸（¥800）
+            </Button>
+            <Button onClick={() => handleSelect('夙川の水', 400)}>
+              夙川の水（¥400）
+            </Button>
           </div>
         </div>
       )}
