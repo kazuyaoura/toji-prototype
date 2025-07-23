@@ -60,13 +60,13 @@ export default function RiceSelection({ onSelect }: Props) {
       <Image
         src="/bg_rice_storage_room.png"
         alt="米蔵"
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: 'cover' }}
         priority
       />
 
       {/* キャラクター */}
-      <div className="absolute bottom-0 left-0 w-1/3 max-w-[240px]">
+      <div className="absolute bottom-0 left-0 w-1/3 max-w-[300px]">
         <Image
           src="/character_rice_saburo_transparent.png"
           alt="三郎"
@@ -85,7 +85,8 @@ export default function RiceSelection({ onSelect }: Props) {
               width={768}
               height={200}
             />
-            <p className="absolute top-6 left-6 right-6 text-lg whitespace-pre-line leading-relaxed">
+            <p className="absolute top-6 left-6 right-6 text-lg whitespace-pre-line leading-relaxed font-bold text-black"
+              style={{ textShadow: '1px 1px 2px rgba(255,255,255,0.8)' }}>
               {messages[messageIndex]}
             </p>
           </div>
@@ -103,12 +104,14 @@ export default function RiceSelection({ onSelect }: Props) {
               height={300}
             />
             <div className="absolute top-6 left-0 right-0 space-y-2 px-6">
-              <p className="text-lg font-bold mb-2">お米を選んでください（所持金：{money.toLocaleString()}円）</p>
+              <p className="text-lg font-bold mb-2 text-black">
+                お米を選んでください（所持金：{money.toLocaleString()}円）
+              </p>
               {riceOptions.map((option) => (
                 <button
                   key={option.name}
                   onClick={() => handleSelect(option.name, option.cost)}
-                  className="w-full bg-blue-400 text-white py-2 rounded-lg shadow"
+                  className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow"
                 >
                   {option.name}（{option.cost.toLocaleString()}円） - {option.description}
                 </button>
