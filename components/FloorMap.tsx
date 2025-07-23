@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { Button } from '@/components/ui/button';
 
 type FloorMapProps = {
@@ -9,27 +8,25 @@ type FloorMapProps = {
 
 export default function FloorMap({ onNext }: FloorMapProps) {
   return (
-    <div className="p-4 text-center space-y-6">
-      <h2 className="text-xl font-bold">本蔵フロアマップ</h2>
-      <p className="text-base">
-        まずはこれから働く「本蔵」の構造を頭に入れておこう！
-        <br />
-        カメラで撮ってもいいぞ！
-      </p>
+    <div className="relative w-screen h-screen overflow-hidden" onClick={onNext}>
+      {/* 背景（酒蔵内部） */}
+      <img
+        src="/images/bg_wooden_storage_room.png"
+        alt="本蔵内部"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
 
-      {/* フロアマップ画像を入れる場所（後で差し替え可能） */}
-      <div className="w-full max-w-md mx-auto border rounded-lg overflow-hidden shadow">
-        <img
-          src="/floor-map.jpg"
-          alt="本蔵フロアマップ"
-          className="w-full object-contain"
-        />
+      {/* コメント枠 */}
+      <img
+        src="/images/ui_comment_window_base.png"
+        alt="コメント枠"
+        className="absolute bottom-0 left-0 w-full h-[25vh] object-cover"
+      />
+
+      {/* コメントテキスト */}
+      <div className="absolute bottom-[6vh] left-[5vw] right-[5vw] text-[1.2rem] font-bold text-gray-800 drop-shadow-[1px_1px_2px_rgba(255,255,255,0.8)]">
+        ではまず、これから働くこの本蔵の構造をしっかり撮影しておこう。
       </div>
-
-      {/* 次へ進むボタン */}
-      <Button onClick={onNext}>
-        理解した！次へ進む
-      </Button>
     </div>
   );
 }
