@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import Image from "next/image";
+import Image from 'next/image';
 
 type Props = {
   onStart: () => void;
@@ -8,29 +8,17 @@ type Props = {
 
 export default function TitleScreen({ onStart }: Props) {
   return (
-    <div style={{ position: "relative", width: "100%", height: "100vh" }}>
+    <div className="relative w-full h-screen">
       <Image
         src="/images/title_main_with_start.png"
         alt="タイトル画面"
         fill
-        style={{ objectFit: "cover" }}
+        className="object-cover"
         priority
       />
       <button
         onClick={onStart}
-        style={{
-          position: "absolute",
-          bottom: "8%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          padding: "12px 28px",
-          fontSize: "1.5rem",
-          backgroundColor: "#ffffff",
-          borderRadius: "12px",
-          border: "none",
-          boxShadow: "2px 2px 8px rgba(0,0,0,0.3)",
-          cursor: "pointer",
-        }}
+        className="absolute bottom-[8%] left-1/2 transform -translate-x-1/2 px-7 py-3 text-xl font-semibold bg-white rounded-xl shadow-md hover:bg-gray-100 active:scale-95 transition-all duration-150"
       >
         ▶ はじめる
       </button>
