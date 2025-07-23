@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { MoneyContext } from '@/contexts/MoneyContext';
 
 interface RicePolishingChoiceProps {
   playerName: '隆介' | '鈴';
@@ -13,6 +14,7 @@ interface RicePolishingChoiceProps {
 
 export default function RicePolishingChoice({ playerName, selectedRice, onSelect, isFirstPlay }: RicePolishingChoiceProps) {
   const [step, setStep] = useState(0);
+  const { money, spend } = useContext(MoneyContext);
 
   const playerImage = playerName === '隆介'
     ? '/characters/character_main_ryusuke_transparent.png'
@@ -50,6 +52,15 @@ export default function RicePolishingChoice({ playerName, selectedRice, onSelect
     { method: '蒸気機関', label: '蒸気機関（近代の力）', cost: 800 },
     { method: '機械精米', label: '機械精米（高精度・高コスト）', cost: 1500 },
   ];
+
+  const handleSelect = (method: string, cost: number) => {
+    if (money >= cost) {
+      spend(cost);
+      onSelect(method);
+    } else {
+      alert('所持金が足りません！');
+    }
+  };
 
   const renderDialogue = () => {
     let imageSrc = '';
@@ -119,12 +130,13 @@ export default function RicePolishingChoice({ playerName, selectedRice, onSelect
               {polishingOptions.map((option) => (
                 <Button
                   key={option.method}
-                  onClick={() => onSelect(option.method)}
+                  onClick={() => handleSelect(option.method, option.cost)}
                   disabled={option.method === '機械精米' && isFirstPlay}
                 >
                   {`${option.label} - ¥${option.cost}`}
                 </Button>
               ))}
+              <div className="text-sm mt-2 text-white">所持金：¥{money}</div>
             </div>
           </div>
         )}
