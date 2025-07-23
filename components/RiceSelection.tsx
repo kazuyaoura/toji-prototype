@@ -1,22 +1,41 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Image from 'next/image';
+import { MoneyContext } from '@/contexts/MoneyContext';
 
 type Props = {
   onSelect: (choice: string) => void;
 };
 
-const messages = [
-  'ようこそ米蔵へ！',
-  'ここでは酒造りに使うお米を選んでもらうぞ。',
-  '値は張るが最高の酒ができる“播磨産 山田錦”。\n西宮の米はバランス型でコスパ良し。\n飯米は安いがクセが出るぞ。',
-  '味の違いは売れ行きや評判にも関わるから、悩みどころだな…。',
-  'さて、どのお米にする？',
+const riceOptions = [
+  {
+    name: '播磨産 山田錦',
+    cost: 5000,
+    description: '値は張るが最高の酒ができるぞ。評判重視ならこれやな。',
+  },
+  {
+    name: '西宮の米',
+    cost: 3000,
+    description: '地元産でコスパ良し！バランスの取れた選択や。',
+  },
+  {
+    name: '飯米',
+    cost: 1000,
+    description: '安さが魅力やけど、クセが出るかもな…。腕の見せどころや。',
+  },
 ];
 
 export default function RiceSelection({ onSelect }: Props) {
   const [messageIndex, setMessageIndex] = useState(0);
+  const { money, spend } = useContext(MoneyContext);
+
+  const messages = [
+    'ようこそ米蔵へ！',
+    'ここでは酒造りに使うお米を選んでもらうぞ。',
+    '味の違いは売れ行きや評判にも関わるから、悩みどころだな…。',
+    'さて、どのお米にする？',
+  ];
 
   const handleClick = () => {
     if (messageIndex < messages.length - 1) {
@@ -26,11 +45,17 @@ export default function RiceSelection({ onSelect }: Props) {
 
   const isChoiceStep = messageIndex === messages.length - 1;
 
+  const handleSelect = (rice: string, cost: number) => {
+    if (money >= cost) {
+      spend(cost);
+      onSelect(rice);
+    } else {
+      alert('所持金が足りません！');
+    }
+  };
+
   return (
-    <div
-      className="relative w-full h-screen overflow-hidden"
-      style={{ fontFamily: 'sans-serif' }}
-    >
+    <div className="relative w-full h-screen overflow-hidden" style={{ fontFamily: 'sans-serif' }}>
       {/* 背景画像 */}
       <Image
         src="/bg_rice_storage_room.png"
@@ -52,10 +77,7 @@ export default function RiceSelection({ onSelect }: Props) {
 
       {/* コメントボックス */}
       {!isChoiceStep && (
-        <div
-          className="absolute bottom-0 w-full px-4 pb-4"
-          onClick={handleClick}
-        >
+        <div className="absolute bottom-0 w-full px-4 pb-4" onClick={handleClick}>
           <div className="relative mx-auto max-w-2xl">
             <Image
               src="/ui_comment_window_base.png"
@@ -81,25 +103,16 @@ export default function RiceSelection({ onSelect }: Props) {
               height={300}
             />
             <div className="absolute top-6 left-0 right-0 space-y-2 px-6">
-              <p className="text-lg font-bold mb-2">お米を選んでください</p>
-              <button
-                onClick={() => onSelect('播磨産 山田錦')}
-                className="w-full bg-blue-400 text-white py-2 rounded-lg shadow"
-              >
-                播磨産 山田錦
-              </button>
-              <button
-                onClick={() => onSelect('西宮の米')}
-                className="w-full bg-blue-400 text-white py-2 rounded-lg shadow"
-              >
-                西宮の米
-              </button>
-              <button
-                onClick={() => onSelect('飯米')}
-                className="w-full bg-blue-400 text-white py-2 rounded-lg shadow"
-              >
-                飯米
-              </button>
+              <p className="text-lg font-bold mb-2">お米を選んでください（所持金：{money.toLocaleString()}円）</p>
+              {riceOptions.map((option) => (
+                <button
+                  key={option.name}
+                  onClick={() => handleSelect(option.name, option.cost)}
+                  className="w-full bg-blue-400 text-white py-2 rounded-lg shadow"
+                >
+                  {option.name}（{option.cost.toLocaleString()}円） - {option.description}
+                </button>
+              ))}
             </div>
           </div>
         </div>
