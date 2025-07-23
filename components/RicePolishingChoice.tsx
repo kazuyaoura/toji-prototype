@@ -12,13 +12,19 @@ interface RicePolishingChoiceProps {
   isFirstPlay: boolean;
 }
 
-export default function RicePolishingChoice({ playerName, selectedRice, onSelect, isFirstPlay }: RicePolishingChoiceProps) {
+export default function RicePolishingChoice({
+  playerName,
+  selectedRice,
+  onSelect,
+  isFirstPlay,
+}: RicePolishingChoiceProps) {
   const [step, setStep] = useState(0);
   const { money, spend } = useContext(MoneyContext);
 
-  const playerImage = playerName === '隆介'
-    ? '/characters/character_main_ryusuke_transparent.png'
-    : '/characters/character_main_suzue_transparent.png';
+  const playerImage =
+    playerName === '隆介'
+      ? '/characters/character_main_ryusuke_transparent.png'
+      : '/characters/character_main_suzue_transparent.png';
 
   const getFirstDialogue = () => {
     if (selectedRice === '播磨産山田錦') {
@@ -41,7 +47,7 @@ export default function RicePolishingChoice({ playerName, selectedRice, onSelect
     '次は「水車」や。\n近くの夙川（しゅくがわ）にある水車小屋を使うてな、\n自然の力で力強く精米できるんやで。\nただな……ちょっと離れとるから、米の運搬が手間や。400円や。',
     '続いて「蒸気機関」や。\n石炭さえくべれば動いてくれるから、天気に関係なく安定しとる。\n精米のスピードも速いし、仕上がりもなかなかええ。\n800円とちょい高めやけどな。',
     '最後は「機械精米」や！\nこれはもう、最新鋭の技術やで。\n均一に精米できて、味も見た目も上等や。\n…せやけど、1500円。初めての仕込みにはちょっと贅沢かもしれへんな。',
-    'それぞれええとこ悪いとこあるさかい、よう考えて決めてな！\nどの方法で精米する？'
+    'それぞれええとこ悪いとこあるさかい、よう考えて決めてな！\nどの方法で精米する？',
   ];
 
   const handleNext = () => setStep((prev) => prev + 1);
@@ -63,17 +69,8 @@ export default function RicePolishingChoice({ playerName, selectedRice, onSelect
   };
 
   const renderDialogue = () => {
-    let imageSrc = '';
-    let speakerName = '';
-
-    if (step === 0) {
-      imageSrc = playerImage;
-      speakerName = playerName;
-    } else {
-      imageSrc = '/characters/character_rice_saburo_transparent.png';
-      speakerName = '三郎';
-    }
-
+    const imageSrc = step === 0 ? playerImage : '/characters/character_rice_saburo_transparent.png';
+    const speakerName = step === 0 ? playerName : '三郎';
     const isSelectionStep = step === polishingDialogues.length;
 
     return (
@@ -81,8 +78,8 @@ export default function RicePolishingChoice({ playerName, selectedRice, onSelect
         <Image
           src="/backgrounds/bg_rice_storage_room.png"
           alt="背景"
-          layout="fill"
-          objectFit="cover"
+          fill
+          priority
           className="z-0"
         />
 
@@ -105,7 +102,7 @@ export default function RicePolishingChoice({ playerName, selectedRice, onSelect
                 width={800}
                 height={200}
               />
-              <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center px-6 text-base font-bold leading-relaxed text-black whitespace-pre-line">
+              <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center px-6 text-base font-bold leading-relaxed text-black whitespace-pre-line drop-shadow-[1px_1px_1px_rgba(255,255,255,0.8)]">
                 {step === 0 ? getFirstDialogue() : polishingDialogues[step - 1]}
               </div>
             </div>
@@ -136,6 +133,9 @@ export default function RicePolishingChoice({ playerName, selectedRice, onSelect
                   {`${option.label} - ¥${option.cost}`}
                 </Button>
               ))}
+              {isFirstPlay && (
+                <div className="text-xs text-white mt-1">※ 初回は機械精米は選べません</div>
+              )}
               <div className="text-sm mt-2 text-white">所持金：¥{money}</div>
             </div>
           </div>
