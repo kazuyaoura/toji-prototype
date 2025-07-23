@@ -17,7 +17,7 @@ export default function MoneyDisplay() {
           height={100}
           className="w-full h-auto"
         />
-        <span className="absolute top-[58%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-[18px] text-black text-outline">
+        <span className="absolute top-[58%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-[18px] text-black drop-shadow-text">
           ¥{money.toLocaleString()}
         </span>
       </div>
