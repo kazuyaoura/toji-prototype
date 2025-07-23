@@ -1,15 +1,35 @@
-import Link from 'next/link';
+'use client';
+
+import { useState } from "react";
+import TitleScreen from "@/components/TitleScreen";
+import Instructions from "@/components/Instructions";
+import CharacterSelect from "@/components/CharacterSelect";
+import IntroNarration from "@/components/IntroNarration";
+import FloorMap from '@/components/FloorMap';
 
 export default function Home() {
+  const [step, setStep] = useState(0);
+  const [character, setCharacter] = useState("");
+
   return (
-    <main style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1>「今日から杜氏！」</h1>
-      <p>ようこそ、本蔵へ。</p>
-      <Link href="/prologue">
-        <button style={{ marginTop: '1rem', padding: '0.5rem 1rem' }}>
-          ▶ 杜氏を始める
-        </button>
-      </Link>
-    </main>
+    <>
+      {step === 0 && <TitleScreen onStart={() => setStep(1)} />}
+      {step === 1 && <Instructions onNext={() => setStep(2)} />}
+      {step === 2 && (
+        <CharacterSelect
+          onSelect={(name) => {
+            setCharacter(name);
+            setStep(3);
+          }}
+        />
+      )}
+      {step === 3 && (
+        <IntroNarration
+          text={`ようこそ本蔵へ、${character}さん。これからあなたの酒造りが始まります。`}
+          onNext={() => setStep(4)}
+        />
+      )}
+      {step === 4 && <FloorMap onNext={() => setStep(5)} />}
+    </>
   );
 }
