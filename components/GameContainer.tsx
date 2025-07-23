@@ -1,78 +1,84 @@
-// components/GameContainer.tsx
 'use client';
 
-import React, { useState } from 'react';
-import TitleScreen from './scenes/TitleScreen';
-import NoticeScreen from './scenes/NoticeScreen';
-import CharacterSelect from './scenes/CharacterSelect';
-import RiceSelect from './scenes/RiceSelect';
-import RicePolishingChoice from './scenes/RicePolishingChoice';
-import WaterSelect from './scenes/WaterSelect';
-import ChapterIntroScene from './scenes/ChapterIntroScene';
+import { useState } from 'react';
+import TitleScreen from '@/components/scenes/TitleScreen';
+import NoticeScreen from '@/components/scenes/NoticeScreen';
+import CharacterSelect from '@/components/scenes/CharacterSelect';
+import IntroNarration from '@/components/scenes/IntroNarration';
+import FloorMap from '@/components/scenes/FloorMap';
+import RiceSelect from '@/components/scenes/RiceSelect';
+import RicePolishingChoice from '@/components/scenes/RicePolishingChoice';
+import WaterSelect from '@/components/scenes/WaterSelect';
+import ChapterIntroScene from '@/components/scenes/ChapterIntroScene';
 
 export default function GameContainer() {
-  const [step, setStep] = useState('title');
-  const [playerName, setPlayerName] = useState<'隆介' | '鈴'>('隆介');
+  const [step, setStep] = useState(0);
+  const [character, setCharacter] = useState<'隆介' | '鈴' | ''>('');
   const [selectedRice, setSelectedRice] = useState('');
   const [selectedPolishing, setSelectedPolishing] = useState('');
   const [selectedWater, setSelectedWater] = useState('');
 
   switch (step) {
-    case 'title':
-      return <TitleScreen onNext={() => setStep('notice')} />;
-    case 'notice':
-      return <NoticeScreen onNext={() => setStep('character')} />;
-    case 'character':
+    case 0:
+      return <TitleScreen onStart={() => setStep(1)} />;
+    case 1:
+      return <NoticeScreen onNext={() => setStep(2)} />;
+    case 2:
       return (
         <CharacterSelect
           onSelect={(name) => {
-            setPlayerName(name);
-            setStep('rice');
+            setCharacter(name);
+            setStep(3);
           }}
         />
       );
-    case 'rice':
+    case 3:
+      return (
+        <IntroNarration
+          playerName={character}
+          onNext={() => setStep(4)}
+        />
+      );
+    case 4:
+      return <FloorMap onNext={() => setStep(5)} />;
+    case 5:
       return (
         <RiceSelect
-          playerName={playerName}
           onSelect={(rice) => {
             setSelectedRice(rice);
-            setStep('polishing');
+            setStep(6);
           }}
         />
       );
-    case 'polishing':
+    case 6:
       return (
         <RicePolishingChoice
-          playerName={playerName}
+          playerName={character}
           selectedRice={selectedRice}
           onSelect={(method) => {
             setSelectedPolishing(method);
-            setStep('water');
+            setStep(7);
           }}
         />
       );
-    case 'water':
+    case 7:
       return (
         <WaterSelect
-          playerName={playerName}
+          playerName={character}
           onSelect={(water) => {
             setSelectedWater(water);
-            setStep('chapterIntro');
+            setStep(8);
           }}
         />
       );
-    case 'chapterIntro':
+    case 8:
       return (
         <ChapterIntroScene
-          playerName={playerName}
-          onNext={() => setStep('chapter1')}
+          playerName={character}
+          onNext={() => setStep(9)}
         />
       );
-    case 'chapter1':
-      return <div>第一章スタート！（未実装）</div>;
-
     default:
-      return <div>不明なステップです</div>;
+      return <div>第一章へ続く...</div>;
   }
 }
