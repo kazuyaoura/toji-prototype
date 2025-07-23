@@ -1,31 +1,49 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
-type FloorMapProps = {
+type Props = {
   onNext: () => void;
 };
 
-export default function FloorMap({ onNext }: FloorMapProps) {
+export default function FloorMap({ onNext }: Props) {
+  const message = `これが本蔵の見取り図や。
+工程ごとに場所も人もちゃうから、しっかり覚えておいてな！`;
+
   return (
-    <div className="relative w-screen h-screen overflow-hidden" onClick={onNext}>
-      {/* 背景（酒蔵内部） */}
-      <img
-        src="/images/bg_wooden_storage_room.png"
-        alt="本蔵内部"
-        className="absolute inset-0 w-full h-full object-cover"
+    <div className="relative w-screen h-screen overflow-hidden">
+      {/* 背景：フロアマップ */}
+      <Image
+        src="/backgrounds/bg_floor_map.png"
+        alt="フロアマップ"
+        fill
+        style={{ objectFit: 'cover' }}
+        priority
       />
 
-      {/* コメント枠 */}
-      <img
-        src="/images/ui_comment_window_base.png"
-        alt="コメント枠"
-        className="absolute bottom-0 left-0 w-full h-[25vh] object-cover"
-      />
+      {/* コメントボックス */}
+      <div className="absolute bottom-0 w-full flex justify-center items-end z-20">
+        <div className="relative w-[90%] max-w-2xl">
+          <Image
+            src="/ui/ui_comment_window_base.png"
+            alt="コメントウィンドウ"
+            width={800}
+            height={200}
+          />
+          <p className="absolute top-6 left-6 right-6 text-lg font-bold leading-relaxed text-black whitespace-pre-line drop-shadow">
+            {message}
+          </p>
+        </div>
+      </div>
 
-      {/* コメントテキスト */}
-      <div className="absolute bottom-[6vh] left-[5vw] right-[5vw] text-[1.2rem] font-bold text-gray-800 drop-shadow-[1px_1px_2px_rgba(255,255,255,0.8)]">
-        ではまず、これから働くこの本蔵の構造をしっかり撮影しておこう。
+      {/* ▶ボタン */}
+      <div className="absolute bottom-4 right-4 z-30">
+        <button
+          onClick={onNext}
+          className="bg-white text-black text-lg font-bold px-4 py-2 rounded shadow hover:bg-gray-200"
+        >
+          ▶
+        </button>
       </div>
     </div>
   );
