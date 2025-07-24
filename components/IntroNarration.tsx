@@ -5,12 +5,10 @@ import React from 'react';
 
 type Props = {
   onNext: () => void;
-  character: string;
+  character: '隆介' | '鈴';
 };
 
 const IntroNarration: React.FC<Props> = ({ onNext, character }) => {
-  const characterName = character === '隆介' ? '隆介' : '鈴';
-
   const message = `いよいよ今日から、杜氏として本蔵に入ることになった。
 西宮の老舗酒蔵「本蔵」で、日本一の酒を目指すんや。`;
 
