@@ -7,9 +7,10 @@ import { MoneyContext } from '@/contexts/MoneyContext';
 
 interface WaterChoiceProps {
   onSelect: (source: string) => void;
+  character: '隆介' | '鈴'; // ✅ 型を明示
 }
 
-export default function WaterChoice({ onSelect }: WaterChoiceProps) {
+export default function WaterChoice({ onSelect, character }: WaterChoiceProps) {
   const [step, setStep] = useState(0);
   const { money, spend } = useContext(MoneyContext);
 
