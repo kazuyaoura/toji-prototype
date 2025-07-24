@@ -42,7 +42,7 @@ export default function GameContainer() {
     case 3:
       return (
         <IntroNarration
-          playerName={character}
+          character={character} // ← 修正ここ！
           onNext={() => setStep(4)}
         />
       );
