@@ -1,0 +1,8 @@
+/* globals.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #fdfcf8; /* お好みで背景色 */
+}
