@@ -6,9 +6,9 @@ import NoticeScreen from '@/components/NoticeScreen';
 import CharacterSelect from '@/components/CharacterSelect';
 import IntroNarration from '@/components/IntroNarration';
 import FloorMap from '@/components/FloorMap';
-import RiceSelect from '@/components/RiceSelect';
+import RiceSelection from '@/components/RiceSelection'; // 修正済み
 import RicePolishingChoice from '@/components/RicePolishingChoice';
-import WaterSelect from '@/components/WaterSelect';
+import WaterChoice from '@/components/WaterChoice'; // 修正済み
 import ChapterIntroScene from '@/components/scenes/ChapterIntroScene';
 
 export default function GameContainer() {
@@ -54,7 +54,7 @@ export default function GameContainer() {
     // 米選択（山田錦など）
     case 5:
       return (
-        <RiceSelect
+        <RiceSelection
           onSelect={(rice) => {
             setSelectedRice(rice);
             setStep(6);
@@ -78,7 +78,7 @@ export default function GameContainer() {
     // 水選択（宮水・井戸水・夙川）
     case 7:
       return (
-        <WaterSelect
+        <WaterChoice
           playerName={character}
           onSelect={(water) => {
             setSelectedWater(water);
