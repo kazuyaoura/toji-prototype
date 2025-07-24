@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 
+type CharacterName = '隆介' | '鈴';
+
 type Props = {
-  onSelect: (character: string) => void;
+  onSelect: (character: CharacterName) => void;
 };
 
 export default function CharacterSelect({ onSelect }: Props) {
