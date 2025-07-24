@@ -5,19 +5,19 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { MoneyContext } from '@/contexts/MoneyContext';
 
-interface RicePolishingChoiceProps {
+export interface RicePolishingChoiceProps {
   character: '隆介' | '鈴';
   selectedRice: string;
   onSelect: (method: string) => void;
   isFirstPlay: boolean;
 }
 
-export default function RicePolishingChoice({
+const RicePolishingChoice: React.FC<RicePolishingChoiceProps> = ({
   character,
   selectedRice,
   onSelect,
   isFirstPlay,
-}: RicePolishingChoiceProps) {
+}) => {
   const [step, setStep] = useState(0);
   const { money, spend } = useContext(MoneyContext);
 
@@ -145,4 +145,6 @@ export default function RicePolishingChoice({
   };
 
   return <div className="relative w-full h-screen overflow-hidden">{renderDialogue()}</div>;
-}
+};
+
+export default RicePolishingChoice;
