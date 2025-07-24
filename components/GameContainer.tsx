@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import TitleScreen from '@/components/scenes/TitleScreen';
-import NoticeScreen from '@/components/scenes/NoticeScreen';
-import CharacterSelect from '@/components/scenes/CharacterSelect';
-import IntroNarration from '@/components/scenes/IntroNarration';
-import FloorMap from '@/components/scenes/FloorMap';
-import RiceSelect from '@/components/scenes/RiceSelect';
-import RicePolishingChoice from '@/components/scenes/RicePolishingChoice';
-import WaterSelect from '@/components/scenes/WaterSelect';
+import TitleScreen from '@/components/TitleScreen';
+import NoticeScreen from '@/components/NoticeScreen';
+import CharacterSelect from '@/components/CharacterSelect';
+import IntroNarration from '@/components/IntroNarration';
+import FloorMap from '@/components/FloorMap';
+import RiceSelect from '@/components/RiceSelect';
+import RicePolishingChoice from '@/components/RicePolishingChoice';
+import WaterSelect from '@/components/WaterSelect';
 import ChapterIntroScene from '@/components/scenes/ChapterIntroScene';
 
 export default function GameContainer() {
