@@ -5,17 +5,17 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
 interface ChapterIntroProps {
-  playerName: '隆介' | '鈴';
+  character: '隆介' | '鈴';
   onNext: () => void;
 }
 
-export default function ChapterIntro({ playerName, onNext }: ChapterIntroProps) {
+export default function ChapterIntro({ character, onNext }: ChapterIntroProps) {
   const [step, setStep] = useState(0);
 
   const dialogues = [
     'よし、米も水も決まったな。\nこれで酒造りの準備は整った！',
     'あとはおぬしの腕にかかっておる。\n本蔵の名に恥じぬ酒、楽しみにしておるぞ。',
-    playerName === '隆介'
+    character === '隆介'
       ? 'いよいよ始まるんやな……！\n覚悟を決めて、ええ酒造ったるで！'
       : 'いよいよ始まるんやな……！\n心をこめて、ええ酒造ったるで！',
   ];
@@ -23,11 +23,11 @@ export default function ChapterIntro({ playerName, onNext }: ChapterIntroProps) 
   const characterImage =
     step < 2
       ? '/characters/character_kichizaemon_transparent.png'
-      : playerName === '隆介'
+      : character === '隆介'
       ? '/characters/character_main_ryusuke_transparent.png'
       : '/characters/character_main_suzue_transparent.png';
 
-  const speakerName = step < 2 ? '吉左衛門' : playerName;
+  const speakerName = step < 2 ? '吉左衛門' : character;
 
   const handleNext = () => setStep((prev) => prev + 1);
 
