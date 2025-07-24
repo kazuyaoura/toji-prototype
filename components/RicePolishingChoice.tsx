@@ -6,14 +6,14 @@ import { Button } from '@/components/ui/button';
 import { MoneyContext } from '@/contexts/MoneyContext';
 
 interface RicePolishingChoiceProps {
-  playerName: '隆介' | '鈴';
+  character: '隆介' | '鈴';
   selectedRice: string;
   onSelect: (method: string) => void;
   isFirstPlay: boolean;
 }
 
 export default function RicePolishingChoice({
-  playerName,
+  character,
   selectedRice,
   onSelect,
   isFirstPlay,
@@ -21,22 +21,22 @@ export default function RicePolishingChoice({
   const [step, setStep] = useState(0);
   const { money, spend } = useContext(MoneyContext);
 
-  const playerImage =
-    playerName === '隆介'
+  const characterImage =
+    character === '隆介'
       ? '/characters/character_main_ryusuke_transparent.png'
       : '/characters/character_main_suzue_transparent.png';
 
   const getFirstDialogue = () => {
     if (selectedRice === '播磨産山田錦') {
-      return playerName === '隆介'
+      return character === '隆介'
         ? 'これが播磨の山田錦か……さすがええ粒や。期待が高まるな！'
         : '播磨の山田錦……きれいなお米。これは良いお酒になりそう……！';
     } else if (selectedRice === '西宮産米') {
-      return playerName === '隆介'
+      return character === '隆介'
         ? '地元・西宮の米や。農家さんの想い、ちゃんと形にせなな！'
         : '西宮のお米か……農家さんの気持ち、ちゃんとお酒に込めたいね。';
     } else {
-      return playerName === '隆介'
+      return character === '隆介'
         ? 'ふむ、飯米か……コストは抑えられたな。ここからが腕の見せ所や！'
         : '飯米ね。米代は安く抑えられたし……ここから工夫のしがいがあるわね。';
     }
@@ -69,8 +69,8 @@ export default function RicePolishingChoice({
   };
 
   const renderDialogue = () => {
-    const imageSrc = step === 0 ? playerImage : '/characters/character_rice_saburo_transparent.png';
-    const speakerName = step === 0 ? playerName : '三郎';
+    const imageSrc = step === 0 ? characterImage : '/characters/character_rice_saburo_transparent.png';
+    const speakerName = step === 0 ? character : '三郎';
     const isSelectionStep = step === polishingDialogues.length;
 
     return (
