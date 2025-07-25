@@ -13,7 +13,7 @@ export default function TitleScreen({ onStart }: Props) {
         src="/images/title_main_with_start.png"
         alt="タイトル画面"
         fill
-        className="object-cover"
+        className="object-cover pointer-events-none"
         priority
       />
       <button
