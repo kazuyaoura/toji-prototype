@@ -67,7 +67,7 @@ export default function GameContainer() {
             setSelectedPolishing(method);
             setStep(7);
           }}
-          isFirstPlay={true} // 後にステートで管理してもOK
+          isFirstPlay={true}
         />
       );
 
