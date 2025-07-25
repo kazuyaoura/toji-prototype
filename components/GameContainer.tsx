@@ -95,4 +95,3 @@ export default function GameContainer() {
     default:
       return <div className="p-8 text-center text-xl">第一章へ続く...</div>;
   }
-}
