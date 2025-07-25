@@ -57,12 +57,12 @@ export default function RiceSelection({ onSelect }: Props) {
 
   return (
     <div className="relative w-full h-screen overflow-hidden font-sans">
-      {/* 背景画像 */}
+      {/* 背景画像（クリック判定を遮らないように pointer-events-none） */}
       <Image
         src="/bg_rice_storage_room.png"
         alt="米蔵"
         fill
-        className="object-cover"
+        className="object-cover pointer-events-none"
         priority
       />
 
