@@ -7,7 +7,7 @@ import { MoneyContext } from '@/contexts/MoneyContext';
 
 interface WaterChoiceProps {
   onSelect: (source: string) => void;
-  character: '隆介' | '鈴'; // ✅ 型を明示
+  character: '隆介' | '鈴';
 }
 
 export default function WaterChoice({ onSelect, character }: WaterChoiceProps) {
@@ -38,14 +38,16 @@ export default function WaterChoice({ onSelect, character }: WaterChoiceProps) {
 
   return (
     <div className="relative w-full h-screen overflow-hidden font-sans">
+      {/* ✅ 背景画像に pointer-events-none を追加 */}
       <Image
         src="/bg_miyamizu_well.png"
         alt="背景"
         layout="fill"
         objectFit="cover"
-        className="z-0"
+        className="z-0 pointer-events-none"
       />
 
+      {/* キャラクター表示 */}
       <div className="absolute bottom-1/4 w-full flex justify-center items-end">
         <Image
           src="/character_water_sumie.png"
@@ -56,6 +58,7 @@ export default function WaterChoice({ onSelect, character }: WaterChoiceProps) {
         />
       </div>
 
+      {/* コメントボックス */}
       <div className="absolute bottom-0 w-full flex justify-center items-end z-20">
         <div className="relative w-[80%] max-w-md">
           <Image
@@ -70,12 +73,14 @@ export default function WaterChoice({ onSelect, character }: WaterChoiceProps) {
         </div>
       </div>
 
+      {/* 次へボタン */}
       {step < dialogues.length - 1 && (
         <div className="absolute bottom-2 right-4 z-30">
           <Button onClick={handleNext}>▶</Button>
         </div>
       )}
 
+      {/* 選択肢表示 */}
       {step === dialogues.length - 1 && (
         <div className="absolute bottom-8 w-full flex flex-col items-center space-y-4 z-30">
           <Image
