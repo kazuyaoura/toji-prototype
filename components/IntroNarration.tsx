@@ -28,7 +28,7 @@ const IntroNarration: React.FC<Props> = ({ onNext, character }) => {
       />
 
       {/* コメントウィンドウ */}
-      <div className="absolute bottom-0 w-full flex justify-center items-end z-20">
+      <div className="absolute bottom-0 w-full flex justify-center items-end z-20 pb-6">
         <div className="relative w-[90%] max-w-2xl">
           <Image
             src="/ui/ui_comment_window_base.png"
