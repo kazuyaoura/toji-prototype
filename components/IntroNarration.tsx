@@ -18,12 +18,12 @@ const IntroNarration: React.FC<Props> = ({ onNext, character }) => {
 
   return (
     <div className="relative w-screen h-screen overflow-hidden">
-      {/* 背景画像 */}
+      {/* 背景画像（マウスイベント無効化） */}
       <Image
         src="/backgrounds/bg_narration_kichizaemon_intro.png"
         alt="本蔵"
         fill
-        style={{ objectFit: 'cover' }}
+        className="object-cover pointer-events-none"
         priority
       />
 
