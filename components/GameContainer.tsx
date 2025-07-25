@@ -61,12 +61,13 @@ export default function GameContainer() {
       if (character === '') return null;
       return (
         <RicePolishingChoice
-          playerName={character}
+          character={character}
           selectedRice={selectedRice}
           onSelect={(method) => {
             setSelectedPolishing(method);
             setStep(7);
           }}
+          isFirstPlay={true} // 必要に応じて状態管理に切り替えてください
         />
       );
 
@@ -74,7 +75,7 @@ export default function GameContainer() {
       if (character === '') return null;
       return (
         <WaterChoice
-          playerName={character}
+          character={character}
           onSelect={(water) => {
             setSelectedWater(water);
             setStep(8);
@@ -86,7 +87,7 @@ export default function GameContainer() {
       if (character === '') return null;
       return (
         <ChapterIntroScene
-          playerName={character}
+          character={character}
           onNext={() => setStep(9)}
         />
       );
