@@ -9,8 +9,12 @@ type Props = {
 };
 
 const IntroNarration: React.FC<Props> = ({ onNext, character }) => {
-  const message = `いよいよ今日から、杜氏として本蔵に入ることになった。
-西宮の老舗酒蔵「本蔵」で、日本一の酒を目指すんや。`;
+  const message =
+    character === '隆介'
+      ? `いよいよ今日から、杜氏として本蔵に入ることになった。
+西宮の老舗酒蔵「本蔵」で、日本一の酒を目指すんや。`
+      : `いよいよ今日から、杜氏として本蔵に入ることになった。
+西宮の老舗酒蔵「本蔵」で、日本一のお酒を造ってみせる……！`;
 
   return (
     <div className="relative w-screen h-screen overflow-hidden">
