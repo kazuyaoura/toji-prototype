@@ -80,7 +80,7 @@ const RicePolishingChoice: React.FC<RicePolishingChoiceProps> = ({
           alt="背景"
           fill
           priority
-          className="z-0"
+          className="z-0 pointer-events-none" // ← 背景画像にこれを追加
         />
 
         <div className="absolute bottom-1/4 w-full flex justify-center items-end">
