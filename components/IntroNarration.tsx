@@ -18,7 +18,6 @@ const IntroNarration: React.FC<Props> = ({ onNext, character }) => {
 
   return (
     <div className="relative w-screen h-screen overflow-hidden">
-      {/* 背景画像 */}
       <Image
         src="/backgrounds/bg_narration_kichizaemon_intro.png"
         alt="本蔵"
@@ -27,7 +26,6 @@ const IntroNarration: React.FC<Props> = ({ onNext, character }) => {
         priority
       />
 
-      {/* コメントウィンドウ */}
       <div className="absolute bottom-0 w-full flex justify-center items-end z-20 pb-6">
         <div className="relative w-[90%] max-w-2xl">
           <Image
@@ -42,7 +40,6 @@ const IntroNarration: React.FC<Props> = ({ onNext, character }) => {
         </div>
       </div>
 
-      {/* 次へボタン */}
       <div className="absolute bottom-4 right-4 z-30">
         <button
           onClick={onNext}
