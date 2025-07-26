@@ -9,7 +9,7 @@ type Props = {
 export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="relative w-full h-screen bg-white overflow-hidden">
-      {/* next/image を width + height に変更 */}
+      {/* 背景画像 */}
       <Image
         src="/images/title_main_with_start.png"
         alt="タイトル画面"
@@ -29,15 +29,17 @@ export default function TitleScreen({ onStart }: Props) {
       />
 
       {/* スタートボタン */}
-      <button
-        onClick={() => {
-          console.log('✅ スタートボタン押された（width版）');
-          onStart();
-        }}
-        className="absolute z-10 bottom-[8%] left-1/2 transform -translate-x-1/2 px-7 py-3 text-xl font-semibold bg-white rounded-xl shadow-md hover:bg-gray-100 active:scale-95 transition-all duration-150"
-      >
-        ▶ はじめる
-      </button>
+      <div className="absolute inset-0 z-10 flex items-end justify-center pb-[8%]">
+        <button
+          onClick={() => {
+            console.log('✅ スタートボタン押された');
+            onStart();
+          }}
+          className="px-7 py-3 text-xl font-semibold bg-white rounded-xl shadow-md hover:bg-gray-100 active:scale-95 transition-all duration-150"
+        >
+          ▶ はじめる
+        </button>
+      </div>
     </div>
   );
 }
