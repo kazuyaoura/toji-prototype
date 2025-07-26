@@ -8,8 +8,9 @@ type Props = {
 
 export default function TitleScreen({ onStart }: Props) {
   return (
-    <div className="relative w-full h-screen">
-      <div className="absolute inset-0 pointer-events-none z-0">
+    <div className="relative w-full h-screen bg-white">
+      {/* 背景画像は pointer-events を確実に無効にする */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
           src="/images/title_main_with_start.png"
           alt="タイトル画面"
@@ -19,6 +20,7 @@ export default function TitleScreen({ onStart }: Props) {
         />
       </div>
 
+      {/* ボタンを z-10 で前面に */}
       <button
         onClick={() => {
           console.log('▶ スタートボタン押された');
