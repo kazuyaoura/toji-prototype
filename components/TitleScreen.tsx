@@ -9,9 +9,9 @@ type Props = {
 export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="relative w-screen h-screen bg-white overflow-hidden">
-      {/* 背景画像（スマホ縦型用、比率そのまま） */}
+      {/* 背景画像：正しいファイル名に戻す */}
       <Image
-        src="/images/title_main_with_start_vertical.png" // 必要に応じてパス変更
+        src="/images/title_main_with_start.png" // ✅ 修正済
         alt="タイトル画面"
         width={691}
         height={1536}
@@ -23,7 +23,7 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* STARTの位置に完全一致する透明ボタン */}
+      {/* START位置に透明ボタン */}
       <div
         className="absolute z-10"
         style={{
@@ -36,10 +36,7 @@ export default function TitleScreen({ onStart }: Props) {
         }}
       >
         <button
-          onClick={() => {
-            console.log('▶ はじめるボタンが押されました');
-            onStart();
-          }}
+          onClick={onStart}
           className="w-full h-full bg-transparent border-none"
           aria-label="はじめる"
         />
