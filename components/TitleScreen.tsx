@@ -8,8 +8,8 @@ type Props = {
 
 export default function TitleScreen({ onStart }: Props) {
   return (
-    <div className="relative w-full h-screen bg-white overflow-hidden flex flex-col items-center justify-start">
-      {/* 背景画像：比率保持、画面幅に合わせて縮小 */}
+    <div className="relative w-screen h-screen bg-white overflow-hidden">
+      {/* 背景画像（以前の構成に戻す） */}
       <Image
         src="/images/title_main_with_start.png"
         alt="タイトル画面"
@@ -23,7 +23,7 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* STARTボタンの位置に透明ボタン（画像の高さ比率で調整） */}
+      {/* STARTボタン位置に透明ボタン（画面基準で調整） */}
       <div
         className="absolute z-10"
         style={{
