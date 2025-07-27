@@ -9,12 +9,12 @@ type Props = {
 export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="relative w-screen h-screen bg-white overflow-hidden">
-      {/* スマホ縦長背景画像 */}
+      {/* 背景画像（スマホ縦型用、比率そのまま） */}
       <Image
-        src="/images/title_main_with_start_vertical.png"
+        src="/images/title_main_with_start_vertical.png" // 必要に応じてパス変更
         alt="タイトル画面"
-        width={720}
-        height={1280}
+        width={691}
+        height={1536}
         className="absolute top-0 left-0 w-full h-full object-cover"
         style={{
           pointerEvents: 'none',
@@ -23,14 +23,26 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* START ボタン（背景画像のSTARTにぴったり合わせる） */}
-      <div className="absolute z-10 left-1/2 bottom-[12%] transform -translate-x-1/2">
+      {/* STARTの位置に完全一致する透明ボタン */}
+      <div
+        className="absolute z-10"
+        style={{
+          top: '84.6%',
+          left: '50%',
+          width: '73.8%',
+          height: '6.5%',
+          transform: 'translateX(-50%)',
+          pointerEvents: 'auto',
+        }}
+      >
         <button
-          onClick={onStart}
-          className="px-7 py-3 text-xl font-semibold bg-white/90 rounded-xl shadow-md hover:bg-gray-100 active:scale-95 transition-all duration-150"
-        >
-          ▶ はじめる
-        </button>
+          onClick={() => {
+            console.log('▶ はじめるボタンが押されました');
+            onStart();
+          }}
+          className="w-full h-full bg-transparent border-none"
+          aria-label="はじめる"
+        />
       </div>
     </div>
   );
