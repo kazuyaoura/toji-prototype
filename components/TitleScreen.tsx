@@ -22,17 +22,17 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* ✅ デバッグ用の目印付きボタン */}
+      {/* 🔴 赤い印付き「はじめる」ボタン（DEBUG） */}
       <div
         className="absolute z-10"
         style={{
-          top: '84.6%',
-          left: '50%',
+          top: '30%',
+          left: '52%',
           width: '73.8%',
           height: '6.5%',
           transform: 'translateX(-50%)',
-          border: '2px dashed red',       // ← ボタン枠の目印（枠線）
-          backgroundColor: 'rgba(255,0,0,0.2)', // ← うっすら赤背景
+          border: '2px dashed red',
+          backgroundColor: 'rgba(255, 0, 0, 0.2)',
         }}
       >
         <button
