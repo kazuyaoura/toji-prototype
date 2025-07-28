@@ -9,24 +9,24 @@ type Props = {
 export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="relative w-screen h-screen bg-white overflow-hidden">
-      {/* 穴あき背景画像（START部分だけ透過） */}
+      {/* タイトル背景画像（START部分が透過された画像） */}
       <Image
-        src="/images/title_with_start_hole.png" // ← 新しい背景画像
+        src="/images/title_main_with_start.png" // ← 正しいファイル名に修正済み！
         alt="タイトル画面"
         fill
         className="object-contain"
         style={{
-          pointerEvents: 'none',
+          pointerEvents: 'none', // ← クリックをブロックしないために重要
           zIndex: 0,
         }}
         priority
       />
 
-      {/* 背景の穴にピッタリはまる本物のボタン */}
+      {/* 背景のSTART部分に重ねるボタン */}
       <div
         className="absolute z-10"
         style={{
-          top: '82.5%',         // 微調整可：START絵の位置に応じて上下に ±0.5%
+          top: '82.5%',             // 必要に応じて微調整
           left: '50%',
           width: '73.8%',
           height: '6.5%',
