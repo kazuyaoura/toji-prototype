@@ -9,24 +9,20 @@ type Props = {
 export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="relative w-screen h-screen bg-white overflow-hidden">
-      {/* タイトル背景画像（START部分が透過された画像） */}
+      {/* 背景画像（STARTボタン部分が透明） */}
       <Image
-        src="/images/title_main_with_start.png" // ← 正しいファイル名に修正済み！
+        src="/images/title_main_with_start.png"
         alt="タイトル画面"
         fill
-        className="object-contain"
-        style={{
-          pointerEvents: 'none', // ← クリックをブロックしないために重要
-          zIndex: 0,
-        }}
+        className="object-cover z-0 pointer-events-none" // ← classNameにまとめてz-0
         priority
       />
 
-      {/* 背景のSTART部分に重ねるボタン */}
+      {/* ボタン（STARTの透明部分に重ねる） */}
       <div
         className="absolute z-10"
         style={{
-          top: '82.5%',             // 必要に応じて微調整
+          top: '82.5%',         // 微調整OK
           left: '50%',
           width: '73.8%',
           height: '6.5%',
