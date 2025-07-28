@@ -8,10 +8,10 @@ type Props = {
 
 export default function TitleScreen({ onStart }: Props) {
   return (
-    <div className="w-screen h-screen bg-white flex justify-center items-start pt-4">
-      {/* 画像とボタンをまとめる枠（画像の高さは80%くらい） */}
-      <div className="relative w-full max-w-[430px] h-[80vh]">
-        {/* 背景画像 */}
+    <div className="flex items-center justify-center w-screen h-screen bg-white">
+      {/* 📦 画像とボタンをまとめる枠（高さ画面の90%） */}
+      <div className="relative w-full max-w-[430px] h-[90vh] bg-gray-50">
+        {/* 🖼️ 背景画像（画像の中にボタンを配置したい） */}
         <Image
           src="/images/title_main_with_start.png"
           alt="タイトル画面"
@@ -19,13 +19,16 @@ export default function TitleScreen({ onStart }: Props) {
           className="object-contain pointer-events-none"
         />
 
-        {/* ボタン（DEBUG赤枠付き） */}
-        <div className="absolute top-[58%] left-[52%] w-[73.8%] h-[6.5%] -translate-x-1/2 border-2 border-dashed border-red-500 bg-red-200 z-10">
+        {/* 🔴 画像中央あたりに表示される目立つボタン（テスト） */}
+        <div className="absolute top-[50%] left-[50%] w-[50%] h-[8%] -translate-x-1/2 -translate-y-1/2 z-10 border-4 border-red-500 bg-red-300">
           <button
-            onClick={onStart}
-            className="w-full h-full text-xl font-bold bg-red-500 text-white border-2 border-black rounded-xl"
+            onClick={() => {
+              console.log('✅ ボタン押された');
+              onStart();
+            }}
+            className="w-full h-full text-xl font-bold text-white bg-red-600 border-2 border-black rounded-xl"
           >
-            ▶ はじめる（DEBUG）
+            ▶ はじめる（テスト）
           </button>
         </div>
       </div>
