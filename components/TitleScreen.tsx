@@ -8,28 +8,40 @@ type Props = {
 
 export default function TitleScreen({ onStart }: Props) {
   return (
-    <div className="w-screen h-screen bg-white flex items-center justify-center">
-      <div className="relative w-full max-w-[430px] h-[90vh] bg-yellow-100">
-        {/* 背景画像 */}
-        <Image
-          src="/images/title_main_with_start.png"
-          alt="タイトル画面"
-          fill
-          className="object-contain pointer-events-none z-0"
-        />
+    <div className="relative w-screen h-screen bg-white overflow-hidden">
+      {/* 穴あき背景画像（START部分だけ透過） */}
+      <Image
+        src="/images/title_with_start_hole.png" // ← 新しい背景画像
+        alt="タイトル画面"
+        fill
+        className="object-contain"
+        style={{
+          pointerEvents: 'none',
+          zIndex: 0,
+        }}
+        priority
+      />
 
-        {/* ✅ テスト用ボタン（赤色・中央） */}
-        <div className="absolute top-[50%] left-[50%] w-[50%] h-[8%] -translate-x-1/2 -translate-y-1/2 z-10 border-4 border-red-500 bg-red-300">
-          <button
-            onClick={() => {
-              console.log('✅ テストボタン押された');
-              onStart();
-            }}
-            className="w-full h-full text-xl font-bold bg-red-600 text-white border-2 border-black rounded-xl"
-          >
-            ▶ テスト
-          </button>
-        </div>
+      {/* 背景の穴にピッタリはまる本物のボタン */}
+      <div
+        className="absolute z-10"
+        style={{
+          top: '82.5%',         // 微調整可：START絵の位置に応じて上下に ±0.5%
+          left: '50%',
+          width: '73.8%',
+          height: '6.5%',
+          transform: 'translateX(-50%)',
+        }}
+      >
+        <button
+          onClick={() => {
+            console.log('✅ はじめるボタン押下');
+            onStart();
+          }}
+          className="w-full h-full bg-orange-500 text-white text-xl font-bold rounded-xl shadow-md hover:opacity-90 active:scale-95 transition-all duration-150"
+        >
+          ▶ はじめる
+        </button>
       </div>
     </div>
   );
