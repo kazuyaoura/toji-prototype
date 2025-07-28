@@ -8,30 +8,37 @@ type Props = {
 
 export default function TitleScreen({ onStart }: Props) {
   return (
-    <div className="w-screen h-screen bg-white flex flex-col items-center justify-start pt-6">
-      {/* タイトル画像：最大高さを画面の50%に制限 */}
-      <div className="w-full max-w-[430px] h-[50vh] relative">
-        <Image
-          src="/images/title_main_with_start.png"
-          alt="タイトル画面"
-          fill
-          className="object-contain"
-          style={{
-            pointerEvents: 'none',
-            zIndex: 0,
-          }}
-          priority
-        />
-      </div>
+    <div className="relative w-screen h-screen bg-white overflow-hidden">
+      {/* 背景画像：縦長比率を維持しつつ全体に表示 */}
+      <Image
+        src="/images/title_main_with_start.png"
+        alt="タイトル画面"
+        fill
+        className="object-contain"
+        style={{
+          pointerEvents: 'none',
+          zIndex: 0,
+        }}
+        priority
+      />
 
-      {/* ボタンを画像の下に表示 */}
-      <div className="mt-8">
+      {/* STARTの絵と重ねる位置に「▶ はじめる」ボタン */}
+      <div
+        className="absolute z-10"
+        style={{
+          top: '84.6%',
+          left: '50%',
+          width: '73.8%',
+          height: '6.5%',
+          transform: 'translateX(-50%)',
+        }}
+      >
         <button
           onClick={() => {
-            console.log('✅ スタートボタン押された（画像下）');
+            console.log('✅ STARTボタンが押されました');
             onStart();
           }}
-          className="px-7 py-3 text-xl font-semibold bg-white rounded-xl shadow-md hover:bg-gray-100 active:scale-95 transition-all duration-150"
+          className="w-full h-full text-xl font-semibold bg-white rounded-xl shadow-md hover:bg-gray-100 active:scale-95 transition-all duration-150"
         >
           ▶ はじめる
         </button>
