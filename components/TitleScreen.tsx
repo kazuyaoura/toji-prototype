@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 type Props = {
   onStart: () => void;
 };
@@ -7,35 +9,36 @@ type Props = {
 export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="relative w-screen h-screen bg-white overflow-hidden">
-      {/* 背景画像（START絵付き） */}
-      <img
-        src="/images/title_main_with_start.png"
+      {/* 背景画像 */}
+      <Image
+        src="/images/title_main_with_start.png" // ← この画像の上に載せる
         alt="タイトル画面"
-        className="w-full h-full object-contain"
-        style={{ pointerEvents: 'none' }}
+        fill
+        className="object-contain"
+        style={{
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+        priority
       />
 
-      {/* 猿若方式：画像の上に絶対配置ボタン */}
-      <button
-        onClick={() => {
-          console.log('▶ はじめる（猿若方式）押されたよ！');
-          onStart();
-        }}
-        className="absolute"
+      {/* 画像の上に強制表示される本物のボタン */}
+      <div
+        className="absolute z-50 left-1/2 top-1/2"
         style={{
-          top: '83%',            // ← 必要に応じて微調整
-          left: '50%',
-          width: '74%',
-          height: '6.5%',
-          transform: 'translateX(-50%)',
-          backgroundColor: 'rgba(255, 0, 0, 0.5)', // ← 目視確認用（完成時は透明に）
-          color: 'white',
-          fontWeight: 'bold',
-          fontSize: '1.2rem',
+          transform: 'translate(-50%, -50%)',
         }}
       >
-        ▶ はじめる
-      </button>
+        <button
+          onClick={() => {
+            console.log('▶ はじめる 押されました！');
+            onStart();
+          }}
+          className="px-8 py-4 text-xl font-bold bg-red-600 text-white rounded-xl shadow-lg"
+        >
+          ▶ はじめる
+        </button>
+      </div>
     </div>
   );
 }
