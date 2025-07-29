@@ -6,18 +6,18 @@ type Props = {
 
 export default function TitleScreen({ onStart }: Props) {
   return (
-    <div className="relative w-screen h-screen bg-white overflow-hidden">
-      {/* 背景画像 */}
+    <div className="relative w-screen h-screen overflow-hidden bg-white">
+      {/* 背景画像を絶対位置で配置 */}
       <img
         src="/images/title_main_with_start.png"
         alt="タイトル画面"
-        className="w-full h-full object-cover pointer-events-none"
+        className="absolute top-0 left-0 w-full h-full object-cover z-0 pointer-events-none"
       />
 
-      {/* 青丸ボタンを再現 */}
+      {/* はじめるボタン（確実に重ねて中央配置） */}
       <button
         onClick={onStart}
-        className="absolute z-50 top-[83%] left-1/2 transform -translate-x-1/2 px-4 py-2 border border-black text-black bg-white rounded-md text-sm shadow"
+        className="absolute z-10 top-[83%] left-1/2 transform -translate-x-1/2 px-4 py-2 bg-white text-black border border-black rounded shadow text-sm"
       >
         ▶ はじめる
       </button>
