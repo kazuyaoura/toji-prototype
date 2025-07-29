@@ -20,12 +20,12 @@ export default function TitleScreen({ onStart }: Props) {
           priority
         />
 
-        {/* ▶ ボタン：z-10 で前面に */}
+        {/* ▶ ボタン：キャラクターの足元あたりに配置 */}
         <button
           onClick={onStart}
           className="absolute z-10"
           style={{
-            top: '82.5%',
+            top: '90%', // 足元付近に調整
             left: '50%',
             width: '73.8%',
             height: '6.5%',
