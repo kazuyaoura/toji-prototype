@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-
 type Props = {
   onStart: () => void;
 };
@@ -9,32 +7,38 @@ type Props = {
 export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="relative w-screen h-screen bg-white overflow-hidden">
-      {/* 背景画像 */}
-      <Image
-        src="/images/title_main_with_start.png" // ← この画像の上に載せる
+      {/* 背景画像（画像全体に表示） */}
+      <img
+        src="/images/title_main_with_start.png"
         alt="タイトル画面"
-        fill
-        className="object-contain"
         style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'contain', // 必要なら 'cover' に変更してフィット調整
           zIndex: 0,
           pointerEvents: 'none',
         }}
-        priority
       />
 
-      {/* 画像の上に強制表示される本物のボタン */}
+      {/* 本物のはじめるボタン（まずは赤く表示） */}
       <div
-        className="absolute z-50 left-1/2 top-1/2"
+        className="absolute z-50 left-1/2"
         style={{
-          transform: 'translate(-50%, -50%)',
+          top: '83%', // STARTボタンの中央に重ねたい位置。必要なら微調整
+          width: '72%',
+          height: '6%',
+          transform: 'translateX(-50%)',
         }}
       >
         <button
           onClick={() => {
-            console.log('▶ はじめる 押されました！');
+            console.log('✅ ▶ はじめる 押されました');
             onStart();
           }}
-          className="px-8 py-4 text-xl font-bold bg-red-600 text-white rounded-xl shadow-lg"
+          className="w-full h-full text-xl font-bold bg-red-600 text-white rounded-xl shadow-md hover:opacity-90 active:scale-95 transition"
         >
           ▶ はじめる
         </button>
