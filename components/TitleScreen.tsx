@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 type Props = {
   onStart: () => void;
 };
@@ -7,17 +9,19 @@ type Props = {
 export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-white">
-      {/* 背景画像：絶対位置 + z-0 + object-contain */}
-      <img
+      {/* fill で背景画像を画面いっぱいに */}
+      <Image
         src="/images/title_main_with_start.png"
         alt="タイトル画面"
-        className="absolute top-0 left-0 w-full h-full object-contain z-0 pointer-events-none"
+        fill
+        className="object-cover z-0 pointer-events-none"
+        priority
       />
 
-      {/* 重なり確認用ボタン：青色・中央・太め */}
+      {/* テスト用：明るい青ボタンを乗せる */}
       <button
         onClick={onStart}
-        className="absolute z-10 top-[82.5%] left-1/2 transform -translate-x-1/2 w-[74%] h-[6%] bg-blue-600 text-white rounded-full shadow-md text-lg font-bold flex items-center justify-center"
+        className="absolute z-10 top-[82.5%] left-1/2 transform -translate-x-1/2 w-[74%] h-[6%] bg-blue-600 text-white rounded-md shadow text-lg font-bold"
       >
         ▶ はじめる
       </button>
