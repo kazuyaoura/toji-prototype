@@ -9,7 +9,7 @@ type Props = {
 export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="relative w-screen h-screen bg-white overflow-hidden">
-      {/* 背景画像（START絵あり） */}
+      {/* 背景画像（START付き） */}
       <Image
         src="/images/title_main_with_start.png"
         alt="タイトル画面"
@@ -17,18 +17,16 @@ export default function TitleScreen({ onStart }: Props) {
         className="object-contain"
         style={{
           zIndex: 0,
-          pointerEvents: 'none', // 背景がクリックを邪魔しないように
+          pointerEvents: 'none', // 背景画像はクリック遮らない
         }}
         priority
       />
 
-      {/* 上に重ねる本物のボタン */}
+      {/* 本物のCTAボタンを画像の前面に重ねる */}
       <div
         className="absolute z-50 left-1/2"
         style={{
-          top: '82.8%',              // ← STARTボタン絵の位置（微調整可）
-          width: '74%',              // ← ボタン絵の横幅に合わせる
-          height: '6.5%',            // ← ボタン絵の高さに合わせる
+          top: '82.5%',               // START絵の位置に合わせて調整
           transform: 'translateX(-50%)',
         }}
       >
@@ -37,7 +35,7 @@ export default function TitleScreen({ onStart }: Props) {
             console.log('▶ はじめる 押されました！');
             onStart();
           }}
-          className="w-full h-full text-xl font-bold bg-transparent text-transparent"
+          className="px-10 py-4 text-xl font-bold text-white bg-gradient-to-br from-red-700 to-yellow-500 rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition"
         >
           ▶ はじめる
         </button>
