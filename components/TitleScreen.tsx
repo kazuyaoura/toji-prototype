@@ -8,23 +8,38 @@ type Props = {
 
 export default function TitleScreen({ onStart }: Props) {
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-white">
-      {/* fill で背景画像を画面いっぱいに */}
-      <Image
-        src="/images/title_main_with_start.png"
-        alt="タイトル画面"
-        fill
-        className="object-cover z-0 pointer-events-none"
-        priority
-      />
+    <div className="w-screen h-screen flex items-center justify-center bg-white overflow-hidden">
+      {/* 親を relative にして fill と button をまとめる */}
+      <div className="relative w-full h-full">
+        {/* 背景画像：fill はこの relative 親の中で機能する */}
+        <Image
+          src="/images/title_main_with_start.png"
+          alt="タイトル画面"
+          fill
+          className="object-contain z-0 pointer-events-none"
+          priority
+        />
 
-      {/* テスト用：明るい青ボタンを乗せる */}
-      <button
-        onClick={onStart}
-        className="absolute z-10 top-[82.5%] left-1/2 transform -translate-x-1/2 w-[74%] h-[6%] bg-blue-600 text-white rounded-md shadow text-lg font-bold"
-      >
-        ▶ はじめる
-      </button>
+        {/* ▶ ボタン：z-10 で前面に */}
+        <button
+          onClick={onStart}
+          className="absolute z-10"
+          style={{
+            top: '82.5%',
+            left: '50%',
+            width: '73.8%',
+            height: '6.5%',
+            transform: 'translateX(-50%)',
+            backgroundColor: '#007bff',
+            color: 'white',
+            fontWeight: 'bold',
+            borderRadius: '0.5rem',
+            fontSize: '1rem',
+          }}
+        >
+          ▶ はじめる
+        </button>
+      </div>
     </div>
   );
 }
