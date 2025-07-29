@@ -9,33 +9,30 @@ type Props = {
 export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="relative w-screen h-screen bg-white overflow-hidden">
-      {/* 背景画像（START付き） */}
+      {/* 背景画像（STARTなしバージョン） */}
       <Image
-        src="/images/title_main_with_start.png"
-        alt="タイトル画面"
+        src="/images/title_main_no_start.png" // ← STARTなしの背景画像を使う
+        alt="タイトル背景"
         fill
         className="object-contain"
-        style={{
-          zIndex: 0,
-          pointerEvents: 'none', // 背景画像はクリック遮らない
-        }}
+        style={{ pointerEvents: 'none', zIndex: 0 }}
         priority
       />
 
-      {/* 本物のCTAボタンを画像の前面に重ねる */}
+      {/* テスト用「はじめる」ボタン（白黒枠） */}
       <div
         className="absolute z-50 left-1/2"
         style={{
-          top: '82.5%',               // START絵の位置に合わせて調整
+          top: '83%', // 必要に応じて位置調整
           transform: 'translateX(-50%)',
         }}
       >
         <button
           onClick={() => {
-            console.log('▶ はじめる 押されました！');
+            console.log('✅ ▶ はじめる 押されました');
             onStart();
           }}
-          className="px-10 py-4 text-xl font-bold text-white bg-gradient-to-br from-red-700 to-yellow-500 rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition"
+          className="px-6 py-2 border border-black bg-white text-black rounded"
         >
           ▶ はじめる
         </button>
