@@ -18,15 +18,15 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* ▶ はじめるボタン：「日か」に重ねて表示 */}
+      {/* ▶ はじめるボタン：さらに右へ寄せる */}
       <button
         onClick={onStart}
         className="absolute z-50"
         style={{
-          top: '17%',                      // 上から17%（タイトル部分に重ねる）
-          left: '65%',                     // やや右寄り
-          transform: 'translateX(-50%)',   // ボタンの中央を位置に揃える
-          width: '28%',                    // タイトルに収まる程度の幅
+          top: '17%',            // タイトル上部に重ねる位置のまま
+          left: '75%',           // ← さらに右へ寄せた
+          // transform を削除（中央揃えしない）
+          width: '28%',
           height: '42px',
           backgroundColor: '#007bff',
           color: 'white',
