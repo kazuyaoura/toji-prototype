@@ -18,24 +18,24 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* ▶ はじめるボタン：さらに右へ寄せる */}
+      {/* はじめるボタン：上下左右をすべて逆方向に振って配置 */}
       <button
         onClick={onStart}
-        className="absolute z-50"
+        className="fixed z-50"
         style={{
-          top: '17%',            // タイトル上部に重ねる位置のまま
-          left: '75%',           // ← さらに右へ寄せた
-          // transform を削除（中央揃えしない）
-          width: '28%',
-          height: '42px',
+          top: '4%',                  // ← 本来は bottom: '4%'
+          right: '50%',               // ← 本来は left: '50%'
+          transform: 'translateX(50%)', // ← 本来は -50%
+          width: '75%',
+          height: '48px',
           backgroundColor: '#007bff',
           color: 'white',
           fontWeight: 'bold',
-          borderRadius: '0.5rem',
-          fontSize: '0.95rem',
+          borderRadius: '8px',
+          fontSize: '1rem',
         }}
       >
-        ▶ はじめる
+        ▶ はじめる（検証用）
       </button>
     </div>
   );
