@@ -18,14 +18,14 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* ▶ はじめるボタン：中央から右に25%ずらす */}
+      {/* ▶ はじめるボタン：中央から右に22%ずらす */}
       <button
         onClick={onStart}
         className="absolute z-50"
         style={{
           bottom: '5%',
           left: '50%',
-          transform: 'translateX(25%)',
+          transform: 'translateX(22%)',
           width: '75%',
           height: '48px',
           backgroundColor: '#007bff',
