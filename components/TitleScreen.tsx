@@ -8,28 +8,36 @@ type Props = {
 
 export default function TitleScreen({ onStart }: Props) {
   return (
-    <div className="relative w-screen h-screen bg-white overflow-hidden">
-      {/* fillで背景を絶対配置 */}
+    <div className="w-screen h-screen relative overflow-hidden">
+      {/* 背景画像 */}
       <Image
         src="/images/title_main_with_start.png"
         alt="タイトル画面"
         fill
-        className="object-contain pointer-events-none z-0"
+        className="object-cover z-0 pointer-events-none"
         priority
       />
 
-      {/* コンテンツ全体（z-index 10 以上） */}
-      <div className="absolute inset-0 z-10 flex flex-col justify-end items-center">
-        {/* ボタンの下余白を指定（必要なら調整） */}
-        <div className="mb-[7%] w-full flex justify-center">
-          <button
-            onClick={onStart}
-            className="w-[75%] h-12 bg-blue-600 text-white font-bold rounded-lg text-lg shadow"
-          >
-            ▶ はじめる
-          </button>
-        </div>
-      </div>
+      {/* はじめるボタン：最前面に出すための z-index 強化 */}
+      <button
+        onClick={onStart}
+        className="absolute"
+        style={{
+          top: '80%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '75%',
+          height: '48px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          fontWeight: 'bold',
+          borderRadius: '8px',
+          fontSize: '1rem',
+          zIndex: 9999, // ← 最前面に確実に出す
+        }}
+      >
+        ▶ はじめる
+      </button>
     </div>
   );
 }
