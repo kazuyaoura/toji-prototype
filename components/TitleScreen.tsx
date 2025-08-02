@@ -23,9 +23,9 @@ export default function TitleScreen({ onStart }: Props) {
         onClick={onStart}
         className="absolute z-50"
         style={{
-          bottom: '5%',                    // 画面下からの位置（効いていれば）
-          left: '50%',                     // 基準点を中央に
-          transform: 'translateX(20%)',    // ← 中央からさらに右へ20%ずらす
+          bottom: '5%',
+          left: '50%',
+          transform: 'translateX(40%)',
           width: '75%',
           height: '48px',
           backgroundColor: '#007bff',
@@ -37,3 +37,6 @@ export default function TitleScreen({ onStart }: Props) {
       >
         ▶ はじめる
       </button>
+    </div>
+  );
+}
