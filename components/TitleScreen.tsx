@@ -18,14 +18,14 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* はじめるボタン：画面下部中央に固定配置 */}
+      {/* はじめるボタン：absoluteで親要素内に配置（中央下） */}
       <button
         onClick={onStart}
-        className="fixed z-50"
+        className="absolute z-20"
         style={{
-          bottom: '4%',                    // ✅ 下から4%に配置
-          left: '50%',                     // ← 中央揃え
-          transform: 'translateX(-50%)',   // ← 左にずらして中央表示
+          bottom: '4%',                // ✅ 下から4%
+          left: '50%',                 // ✅ 横中央
+          transform: 'translateX(-50%)',
           width: '75%',
           height: '48px',
           backgroundColor: '#007bff',
