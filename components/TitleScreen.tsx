@@ -9,13 +9,13 @@ type Props = {
 export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-end bg-white relative overflow-hidden">
-      {/* 背景画像：fill は使わず通常のレイアウト */}
+      {/* 背景画像：縦横比維持して収める */}
       <div className="absolute top-0 left-0 w-full h-full -z-10">
         <Image
           src="/images/title_main_with_start.png"
           alt="タイトル画面"
           layout="fill"
-          objectFit="cover"
+          objectFit="contain" // ← ここを contain に
           priority
         />
       </div>
