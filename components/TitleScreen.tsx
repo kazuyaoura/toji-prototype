@@ -8,35 +8,27 @@ type Props = {
 
 export default function TitleScreen({ onStart }: Props) {
   return (
-    <div className="relative w-screen min-h-screen bg-white overflow-hidden">
-      {/* 背景画像 */}
-      <Image
-        src="/images/title_main_with_start.png"
-        alt="タイトル画面"
-        fill
-        className="object-cover pointer-events-none z-0"
-        priority
-      />
+    <div className="w-screen h-screen flex flex-col items-center justify-end bg-white relative overflow-hidden">
+      {/* 背景画像：fill は使わず通常のレイアウト */}
+      <div className="absolute top-0 left-0 w-full h-full -z-10">
+        <Image
+          src="/images/title_main_with_start.png"
+          alt="タイトル画面"
+          layout="fill"
+          objectFit="cover"
+          priority
+        />
+      </div>
 
-      {/* はじめるボタン：絶対配置で bottom が効くように */}
-      <button
-        onClick={onStart}
-        className="absolute z-50"
-        style={{
-          bottom: '8%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '75%',
-          height: '48px',
-          backgroundColor: '#007bff',
-          color: 'white',
-          fontWeight: 'bold',
-          borderRadius: '8px',
-          fontSize: '1rem',
-        }}
-      >
-        ▶ はじめる
-      </button>
+      {/* はじめるボタン */}
+      <div className="w-full flex justify-center pb-8">
+        <button
+          onClick={onStart}
+          className="w-[75%] h-12 bg-blue-600 text-white font-bold rounded-lg text-lg shadow"
+        >
+          ▶ はじめる
+        </button>
+      </div>
     </div>
   );
 }
