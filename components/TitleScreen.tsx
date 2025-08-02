@@ -18,13 +18,13 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* はじめるボタン：反転環境対応、画面下部中央に表示 */}
+      {/* はじめるボタン：topを80%にして下部寄りに表示 */}
       <button
         onClick={onStart}
         className="fixed z-50"
         style={{
-          top: '5%',                      // ← 小さい値で「画面下部」に表示される反転環境対応
-          right: '50%',                   // ← 中央揃え（左右も反転している想定）
+          top: '80%',                     // ✅ 画面下寄りに配置
+          right: '50%',                   // ← 中央揃え（反転対応）
           transform: 'translateX(50%)',   // ← 右にずらす（反転環境対応）
           width: '75%',
           height: '48px',
