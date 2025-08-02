@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-
 type Props = {
   onStart: () => void;
 };
@@ -9,7 +7,8 @@ type Props = {
 export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="w-screen h-screen bg-white relative overflow-hidden">
-      {/* 背景画像 */}
+      {/* 背景画像を一旦コメントアウト or 除外 */}
+      {/*
       <Image
         src="/images/title_main_with_start.png"
         alt="タイトル画面"
@@ -17,25 +16,26 @@ export default function TitleScreen({ onStart }: Props) {
         className="object-cover pointer-events-none z-0"
         priority
       />
+      */}
 
-      {/* はじめるボタン：absoluteで親要素内に配置（中央下） */}
+      {/* はじめるボタンだけを絶対配置 */}
       <button
         onClick={onStart}
-        className="absolute z-20"
+        className="absolute z-50"
         style={{
-          bottom: '4%',                // ✅ 下から4%
-          left: '50%',                 // ✅ 横中央
+          bottom: '10%',
+          left: '50%',
           transform: 'translateX(-50%)',
           width: '75%',
           height: '48px',
-          backgroundColor: '#007bff',
+          backgroundColor: 'red',
           color: 'white',
           fontWeight: 'bold',
           borderRadius: '8px',
           fontSize: '1rem',
         }}
       >
-        ▶ はじめる
+        ▶ はじめる（背景なし）
       </button>
     </div>
   );
