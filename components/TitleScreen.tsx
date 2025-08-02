@@ -18,25 +18,24 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* ▶ はじめるボタン：中央から右に22%ずらす */}
-      <button
-        onClick={onStart}
-        className="absolute z-50"
-        style={{
-          bottom: '5%',
-          left: '50%',
-          transform: 'translateX(22%)',
-          width: '75%',
-          height: '48px',
-          backgroundColor: '#007bff',
-          color: 'white',
-          fontWeight: 'bold',
-          borderRadius: '8px',
-          fontSize: '1rem',
-        }}
-      >
-        ▶ はじめる
-      </button>
+      {/* ボタン配置用のflexラッパー */}
+      <div className="absolute inset-0 z-10 flex items-end justify-center pb-[5%]">
+        <button
+          onClick={onStart}
+          style={{
+            transform: 'translateX(22%)',  // 中央から右に22%ずらす
+            width: '75%',
+            height: '48px',
+            backgroundColor: '#007bff',
+            color: 'white',
+            fontWeight: 'bold',
+            borderRadius: '8px',
+            fontSize: '1rem',
+          }}
+        >
+          ▶ はじめる
+        </button>
+      </div>
     </div>
   );
 }
