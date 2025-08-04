@@ -18,19 +18,13 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* ボタン配置用のflexラッパー */}
-      <div className="absolute inset-0 z-10 flex items-end justify-center pb-[5%]">
+      {/* フレックスラッパー */}
+      <div className="absolute inset-0 z-10 flex items-end justify-center min-h-screen pb-[10%]">
         <button
           onClick={onStart}
+          className="w-[75%] h-12 bg-blue-600 text-white font-bold rounded-lg text-lg"
           style={{
-            transform: 'translateX(22%)',  // 中央から右に22%ずらす
-            width: '75%',
-            height: '48px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            fontWeight: 'bold',
-            borderRadius: '8px',
-            fontSize: '1rem',
+            transform: 'translateX(22%)', // 中央から右に寄せ
           }}
         >
           ▶ はじめる
