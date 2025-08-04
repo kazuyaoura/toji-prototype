@@ -18,13 +18,13 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* フレックスラッパー */}
-      <div className="absolute inset-0 z-10 flex items-end justify-center min-h-screen pb-[10%]">
+      {/* ボタン用フレックスラッパー */}
+      <div className="absolute w-full h-full z-10 flex items-end justify-center pb-[8%]">
         <button
           onClick={onStart}
           className="w-[75%] h-12 bg-blue-600 text-white font-bold rounded-lg text-lg"
           style={{
-            transform: 'translateX(22%)', // 中央から右に寄せ
+            transform: 'translateX(22%)', // 中央より22%右へ
           }}
         >
           ▶ はじめる
