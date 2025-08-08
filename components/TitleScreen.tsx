@@ -15,15 +15,14 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* 中央基準 → 右へ安全にシフト */}
+      {/* ボタンの位置：中央から6vw右にずらす → ほぼ中央 */}
       <div
         style={{
           position: 'absolute',
           bottom: '5%',
           left: '50%',
-          // 中央(-50%) から 10vw 右へ。端末幅に応じて安全にずれる
-          transform: 'translateX(calc(-50% + 10vw))',
-          width: 'min(75vw, 520px)', // はみ出し防止の上限
+          transform: 'translateX(calc(-50% + 6vw))',
+          width: 'min(75vw, 520px)',
           zIndex: 10,
         }}
       >
