@@ -18,33 +18,18 @@ export default function TitleScreen({ onStart }: Props) {
         priority
       />
 
-      {/* ▶ はじめるボタン */}
-      <div
+      {/* はじめるボタン */}
+      <button
+        onClick={onStart}
+        className="absolute z-50 px-6 py-3 bg-blue-600 text-white rounded shadow text-base font-semibold"
         style={{
-          position: 'absolute',
-          bottom: '5%',                 // 下からの位置（必要に応じて微調整）
-          left: '50%',                  // 中央起点
-          transform: 'translateX(calc(-50% + 3vw))', // ← 中央よりやや左にずらす
-          width: 'min(75vw, 520px)',    // スマホ＆PC両対応の幅制限
-          zIndex: 10,
+          bottom: '5%',
+          left: '50%',
+          transform: 'translateX(calc(-50% + 4vw))',
         }}
       >
-        <button
-          onClick={onStart}
-          style={{
-            width: '100%',
-            height: '48px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            fontWeight: 'bold',
-            fontSize: '1rem',
-            borderRadius: '8px',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
-          }}
-        >
-          ▶ はじめる
-        </button>
-      </div>
+        ▶ はじめる
+      </button>
     </div>
   );
 }
