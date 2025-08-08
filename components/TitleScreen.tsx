@@ -6,37 +6,25 @@ type Props = { onStart: () => void };
 
 export default function TitleScreen({ onStart }: Props) {
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: '100vw',
-        height: '100vh',
-        overflow: 'hidden',
-        backgroundColor: 'white',
-      }}
-    >
-      {/* 背景画像 */}
+    <div className="w-screen h-screen relative overflow-hidden bg-white">
       <Image
         src="/images/title_main_with_start.png"
         alt="タイトル画面"
         fill
-        style={{
-          objectFit: 'cover',
-          pointerEvents: 'none',
-          zIndex: 0,
-        }}
+        className="object-cover pointer-events-none z-0"
         priority
       />
 
-      {/* ボタン配置 */}
+      {/* 中央基準 → 右へ安全にシフト */}
       <div
         style={{
           position: 'absolute',
           bottom: '5%',
           left: '50%',
-          transform: 'translateX(22%)',
+          // 中央(-50%) から 10vw 右へ。端末幅に応じて安全にずれる
+          transform: 'translateX(calc(-50% + 10vw))',
+          width: 'min(75vw, 520px)', // はみ出し防止の上限
           zIndex: 10,
-          width: '75%',
         }}
       >
         <button
