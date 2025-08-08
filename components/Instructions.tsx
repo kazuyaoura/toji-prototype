@@ -1,24 +1,20 @@
 'use client';
 
-import Image from 'next/image';
-
 type Props = {
   onNext: () => void;
 };
 
 export default function Instructions({ onNext }: Props) {
   return (
-    <div className="w-screen h-screen relative overflow-hidden bg-white">
+    <div className="w-screen h-screen bg-white relative overflow-hidden">
       {/* 背景画像 */}
-      <Image
+      <img
         src="/images/ui_notice_game_disclaimer.png"
         alt="ご注意"
-        fill
-        className="object-contain pointer-events-none z-0"
-        priority
+        className="w-full h-full object-cover pointer-events-none z-0"
       />
 
-      {/* ボタンの位置：中央から0vw（真ん中） */}
+      {/* 次へボタン（中央寄せ、下5%） */}
       <div
         style={{
           position: 'absolute',
