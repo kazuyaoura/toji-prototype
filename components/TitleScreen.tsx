@@ -2,27 +2,30 @@
 
 import Image from 'next/image';
 
-type Props = { onStart: () => void };
+type Props = {
+  onStart: () => void;
+};
 
 export default function TitleScreen({ onStart }: Props) {
   return (
-    <div className="w-screen h-screen relative overflow-hidden bg-white">
+    <div className="relative w-screen h-screen bg-white overflow-hidden">
+      {/* 背景画像 */}
       <Image
         src="/images/title_main_with_start.png"
         alt="タイトル画面"
         fill
-        className="object-cover pointer-events-none z-0"
+        className="object-cover pointer-events-none"
         priority
       />
 
-      {/* ボタンの位置：中央から6vw右にずらす → ほぼ中央 */}
+      {/* ▶ はじめるボタン */}
       <div
         style={{
           position: 'absolute',
-          bottom: '5%',
-          left: '50%',
-          transform: 'translateX(calc(-50% + 6vw))',
-          width: 'min(75vw, 520px)',
+          bottom: '5%',                 // 下からの位置（必要に応じて微調整）
+          left: '50%',                  // 中央起点
+          transform: 'translateX(calc(-50% + 3vw))', // ← 中央よりやや左にずらす
+          width: 'min(75vw, 520px)',    // スマホ＆PC両対応の幅制限
           zIndex: 10,
         }}
       >
