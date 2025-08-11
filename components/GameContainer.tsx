@@ -1,3 +1,4 @@
+// components/GameContainer.tsx
 'use client';
 
 import { useState } from 'react';
@@ -10,6 +11,7 @@ import RiceSelection from '@/components/RiceSelection';
 import RicePolishingChoice from '@/components/RicePolishingChoice';
 import WaterChoice from '@/components/WaterChoice';
 import ChapterIntroScene from '@/components/scenes/ChapterIntroScene';
+import MoneyDisplay from '@/components/MoneyDisplay';
 
 export default function GameContainer() {
   const [step, setStep] = useState(0);
@@ -18,48 +20,43 @@ export default function GameContainer() {
   const [selectedPolishing, setSelectedPolishing] = useState('');
   const [selectedWater, setSelectedWater] = useState('');
 
-  switch (step) {
-    case 0:
-      return <TitleScreen onStart={() => setStep(1)} />;
+  return (
+    <>
+      {/* タイトル画面と注意画面では所持金を非表示 */}
+      {step >= 2 && <MoneyDisplay />}
 
-    case 1:
-      return <NoticeScreen onNext={() => setStep(2)} />;
+      {step === 0 && <TitleScreen onStart={() => setStep(1)} />}
 
-    case 2:
-      return (
+      {step === 1 && <NoticeScreen onNext={() => setStep(2)} />}
+
+      {step === 2 && (
         <CharacterSelect
           onSelect={(name) => {
             setCharacter(name);
             setStep(3);
           }}
         />
-      );
+      )}
 
-    case 3:
-      if (character === '') return null;
-      return (
+      {step === 3 && character !== '' && (
         <IntroNarration
           character={character}
           onNext={() => setStep(4)}
         />
-      );
+      )}
 
-    case 4:
-      return <FloorMap onNext={() => setStep(5)} />;
+      {step === 4 && <FloorMap onNext={() => setStep(5)} />}
 
-    case 5:
-      return (
+      {step === 5 && (
         <RiceSelection
           onSelect={(rice) => {
             setSelectedRice(rice);
             setStep(6);
           }}
         />
-      );
+      )}
 
-    case 6:
-      if (character === '') return null;
-      return (
+      {step === 6 && character !== '' && (
         <RicePolishingChoice
           character={character}
           selectedRice={selectedRice}
@@ -69,11 +66,9 @@ export default function GameContainer() {
           }}
           isFirstPlay={true}
         />
-      );
+      )}
 
-    case 7:
-      if (character === '') return null;
-      return (
+      {step === 7 && character !== '' && (
         <WaterChoice
           character={character}
           onSelect={(water) => {
@@ -81,18 +76,20 @@ export default function GameContainer() {
             setStep(8);
           }}
         />
-      );
+      )}
 
-    case 8:
-      if (character === '') return null;
-      return (
+      {step === 8 && character !== '' && (
         <ChapterIntroScene
           character={character}
           onNext={() => setStep(9)}
         />
-      );
+      )}
 
-    default:
-      return <div className="p-8 text-center text-xl">第一章へ続く...</div>;
-  }
+      {step >= 9 && (
+        <div className="p-8 text-center text-xl">
+          第一章へ続く...
+        </div>
+      )}
+    </>
+  );
 }
