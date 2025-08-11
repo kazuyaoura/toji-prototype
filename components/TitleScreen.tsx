@@ -1,36 +1,37 @@
+// components/NoticeScreen.tsx
 'use client';
 
 import Image from 'next/image';
 
 type Props = {
-  onStart: () => void;
+  onNext: () => void;
 };
 
-export default function TitleScreen({ onStart }: Props) {
+export default function NoticeScreen({ onNext }: Props) {
   return (
     <div className="relative w-screen h-screen bg-white overflow-hidden">
-      {/* 背景画像 */}
+      {/* 背景画像（タイトルと同じ方針） */}
       <Image
-        src="/images/title_main_with_start.png"
-        alt="タイトル画面"
+        src="/images/ui_notice_game_disclaimer.png"
+        alt="ご注意"
         fill
-        className="object-cover pointer-events-none"
         priority
+        className="object-contain pointer-events-none"
       />
 
-      {/* ▶ はじめるボタン */}
+      {/* ▶ 次へボタン（タイトル画面と同じ配置・サイズ感） */}
       <div
         style={{
           position: 'absolute',
-          bottom: '5%',                 
-          left: '50%',                  
-          transform: 'translateX(calc(-50% - 1vw))', // ← 左に約1vwずらす
-          width: 'min(75vw, 520px)',    
+          bottom: '5%',
+          left: '50%',
+          transform: 'translateX(calc(-50% - 1vw))', // タイトルと同じく少し左に
+          width: 'min(75vw, 520px)',
           zIndex: 10,
         }}
       >
         <button
-          onClick={onStart}
+          onClick={onNext}
           style={{
             width: '100%',
             height: '48px',
@@ -42,7 +43,7 @@ export default function TitleScreen({ onStart }: Props) {
             boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
           }}
         >
-          ▶ はじめる
+          ▶ 次へ
         </button>
       </div>
     </div>
