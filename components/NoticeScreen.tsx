@@ -3,34 +3,18 @@
 type Props = { onNext: () => void };
 
 export default function NoticeScreen({ onNext }: Props) {
-  // キャッシュ回避用にクエリを付ける（値は適宜更新）
-  const SRC = '/images/ui_notice_game_disclaimer.png?v=5';
+  const SRC = '/images/ui_notice_game_disclaimer.png'; // クエリは付けない
 
   return (
-    <div
-      // 画面全面を覆う（他UIより前面）
-      className="fixed inset-0 z-[999]"
-      style={{
-        backgroundImage: `url(${SRC})`,
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundColor: '#000',
-      }}
-    >
-      {/* フォールバック用の不可視img（失敗時は1pxで可視化） */}
+    <div className="fixed inset-0 z-[999] bg-black">
+      {/* 画像を画面いっぱいに敷く（縦横比は保持） */}
       <img
         src={SRC}
-        alt="ご注意（プリロード）"
-        style={{ position: 'absolute', width: 0, height: 0, opacity: 0 }}
-        onError={(e) => {
-          e.currentTarget.style.width = '1px';
-          e.currentTarget.style.height = '1px';
-          e.currentTarget.style.opacity = '1';
-        }}
+        alt="ご注意"
+        className="absolute inset-0 w-full h-full object-contain pointer-events-none"
       />
 
-      {/* 下中央の「次へ」 */}
+      {/* 下中央の「次へ」ボタン */}
       <button
         onClick={onNext}
         className="absolute bottom-[5%] left-1/2 -translate-x-1/2
