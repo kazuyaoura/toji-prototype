@@ -10,8 +10,10 @@ type Props = { onSelect: (character: CharacterName) => void };
 export default function CharacterSelect({ onSelect }: Props) {
   return (
     <div className="min-h-screen w-screen bg-white flex flex-col items-center">
+      {/* タイトル */}
       <h1 className="text-xl font-bold mt-4 mb-4">主人公を選んでください</h1>
 
+      {/* 横並び 2カラム */}
       <div className="w-full max-w-[680px] px-4 grid grid-cols-2 gap-4 place-items-center">
         {/* 隆介 */}
         <div className="w-full flex flex-col items-center">
@@ -22,7 +24,9 @@ export default function CharacterSelect({ onSelect }: Props) {
             decoding="async"
           />
           <div className="mt-3 w-full max-w-[240px]">
-            <Button fullWidth onClick={() => onSelect('隆介')}>▶ 隆介を選ぶ</Button>
+            <Button className="w-full" onClick={() => onSelect('隆介')}>
+              ▶ 隆介を選ぶ
+            </Button>
           </div>
         </div>
 
@@ -35,7 +39,9 @@ export default function CharacterSelect({ onSelect }: Props) {
             decoding="async"
           />
           <div className="mt-3 w-full max-w-[240px]">
-            <Button fullWidth onClick={() => onSelect('鈴')}>▶ 鈴を選ぶ</Button>
+            <Button className="w-full" onClick={() => onSelect('鈴')}>
+              ▶ 鈴を選ぶ
+            </Button>
           </div>
         </div>
       </div>
