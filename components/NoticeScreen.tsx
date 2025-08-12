@@ -10,7 +10,7 @@ type Props = {
 export default function NoticeScreen({ onNext }: Props) {
   return (
     <div className="relative w-screen h-screen bg-black overflow-hidden">
-      {/* 背景画像 */}
+      {/* 背景画像（縦型） */}
       <Image
         src="/images/ui_notice_game_disclaimer_mobile.png"
         alt="ご注意"
@@ -20,7 +20,7 @@ export default function NoticeScreen({ onNext }: Props) {
         className="object-contain pointer-events-none select-none z-0"
       />
 
-      {/* ▶ 次へボタン */}
+      {/* CATボタン（次へ） */}
       <div
         className="absolute z-10 left-1/2"
         style={{
@@ -31,13 +31,25 @@ export default function NoticeScreen({ onNext }: Props) {
       >
         <button
           onClick={onNext}
-          className="w-full py-3 rounded-lg font-bold text-white shadow"
+          className="relative w-full"
           style={{
-            backgroundColor: '#007bff',
-            fontSize: '1.2rem',
+            aspectRatio: '3 / 1', // ボタンの比率
           }}
         >
-          ▶ 次へ
+          {/* ボタン背景画像 */}
+          <Image
+            src="/images/ui_cat_button.png"
+            alt="次へボタン"
+            fill
+            className="object-contain"
+          />
+          {/* ボタンテキスト */}
+          <span
+            className="absolute inset-0 flex items-center justify-center text-white font-bold"
+            style={{ fontSize: '1.4rem' }}
+          >
+            ▶ 次へ
+          </span>
         </button>
       </div>
     </div>
