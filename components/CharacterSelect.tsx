@@ -5,41 +5,37 @@ import { Button } from '@/components/ui/button';
 
 type CharacterName = '隆介' | '鈴';
 
-type Props = {
-  onSelect: (character: CharacterName) => void;
-};
+type Props = { onSelect: (character: CharacterName) => void };
 
 export default function CharacterSelect({ onSelect }: Props) {
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center bg-white p-4">
-      {/* タイトル */}
-      <h1 className="text-xl font-bold mb-6">主人公を選んでください</h1>
+    <div className="min-h-screen w-screen bg-white flex flex-col items-center">
+      <h1 className="text-xl font-bold mt-4 mb-4">主人公を選んでください</h1>
 
-      {/* 2カラム（画像の下にボタン） */}
-      <div className="grid grid-cols-2 gap-6">
+      <div className="w-full max-w-[680px] px-4 grid grid-cols-2 gap-4 place-items-center">
         {/* 隆介 */}
-        <div className="flex flex-col items-center">
+        <div className="w-full flex flex-col items-center">
           <img
             src="/images/ryusuke_character.png"
             alt="隆介"
-            className="w-[40vw] max-w-[160px] h-auto object-contain"
+            className="w-full max-w-[240px] h-auto object-contain"
             decoding="async"
           />
-          <div className="mt-3">
-            <Button onClick={() => onSelect('隆介')}>隆介を選ぶ</Button>
+          <div className="mt-3 w-full max-w-[240px]">
+            <Button fullWidth onClick={() => onSelect('隆介')}>▶ 隆介を選ぶ</Button>
           </div>
         </div>
 
         {/* 鈴 */}
-        <div className="flex flex-col items-center">
+        <div className="w-full flex flex-col items-center">
           <img
             src="/images/suzu_character.png"
             alt="鈴"
-            className="w-[40vw] max-w-[160px] h-auto object-contain"
+            className="w-full max-w-[240px] h-auto object-contain"
             decoding="async"
           />
-          <div className="mt-3">
-            <Button onClick={() => onSelect('鈴')}>鈴を選ぶ</Button>
+          <div className="mt-3 w-full max-w-[240px]">
+            <Button fullWidth onClick={() => onSelect('鈴')}>▶ 鈴を選ぶ</Button>
           </div>
         </div>
       </div>
