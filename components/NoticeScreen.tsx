@@ -3,53 +3,45 @@
 
 import Image from 'next/image';
 
-type Props = {
-  onNext: () => void;
-};
+type Props = { onNext: () => void };
 
 export default function NoticeScreen({ onNext }: Props) {
   return (
     <div className="relative w-screen h-screen bg-black overflow-hidden">
-      {/* 背景画像（縦型） */}
+      {/* 背景：縦長の全文字を見せたいので contain、レイアウト理屈は Title と同じ fill */}
       <Image
-        src="/images/ui_notice_game_disclaimer_mobile.png"
+        src="/images/ui_notice_game_disclaimer.png"
         alt="ご注意"
         fill
         priority
-        sizes="100vw"
-        className="object-contain pointer-events-none select-none z-0"
+        className="object-contain pointer-events-none"
       />
 
-      {/* CATボタン（次へ） */}
+      {/* ボタン：TitleScreen と同じ座標ロジック＆同じ横補正（-1vw） */}
       <div
-        className="absolute z-10 left-1/2"
         style={{
-          bottom: '5%', // 下から5%
-          transform: 'translateX(-50%)',
-          width: 'min(60vw, 240px)',
+          position: 'absolute',
+          bottom: '5%',
+          left: '50%',
+          transform: 'translateX(calc(-50% - 1vw))',
+          width: 'min(75vw, 520px)',
+          zIndex: 10,
         }}
       >
         <button
           onClick={onNext}
-          className="relative w-full"
           style={{
-            aspectRatio: '3 / 1', // ボタンの比率
+            width: '100%',
+            height: '48px',
+            backgroundColor: '#007bff',
+            color: 'white',
+            fontWeight: 'bold',
+            fontSize: '1rem',
+            borderRadius: '8px',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
           }}
         >
-          {/* ボタン背景画像 */}
-          <Image
-            src="/images/ui_cat_button.png"
-            alt="次へボタン"
-            fill
-            className="object-contain"
-          />
-          {/* ボタンテキスト */}
-          <span
-            className="absolute inset-0 flex items-center justify-center text-white font-bold"
-            style={{ fontSize: '1.4rem' }}
-          >
-            ▶ 次へ
-          </span>
+          ▶ 次へ
         </button>
       </div>
     </div>
