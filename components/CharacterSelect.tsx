@@ -13,26 +13,35 @@ export default function CharacterSelect({ onSelect }: Props) {
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-center bg-white p-4">
       {/* タイトル */}
-      <h1 className="text-xl font-bold mb-4">主人公を選んでください</h1>
+      <h1 className="text-xl font-bold mb-6">主人公を選んでください</h1>
 
-      {/* キャラ画像：横並び */}
-      <div className="flex flex-row justify-center gap-6 mb-4">
-        <img
-          src="/characters/character_main_ryusuke.png"
-          alt="隆介"
-          className="w-[40vw] max-w-[160px] h-auto object-contain"
-        />
-        <img
-          src="/characters/character_main_suzu.png"
-          alt="鈴"
-          className="w-[40vw] max-w-[160px] h-auto object-contain"
-        />
-      </div>
+      {/* 2カラム（画像の下にボタン） */}
+      <div className="grid grid-cols-2 gap-6">
+        {/* 隆介 */}
+        <div className="flex flex-col items-center">
+          <img
+            src="/images/ryusuke_character.png"
+            alt="隆介"
+            className="w-[40vw] max-w-[160px] h-auto object-contain"
+            decoding="async"
+          />
+          <div className="mt-3">
+            <Button onClick={() => onSelect('隆介')}>隆介を選ぶ</Button>
+          </div>
+        </div>
 
-      {/* ボタン：横並び */}
-      <div className="flex flex-row justify-center gap-6">
-        <Button onClick={() => onSelect('隆介')}>隆介を選ぶ</Button>
-        <Button onClick={() => onSelect('鈴')}>鈴を選ぶ</Button>
+        {/* 鈴 */}
+        <div className="flex flex-col items-center">
+          <img
+            src="/images/suzu_character.png"
+            alt="鈴"
+            className="w-[40vw] max-w-[160px] h-auto object-contain"
+            decoding="async"
+          />
+          <div className="mt-3">
+            <Button onClick={() => onSelect('鈴')}>鈴を選ぶ</Button>
+          </div>
+        </div>
       </div>
     </div>
   );
