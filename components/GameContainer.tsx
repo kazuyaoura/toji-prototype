@@ -1,7 +1,7 @@
-// components/GameContainer.tsx
 'use client';
 
 import { useState } from 'react';
+import MoneyDisplay from '@/components/MoneyDisplay';
 import TitleScreen from '@/components/TitleScreen';
 import NoticeScreen from '@/components/NoticeScreen';
 import CharacterSelect from '@/components/CharacterSelect';
@@ -11,7 +11,6 @@ import RiceSelection from '@/components/RiceSelection';
 import RicePolishingChoice from '@/components/RicePolishingChoice';
 import WaterChoice from '@/components/WaterChoice';
 import ChapterIntroScene from '@/components/scenes/ChapterIntroScene';
-import MoneyDisplay from '@/components/MoneyDisplay';
 
 export default function GameContainer() {
   const [step, setStep] = useState(0);
@@ -20,10 +19,12 @@ export default function GameContainer() {
   const [selectedPolishing, setSelectedPolishing] = useState('');
   const [selectedWater, setSelectedWater] = useState('');
 
+  // ★ 所持金は「マップ以降」で表示（= step >= 4）
+  const showMoney = step >= 4;
+
   return (
     <>
-      {/* タイトル画面と注意画面では所持金を非表示 */}
-      {step >= 2 && <MoneyDisplay />}
+      {showMoney && <MoneyDisplay />}
 
       {step === 0 && <TitleScreen onStart={() => setStep(1)} />}
 
@@ -39,10 +40,7 @@ export default function GameContainer() {
       )}
 
       {step === 3 && character !== '' && (
-        <IntroNarration
-          character={character}
-          onNext={() => setStep(4)}
-        />
+        <IntroNarration character={character} onNext={() => setStep(4)} />
       )}
 
       {step === 4 && <FloorMap onNext={() => setStep(5)} />}
@@ -60,8 +58,8 @@ export default function GameContainer() {
         <RicePolishingChoice
           character={character}
           selectedRice={selectedRice}
-          onSelect={(method) => {
-            setSelectedPolishing(method);
+          onSelect={(m) => {
+            setSelectedPolishing(m);
             setStep(7);
           }}
           isFirstPlay={true}
@@ -71,25 +69,18 @@ export default function GameContainer() {
       {step === 7 && character !== '' && (
         <WaterChoice
           character={character}
-          onSelect={(water) => {
-            setSelectedWater(water);
+          onSelect={(w) => {
+            setSelectedWater(w);
             setStep(8);
           }}
         />
       )}
 
       {step === 8 && character !== '' && (
-        <ChapterIntroScene
-          character={character}
-          onNext={() => setStep(9)}
-        />
+        <ChapterIntroScene character={character} onNext={() => setStep(9)} />
       )}
 
-      {step >= 9 && (
-        <div className="p-8 text-center text-xl">
-          第一章へ続く...
-        </div>
-      )}
+      {step > 8 && <div className="p-8 text-center text-xl">第一章へ続く...</div>}
     </>
   );
 }
