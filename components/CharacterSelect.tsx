@@ -1,4 +1,4 @@
-// components/CharacterSelect.tsx （v9）
+// components/CharacterSelect.tsx （v10）
 'use client';
 
 type CharacterName = '隆介' | '鈴';
@@ -24,7 +24,7 @@ export default function CharacterSelect({ onSelect }: Props) {
       <div style={{ flex: 1 }} />
 
       <main style={{ width: '100%', maxWidth: 720, padding: '12px' }}>
-        {/* タイトル＆飾り罫 */}
+        {/* タイトル（※行は削除） */}
         <div style={{ textAlign: 'center', marginBottom: 12 }}>
           <div
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 6 }}
@@ -56,11 +56,8 @@ export default function CharacterSelect({ onSelect }: Props) {
           </div>
 
           <h1 style={{ fontSize: 18, fontWeight: 700, margin: 0 }}>
-            主人公を選んでください（v9）
+            主人公を選んでください（v10）
           </h1>
-          <p style={{ margin: '6px 0 0', fontSize: 13, color: '#555', lineHeight: 1.5 }}>
-            ※ お好きな主人公を選ぶと、この後のセリフや相棒（頭）が変わります
-          </p>
         </div>
 
         {/* 2カラム */}
@@ -94,20 +91,23 @@ export default function CharacterSelect({ onSelect }: Props) {
 
           {/* 隆介カード */}
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            {/* 名札（サイズUP & 太字） */}
             <div
               style={{
-                fontSize: 12,
-                color: '#333',
-                background: 'rgba(255,255,255,0.85)',
-                padding: '4px 10px',
+                fontSize: 16,            // ← ここを上げました（お好みで18までOK）
+                fontWeight: 700,         // ← 太字
+                color: '#222',
+                background: 'rgba(255,255,255,0.9)',
+                padding: '6px 14px',
                 borderRadius: 999,
                 boxShadow: '0 1px 3px rgba(0,0,0,.08)',
-                marginBottom: 6,
+                marginBottom: 8,
               }}
             >
               隆介
             </div>
 
+            {/* 画像枠 */}
             <div
               style={{
                 width: '44vw',
@@ -130,6 +130,7 @@ export default function CharacterSelect({ onSelect }: Props) {
               />
             </div>
 
+            {/* キャッチコピー（性格のみ） */}
             <p
               style={{
                 margin: '8px 0 0',
@@ -143,6 +144,7 @@ export default function CharacterSelect({ onSelect }: Props) {
               元気で明るく、誰からも好かれる<strong>人気者</strong>。
             </p>
 
+            {/* ボタン */}
             <button
               type="button"
               onClick={() => onSelect('隆介')}
@@ -168,13 +170,14 @@ export default function CharacterSelect({ onSelect }: Props) {
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div
               style={{
-                fontSize: 12,
-                color: '#333',
-                background: 'rgba(255,255,255,0.85)',
-                padding: '4px 10px',
+                fontSize: 16,
+                fontWeight: 700,
+                color: '#222',
+                background: 'rgba(255,255,255,0.9)',
+                padding: '6px 14px',
                 borderRadius: 999,
                 boxShadow: '0 1px 3px rgba(0,0,0,.08)',
-                marginBottom: 6,
+                marginBottom: 8,
               }}
             >
               鈴
@@ -242,4 +245,4 @@ export default function CharacterSelect({ onSelect }: Props) {
       <div style={{ flex: 1 }} />
     </div>
   );
-}
+                }
