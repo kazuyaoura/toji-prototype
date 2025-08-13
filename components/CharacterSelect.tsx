@@ -1,248 +1,52 @@
-// components/CharacterSelect.tsx （v10）
 'use client';
 
-type CharacterName = '隆介' | '鈴';
-type Props = { onSelect: (character: CharacterName) => void };
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 
-export default function CharacterSelect({ onSelect }: Props) {
+type CharacterSelectProps = {
+  onSelect: (character: '隆介' | '鈴') => void;
+};
+
+export default function CharacterSelect({ onSelect }: CharacterSelectProps) {
   return (
-    <div
-      style={{
-        width: '100vw',
-        minHeight: '100vh',
-        backgroundColor: '#FAF7F2',
-        backgroundImage:
-          'radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px), radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px)',
-        backgroundSize: '24px 24px, 12px 12px',
-        backgroundPosition: '0 0, 6px 6px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      {/* 上スペーサー */}
-      <div style={{ flex: 1 }} />
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#FAF7F2]">
+      <h1 className="text-xl font-bold mb-6">主人公を選んでください</h1>
 
-      <main style={{ width: '100%', maxWidth: 720, padding: '12px' }}>
-        {/* タイトル（※行は削除） */}
-        <div style={{ textAlign: 'center', marginBottom: 12 }}>
-          <div
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 6 }}
-          >
-            <div
-              style={{
-                height: 1,
-                width: '28%',
-                background: 'linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0.18), rgba(0,0,0,0))',
-              }}
-            />
-            <div
-              aria-hidden
-              style={{
-                width: 14,
-                height: 14,
-                borderRadius: 999,
-                background: '#C9A063',
-                boxShadow: '0 1px 2px rgba(0,0,0,.15) inset',
-              }}
-            />
-            <div
-              style={{
-                height: 1,
-                width: '28%',
-                background: 'linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0.18), rgba(0,0,0,0))',
-              }}
-            />
-          </div>
-
-          <h1 style={{ fontSize: 18, fontWeight: 700, margin: 0 }}>
-            主人公を選んでください（v10）
-          </h1>
-        </div>
-
-        {/* 2カラム */}
-        <div
-          style={{
-            width: '100%',
-            maxWidth: 680,
-            margin: '0 auto',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            columnGap: 16,
-            alignItems: 'start',
-            justifyItems: 'center',
-            position: 'relative',
-          }}
-        >
-          {/* 仕切り線 */}
-          <div
-            aria-hidden
-            style={{
-              position: 'absolute',
-              left: '50%',
-              top: 0,
-              bottom: 0,
-              width: 1,
-              transform: 'translateX(-0.5px)',
-              background:
-                'linear-gradient(to bottom, transparent, rgba(0,0,0,0.08) 15%, rgba(0,0,0,0.08) 85%, transparent)',
-            }}
+      <div className="flex gap-6">
+        {/* 隆介 */}
+        <div className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md w-40">
+          <Image
+            src="/images/ryusuke_character.png"
+            alt="隆介"
+            width={150}
+            height={150}
+            className="mb-2"
           />
-
-          {/* 隆介カード */}
-          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            {/* 名札（サイズUP & 太字） */}
-            <div
-              style={{
-                fontSize: 16,            // ← ここを上げました（お好みで18までOK）
-                fontWeight: 700,         // ← 太字
-                color: '#222',
-                background: 'rgba(255,255,255,0.9)',
-                padding: '6px 14px',
-                borderRadius: 999,
-                boxShadow: '0 1px 3px rgba(0,0,0,.08)',
-                marginBottom: 8,
-              }}
-            >
-              隆介
-            </div>
-
-            {/* 画像枠 */}
-            <div
-              style={{
-                width: '44vw',
-                maxWidth: 280,
-                height: '32vh',
-                overflow: 'hidden',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: 'rgba(255,255,255,0.6)',
-                borderRadius: 12,
-                boxShadow: '0 2px 8px rgba(0,0,0,.06)',
-              }}
-            >
-              <img
-                src="/images/ryusuke_character.png"
-                alt="隆介"
-                style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-                decoding="async"
-              />
-            </div>
-
-            {/* キャッチコピー（性格のみ） */}
-            <p
-              style={{
-                margin: '8px 0 0',
-                fontSize: 13,
-                color: '#444',
-                lineHeight: 1.5,
-                textAlign: 'center',
-                maxWidth: 280,
-              }}
-            >
-              元気で明るく、誰からも好かれる<strong>人気者</strong>。
-            </p>
-
-            {/* ボタン */}
-            <button
-              type="button"
-              onClick={() => onSelect('隆介')}
-              style={{
-                width: '100%',
-                maxWidth: 280,
-                marginTop: 10,
-                padding: '12px 16px',
-                border: 'none',
-                borderRadius: 12,
-                fontWeight: 700,
-                color: '#fff',
-                backgroundColor: '#007bff',
-                boxShadow: '0 3px 10px rgba(0,0,0,.15)',
-                fontSize: '1.1rem',
-              }}
-            >
-              ▶ 隆介を選ぶ
-            </button>
-          </div>
-
-          {/* 鈴カード */}
-          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div
-              style={{
-                fontSize: 16,
-                fontWeight: 700,
-                color: '#222',
-                background: 'rgba(255,255,255,0.9)',
-                padding: '6px 14px',
-                borderRadius: 999,
-                boxShadow: '0 1px 3px rgba(0,0,0,.08)',
-                marginBottom: 8,
-              }}
-            >
-              鈴
-            </div>
-
-            <div
-              style={{
-                width: '44vw',
-                maxWidth: 280,
-                height: '32vh',
-                overflow: 'hidden',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: 'rgba(255,255,255,0.6)',
-                borderRadius: 12,
-                boxShadow: '0 2px 8px rgba(0,0,0,.06)',
-              }}
-            >
-              <img
-                src="/images/suzu_character.png"
-                alt="鈴"
-                style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-                decoding="async"
-              />
-            </div>
-
-            <p
-              style={{
-                margin: '8px 0 0',
-                fontSize: 13,
-                color: '#444',
-                lineHeight: 1.5,
-                textAlign: 'center',
-                maxWidth: 280,
-              }}
-            >
-              冷静で頭脳明晰、みんなが頼りにする<strong>理論派</strong>。
-            </p>
-
-            <button
-              type="button"
-              onClick={() => onSelect('鈴')}
-              style={{
-                width: '100%',
-                maxWidth: 280,
-                marginTop: 10,
-                padding: '12px 16px',
-                border: 'none',
-                borderRadius: 12,
-                fontWeight: 700,
-                color: '#fff',
-                backgroundColor: '#007bff',
-                boxShadow: '0 3px 10px rgba(0,0,0,.15)',
-                fontSize: '1.1rem',
-              }}
-            >
-              ▶ 鈴を選ぶ
-            </button>
-          </div>
+          <p className="text-center text-sm mb-3">
+            元気で明るく、誰からも好かれる <span className="font-bold">人気者</span>。
+          </p>
+          <Button onClick={() => onSelect('隆介')} className="w-full">
+            ▶ 隆介を選ぶ
+          </Button>
         </div>
-      </main>
 
-      {/* 下スペーサー */}
-      <div style={{ flex: 1 }} />
+        {/* 鈴 */}
+        <div className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md w-40">
+          <Image
+            src="/images/suzu_character.png"
+            alt="鈴"
+            width={150}
+            height={150}
+            className="mb-2"
+          />
+          <p className="text-center text-sm mb-3">
+            冷静で頭脳明晰、みんなが頼りにする <span className="font-bold">理論派</span>。
+          </p>
+          <Button onClick={() => onSelect('鈴')} className="w-full">
+            ▶ 鈴を選ぶ
+          </Button>
+        </div>
+      </div>
     </div>
   );
-                }
+}
