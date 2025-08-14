@@ -1,0 +1,98 @@
+// components/SceneScreen.tsx
+'use client';
+
+type Props = {
+  /** 下部コメント枠に表示する本文（改行OK） */
+  comment: string;
+  /** 発言キャラクターの画像（上部に表示） */
+  characterImg: string;
+  /** シーン画像（場面ごとに差し替え） */
+  sceneImg: string;
+  /** 次へボタン押下時（不要なら省略） */
+  onNext?: () => void;
+  /** 画面タイトル（視覚的には非表示／アクセシビリティ用） */
+  title?: string;
+};
+
+export default function SceneScreen({
+  comment,
+  characterImg,
+  sceneImg,
+  onNext,
+  title = 'シーン',
+}: Props) {
+  return (
+    <div
+      className={[
+        'min-h-screen w-screen flex flex-col items-center',
+        'bg-[#FAF7F2]',
+        'bg-[radial-gradient(rgba(0,0,0,0.06)_1px,transparent_1px),radial-gradient(rgba(0,0,0,0.04)_1px,transparent_1px)]',
+        'bg-[length:24px_24px,12px_12px]',
+        'bg-[position:0_0,6px_6px]',
+      ].join(' ')}
+    >
+      <h1 className="sr-only">{title}</h1>
+
+      {/* 上：発言キャラクター */}
+      <div className="mt-3">
+        <img
+          src={characterImg}
+          alt=""
+          className="block max-h-[120px] object-contain pointer-events-none"
+          decoding="async"
+        />
+      </div>
+
+      {/* 中：シーン画像（毎シーン差し替え） */}
+      <div className="mt-2 w-full flex justify-center">
+        {/* 16:9の安定枠。高さは端末に合わせて自動で決定 */}
+        <div className="w-[92%] max-w-[720px] aspect-[16/9] bg-white/60 rounded-xl shadow overflow-hidden flex items-center justify-center">
+          <img
+            src={sceneImg}
+            alt=""
+            className="block max-w-full max-h-full object-contain pointer-events-none"
+            decoding="async"
+          />
+        </div>
+      </div>
+
+      {/* ===== 下：コメント枠（画像ベース）＋ 次へボタン ===== */}
+      <div
+        className="fixed left-0 right-0 bottom-0 z-50"
+        style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 12px)' }}
+      >
+        <div className="mx-auto w-full max-w-[720px] px-4">
+          {/* コメント枠：既存画像を背景に使用 */}
+          <div
+            className="w-full"
+            style={{
+              height: 140, // 必要なら微調整（120〜160推奨）
+              backgroundImage: 'url(/images/ui_comment_window_base.png)',
+              backgroundSize: '100% 100%',
+              backgroundRepeat: 'no-repeat',
+              filter: 'drop-shadow(0 4px 12px rgba(0,0,0,.18))',
+              borderRadius: 16,
+              padding: '16px 18px',
+            }}
+          >
+            <div className="text-[15px] leading-[1.6] text-[#222] max-h-[96px] overflow-y-auto whitespace-pre-wrap">
+              {comment}
+            </div>
+          </div>
+
+          {onNext && (
+            <button
+              onClick={onNext}
+              className="w-full mt-2 py-3 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 active:translate-y-[1px] shadow"
+            >
+              ▶ 次へ
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* 下固定UIぶんのスペーサー（本文と重なり防止） */}
+      <div className="h-[168px]" />
+    </div>
+  );
+}
