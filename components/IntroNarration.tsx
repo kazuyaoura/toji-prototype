@@ -17,40 +17,58 @@ const IntroNarration: React.FC<Props> = ({ onNext, character }) => {
 西宮の老舗酒蔵「本蔵」で、日本一のお酒を造ってみせる……！`;
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-black">
-      {/* 背景画像（public/images/bg_narration_kichizaemon_intro.png） */}
-      <Image
-        src="/images/bg_narration_kichizaemon_intro.png"
-        alt="本蔵"
-        fill
-        className="object-cover pointer-events-none"
-        priority
-      />
+    // 画面を上下2段に分割：上=背景(1fr), 下=コメント枠(auto)
+    <div className="grid h-screen grid-rows-[1fr_auto] bg-black">
+      {/* 上段：背景（全幅・上段いっぱい） */}
+      <div className="relative w-full h-full min-h-0">
+        <Image
+          src="/images/bg_narration_kichizaemon_intro.png"
+          alt="本蔵"
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+      </div>
 
-      {/* コメントウィンドウ（public/images/ui_comment_window_base.png） */}
-      <div className="absolute bottom-0 w-full flex justify-center items-end z-20 pb-6">
-        <div className="relative w-[92%] max-w-2xl">
+      {/* 下段：コメントウィンドウ */}
+      <div className="relative w-full pb-[env(safe-area-inset-bottom)]">
+        <div className="relative mx-auto w-[92vw] max-w-2xl">
+          {/* コメントフレーム画像 */}
           <Image
             src="/images/ui_comment_window_base.png"
             alt="コメントウィンドウ"
-            width={800}
-            height={200}
+            width={1200}
+            height={360}
+            className="w-full h-auto select-none pointer-events-none"
             priority
+            sizes="(max-width: 768px) 92vw, 640px"
           />
-          <p className="absolute top-6 left-6 right-6 text-base md:text-lg font-bold leading-relaxed text-black whitespace-pre-line drop-shadow">
+
+          {/* テキスト */}
+          <p
+            className="
+              absolute left-[7%] right-[7%] top-[18%]
+              text-[15px] md:text-base leading-relaxed font-bold
+              text-black whitespace-pre-line
+            "
+          >
             {message}
           </p>
-        </div>
-      </div>
 
-      {/* 次へボタン */}
-      <div className="absolute bottom-4 right-4 z-30">
-        <button
-          onClick={onNext}
-          className="px-4 py-2 rounded-md text-lg font-bold bg-white text-black shadow hover:bg-gray-200 active:scale-95"
-        >
-          ▶
-        </button>
+          {/* 次へボタン */}
+          <button
+            onClick={onNext}
+            className="
+              absolute right-[6%] bottom-[10%]
+              bg-white text-black font-bold px-4 py-2 rounded-md shadow
+              active:scale-95
+            "
+            aria-label="次へ"
+          >
+            ▶
+          </button>
+        </div>
       </div>
     </div>
   );
