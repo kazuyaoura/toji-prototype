@@ -17,10 +17,9 @@ const IntroNarration: React.FC<Props> = ({ onNext, character }) => {
 西宮の老舗酒蔵「本蔵」で、日本一のお酒を造ってみせる……！`;
 
   return (
-    // 上2/3（背景） + 下1/3（コメント）
-    <div className="grid h-screen w-screen grid-rows-[2fr_1fr] bg-black">
-      {/* 上：背景（2/3） */}
-      <div className="relative w-full h-full">
+    <div className="relative w-screen h-screen overflow-hidden bg-black">
+      {/* === 背景レイヤー（最背面） === */}
+      <div className="absolute inset-0 z-[0]">
         <Image
           src="/images/bg_narration_kichizaemon_intro.png"
           alt="本蔵"
@@ -31,31 +30,51 @@ const IntroNarration: React.FC<Props> = ({ onNext, character }) => {
         />
       </div>
 
-      {/* 下：コメント（1/3, 下端吸着） */}
-      <div className="relative w-full h-full pb-[env(safe-area-inset-bottom)] flex items-end justify-center">
-        {/* フレーム：背景画像で描画（＝この中にテキストを重ねる） */}
-        <div
-          className="relative w-[92vw] max-w-2xl mb-2 aspect-[10/3]"
-          style={{
-            backgroundImage: "url('/images/ui_comment_window_base.png')",
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'contain',
-            backgroundPosition: 'center',
-          }}
-        >
-          {/* テキスト＆ボタン用レイヤー（常に前面） */}
-          <div className="absolute inset-0 z-10">
-            {/* テキスト：枠の内側に余白を与える（％指定で端末差に強い） */}
-            <div className="absolute left-[8%] right-[8%] top-[18%]">
-              <p className="text-[15px] md:text-base leading-relaxed font-bold text-black whitespace-pre-line">
-                {message}
-              </p>
-            </div>
+      {/* === UIレイヤー（背景より前） === */}
+      <div className="absolute inset-0 z-[10] flex flex-col">
+        {/* 上 2/3 は空き（背景を見せるため）。必要なら比率は調整可 */}
+        <div className="grow-[2]" />
 
-            {/* 次へボタン：右下寄せ */}
+        {/* 下 1/3：コメントエリア */}
+        <div className="grow-[1] pb-[env(safe-area-inset-bottom)] flex items-end justify-center">
+          {/* 枠の入れ物：幅フィット＋最小/最大幅、比率固定（10:3想定） */}
+          <div
+            className="
+              relative
+              w-[92vw] max-w-[680px] min-w-[280px] mb-2
+            "
+            style={{ aspectRatio: '10 / 3' }}
+          >
+            {/* 枠画像（背面） */}
+            <Image
+              src="/images/ui_comment_window_base.png"
+              alt="コメントウィンドウ"
+              fill
+              className="object-contain pointer-events-none z-[5]"
+              priority
+              sizes="(max-width: 768px) 92vw, 680px"
+            />
+
+            {/* テキスト（前面へ） */}
+            <p
+              className="
+                absolute left-[8%] right-[8%] top-[20%]
+                text-[15px] md:text-base leading-relaxed font-bold
+                text-black whitespace-pre-line
+                z-[20]
+              "
+            >
+              {message}
+            </p>
+
+            {/* 次へボタン（右下） */}
             <button
               onClick={onNext}
-              className="absolute right-[6%] bottom-[10%] bg-white text-black font-bold px-4 py-2 rounded-md shadow active:scale-95"
+              className="
+                absolute right-[6%] bottom-[10%]
+                bg-white text-black font-bold px-4 py-2 rounded-md shadow
+                active:scale-95 z-[20]
+              "
               aria-label="次へ"
             >
               ▶
