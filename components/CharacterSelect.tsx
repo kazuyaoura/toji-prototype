@@ -1,227 +1,76 @@
-// components/CharacterSelect.tsx  ← 完全固定版（インラインCSSで確実に反映）
 'use client';
+import React from 'react';
 
-type CharacterName = '隆介' | '鈴';
-type Props = { onSelect: (character: CharacterName) => void };
+type Props = { message: string };
 
-export default function CharacterSelect({ onSelect }: Props) {
+export default function NarrationScreen({ message }: Props) {
   return (
     <div
-      // 背景はインラインで確実に適用
       style={{
+        position: 'relative',
         width: '100vw',
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        backgroundColor: '#FAF7F2',
-        backgroundImage:
-          'radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px), radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px)',
-        backgroundSize: '24px 24px, 12px 12px',
-        backgroundPosition: '0 0, 6px 6px',
+        height: '100vh',
+        overflow: 'hidden',
       }}
     >
-      {/* 上スペーサー */}
-      <div style={{ flex: 1 }} />
+      {/* 背景 */}
+      <img
+        src="/images/bg_narration_kichizaemon_intro.png"
+        alt=""
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+        }}
+      />
 
-      <main style={{ width: '100%', maxWidth: 720, padding: 12 }}>
-        {/* タイトル＋飾り */}
-        <div style={{ textAlign: 'center', marginBottom: 12 }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
-              marginBottom: 6,
-            }}
-          >
-            <div
-              style={{
-                height: 1,
-                width: '28%',
-                background:
-                  'linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0.18), rgba(0,0,0,0))',
-              }}
-            />
-            <div
-              aria-hidden
-              style={{
-                width: 14,
-                height: 14,
-                borderRadius: 999,
-                background: '#C9A063',
-                boxShadow: 'inset 0 1px 2px rgba(0,0,0,.15)',
-              }}
-            />
-            <div
-              style={{
-                height: 1,
-                width: '28%',
-                background:
-                  'linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0.18), rgba(0,0,0,0))',
-              }}
-            />
-          </div>
-          <h1 style={{ fontSize: 18, fontWeight: 700, margin: 0 }}>
-            主人公を選んでください
-          </h1>
-        </div>
-
-        {/* 2カラム：幅が狭い端末でも必ず横並びにする */}
-        <div
-          style={{
-            width: '100%',
-            maxWidth: 680,
-            margin: '0 auto',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)', // 常に2列
-            columnGap: 12,
-            alignItems: 'start',
-            justifyItems: 'center',
-            position: 'relative',
-          }}
-        >
-          {/* 仕切り線 */}
-          <div
-            aria-hidden
+      {/* コメント枠＋文字（下1/3固定） */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: '33%', // 下1/3
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {/* 枠 */}
+        <div style={{ position: 'relative', width: '90%', maxWidth: 680, aspectRatio: '10/3' }}>
+          <img
+            src="/images/ui_comment_window_base.png"
+            alt=""
             style={{
               position: 'absolute',
-              left: '50%',
-              top: 0,
-              bottom: 0,
-              width: 1,
-              transform: 'translateX(-0.5px)',
-              background:
-                'linear-gradient(to bottom, transparent, rgba(0,0,0,0.08) 15%, rgba(0,0,0,0.08) 85%, transparent)',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
             }}
           />
-
-          {/* === 隆介カード === */}
-          <CharacterCard
-            name="隆介"
-            imgSrc="/images/ryusuke_character.png"
-            onClick={() => onSelect('隆介')}
-          />
-
-          {/* === 鈴カード === */}
-          <CharacterCard
-            name="鈴"
-            imgSrc="/images/suzu_character.png"
-            onClick={() => onSelect('鈴')}
-          />
+          {/* テキストを枠の上に重ねる */}
+          <p
+            style={{
+              position: 'absolute',
+              top: '18%',
+              left: '8%',
+              right: '8%',
+              fontSize: 16,
+              lineHeight: 1.6,
+              fontWeight: 700,
+              color: '#222',
+              whiteSpace: 'pre-line',
+              zIndex: 10,
+            }}
+          >
+            {message}
+          </p>
         </div>
-      </main>
-
-      {/* 下スペーサー */}
-      <div style={{ flex: 1 }} />
-    </div>
-  );
-}
-
-/** 1枚分のカード（画像枠160×200pxで“上下も含めて確実に収める”） */
-function CharacterCard({
-  name,
-  imgSrc,
-  onClick,
-}: {
-  name: '隆介' | '鈴';
-  imgSrc: string;
-  onClick: () => void;
-}) {
-  return (
-    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      {/* 名札 */}
-      <div
-        style={{
-          fontSize: 16,
-          fontWeight: 700,
-          color: '#222',
-          background: 'rgba(255,255,255,0.9)',
-          padding: '6px 14px',
-          borderRadius: 999,
-          boxShadow: '0 1px 3px rgba(0,0,0,.08)',
-          marginBottom: 8,
-        }}
-      >
-        {name}
       </div>
-
-      {/* 画像枠：px固定。内部のimgは max-width/height で収める */}
-      <div
-        style={{
-          width: 160,
-          height: 200,
-          overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'rgba(255,255,255,0.6)',
-          borderRadius: 12,
-          boxShadow: '0 2px 8px rgba(0,0,0,.06)',
-        }}
-      >
-        <img
-          src={imgSrc}
-          alt={name}
-          width={160}
-          height={200}
-          decoding="async"
-          style={{
-            maxWidth: '100%',
-            maxHeight: '100%',
-            width: 'auto',
-            height: 'auto',
-            objectFit: 'contain',
-            display: 'block',
-          }}
-        />
-      </div>
-
-      {/* キャッチ */}
-      <p
-        style={{
-          margin: '8px 0 0',
-          fontSize: 13,
-          color: '#444',
-          lineHeight: 1.5,
-          textAlign: 'center',
-          maxWidth: 280,
-        }}
-      >
-        {name === '隆介'
-          ? (
-            <>
-              元気で明るく、誰からも好かれる<strong>人気者</strong>。
-            </>
-            )
-          : (
-            <>
-              冷静で頭脳明晰、みんなが頼りにする<strong>理論派</strong>。
-            </>
-            )}
-      </p>
-
-      {/* 青ボタン（必ず青） */}
-      <button
-        type="button"
-        onClick={onClick}
-        style={{
-          width: '100%',
-          maxWidth: 280,
-          marginTop: 10,
-          padding: '12px 16px',
-          border: 'none',
-          borderRadius: 12,
-          fontWeight: 700,
-          color: '#fff',
-          backgroundColor: '#1D4ED8', // blue-600
-          boxShadow: '0 3px 10px rgba(0,0,0,.15)',
-          fontSize: '1.05rem',
-        }}
-      >
-        ▶ {name}を選ぶ
-      </button>
     </div>
   );
 }
