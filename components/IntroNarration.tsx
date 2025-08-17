@@ -1,6 +1,4 @@
-// components/IntroNarration.tsx
 'use client';
-
 import React from 'react';
 
 type Props = {
@@ -16,6 +14,10 @@ export default function IntroNarration({ onNext, character }: Props) {
       : `いよいよ今日から、杜氏として本蔵に入ることになった。
 西宮の老舗酒蔵「本蔵」で、日本一のお酒を造ってみせる……！`;
 
+  // 下帯を思い切って 40vh に（＝枠をさらに大きく）
+  const bandVh = 40;         // ← ここを 42/45 に上げるとさらに大きくできます
+  const bgVh = 100 - bandVh; // 上の背景の高さ
+
   return (
     <div
       style={{
@@ -26,13 +28,8 @@ export default function IntroNarration({ onNext, character }: Props) {
         background: '#000',
       }}
     >
-      {/* 背景（上 2/3） */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: '0 0 33.333vh 0', // 下1/3分を残して敷く
-        }}
-      >
+      {/* 上：背景（bgVh 分） */}
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: `${bgVh}vh` }}>
         <img
           src="/images/bg_narration_kichizaemon_intro.png"
           alt="本蔵"
@@ -41,46 +38,47 @@ export default function IntroNarration({ onNext, character }: Props) {
         />
       </div>
 
-      {/* コメント帯（下 1/3） */}
+      {/* 下：帯（bandVh 分） */}
       <div
         style={{
           position: 'absolute',
           left: 0,
           right: 0,
           bottom: 0,
-          height: '33.333vh',
+          height: `${bandVh}vh`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: 'max(env(safe-area-inset-bottom), 8px) 0 8px', // 下端の安全余白
+          paddingBottom: 'env(safe-area-inset-bottom)',
           background: '#000',
         }}
       >
-        {/* ▼ 枠：横幅いっぱい＆帯の高さぎりぎり */}
+        {/* 枠：帯の高さをほぼ使い切る（横は画面いっぱい） */}
         <div
           style={{
             position: 'relative',
-            width: '100vw',                 // 全幅
-            height: '100%',                 // 帯の高さをフルで
+            height: 'calc(100% - 8px)',  // 帯の上下に薄く余白
+            maxWidth: '100vw',
+            width: '100vw',
+            aspectRatio: '11 / 3',       // 10/3 だと少し背が低く見えるので 11/3 に増量
             backgroundImage: 'url(/images/ui_comment_window_base.png)',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            backgroundSize: '100% 100%',    // 容器にピッタリ貼る（余白無視）
+            backgroundSize: '100% 100%', // 余白を無視して全面に
           }}
         >
-          {/* テキスト */}
+          {/* テキスト（枠上） */}
           <p
             style={{
               position: 'absolute',
-              left: '7.5%',
-              right: '7.5%',
+              left: '7%',
+              right: '7%',
               top: '18%',
-              fontSize: 'clamp(14px, 2.6vw, 18px)', // 端末幅で少し可変
+              fontSize: 'clamp(15px, 2.6vw, 18px)', // 端末幅に応じて少しだけ伸縮
               lineHeight: 1.6,
               fontWeight: 700,
               color: '#111',
               whiteSpace: 'pre-line',
-              textShadow: '0 1px 0 rgba(255,255,255,.35)', // 薄く読みやすく
             }}
           >
             {message}
@@ -92,7 +90,7 @@ export default function IntroNarration({ onNext, character }: Props) {
             aria-label="次へ"
             style={{
               position: 'absolute',
-              right: '5%',
+              right: '6%',
               bottom: '10%',
               padding: '10px 14px',
               fontWeight: 700,
