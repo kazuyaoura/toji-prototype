@@ -39,12 +39,7 @@ export default function IntroNarration({ onNext, character }: Props) {
           src="/images/bg_narration_kichizaemon_intro.png"
           alt="本蔵"
           decoding="async"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            display: 'block',
-          }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />
       </div>
 
@@ -60,43 +55,31 @@ export default function IntroNarration({ onNext, character }: Props) {
           alignItems: 'flex-end',
           justifyContent: 'center',
           paddingBottom: 'env(safe-area-inset-bottom)',
+          background: '#000', // 黒帯のまま
         }}
       >
+        {/* ▼ 枠は background-image で“容器いっぱい”に貼る */}
         <div
           style={{
             position: 'relative',
             width: '92vw',
             maxWidth: 720,
-            aspectRatio: '10 / 3', // だいたい 1200x360
-            marginBottom: 8,
+            aspectRatio: '10 / 3', // だいたいの比率。必要なら微調整可
+            marginBottom: 12,
+            backgroundImage: 'url(/images/ui_comment_window_base.png)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            backgroundSize: '100% 100%', // ← ここがポイント（余白を無視して全面に）
+            borderRadius: 8,
           }}
         >
-          {/* 枠 */}
-          <img
-            src="/images/ui_comment_window_base.png"
-            alt="コメントウィンドウ"
-            decoding="async"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'contain',
-              display: 'block',
-              zIndex: 0,
-              pointerEvents: 'none',
-              userSelect: 'none',
-            }}
-          />
-
-          {/* テキスト */}
+          {/* テキスト（枠の上に重ねる） */}
           <p
             style={{
               position: 'absolute',
-              zIndex: 10,
               left: '8%',
               right: '8%',
-              top: '18%',
+              top: '18%',         // 文字位置はここで調整
               fontSize: 16,
               lineHeight: 1.6,
               fontWeight: 700,
@@ -107,13 +90,12 @@ export default function IntroNarration({ onNext, character }: Props) {
             {message}
           </p>
 
-          {/* 次へボタン */}
+          {/* 次へボタン（枠内右下） */}
           <button
             onClick={onNext}
             aria-label="次へ"
             style={{
               position: 'absolute',
-              zIndex: 10,
               right: '6%',
               bottom: '10%',
               padding: '10px 14px',
