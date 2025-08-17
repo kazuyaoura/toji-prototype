@@ -1,3 +1,4 @@
+// components/IntroNarration.tsx
 'use client';
 
 import React from 'react';
@@ -29,10 +30,7 @@ export default function IntroNarration({ onNext, character }: Props) {
       <div
         style={{
           position: 'absolute',
-          left: 0,
-          right: 0,
-          top: 0,
-          height: '66.666vh',
+          inset: '0 0 33.333vh 0', // 下1/3を残して上2/3を背景に
         }}
       >
         <img
@@ -52,34 +50,31 @@ export default function IntroNarration({ onNext, character }: Props) {
           bottom: 0,
           height: '33.333vh',
           display: 'flex',
-          alignItems: 'flex-end',
+          alignItems: 'center',
           justifyContent: 'center',
           paddingBottom: 'env(safe-area-inset-bottom)',
-          background: '#000', // 黒帯のまま
+          background: '#000',
         }}
       >
-        {/* ▼ 枠は background-image で“容器いっぱい”に貼る */}
+        {/* 枠は background-image を全面貼り（余白の影響を受けない） */}
         <div
           style={{
             position: 'relative',
-            width: '92vw',
-            maxWidth: 720,
-            aspectRatio: '10 / 3', // だいたいの比率。必要なら微調整可
-            marginBottom: 12,
+            width: '100vw', // 黒帯いっぱい
+            aspectRatio: '10 / 3', // 必要に応じて 11/3 や 3.3/1 に微調整
             backgroundImage: 'url(/images/ui_comment_window_base.png)',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            backgroundSize: '100% 100%', // ← ここがポイント（余白を無視して全面に）
-            borderRadius: 8,
+            backgroundSize: '100% 100%',
           }}
         >
-          {/* テキスト（枠の上に重ねる） */}
+          {/* テキスト（枠上に重ねる） */}
           <p
             style={{
               position: 'absolute',
               left: '8%',
               right: '8%',
-              top: '18%',         // 文字位置はここで調整
+              top: '18%',        // 文字の縦位置はここで調整
               fontSize: 16,
               lineHeight: 1.6,
               fontWeight: 700,
