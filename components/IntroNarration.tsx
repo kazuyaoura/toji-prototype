@@ -26,11 +26,11 @@ export default function IntroNarration({ onNext, character }: Props) {
         background: '#000',
       }}
     >
-      {/* 上：背景（画面の上2/3） */}
+      {/* 背景（上 2/3） */}
       <div
         style={{
           position: 'absolute',
-          inset: '0 0 33.333vh 0', // 下1/3を残して上2/3を背景に
+          inset: '0 0 33.333vh 0', // 下1/3分を残して敷く
         }}
       >
         <img
@@ -41,7 +41,7 @@ export default function IntroNarration({ onNext, character }: Props) {
         />
       </div>
 
-      {/* 下：コメントパネル（画面の下1/3） */}
+      {/* コメント帯（下 1/3） */}
       <div
         style={{
           position: 'absolute',
@@ -52,34 +52,35 @@ export default function IntroNarration({ onNext, character }: Props) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          paddingBottom: 'env(safe-area-inset-bottom)',
+          padding: 'max(env(safe-area-inset-bottom), 8px) 0 8px', // 下端の安全余白
           background: '#000',
         }}
       >
-        {/* 枠は background-image を全面貼り（余白の影響を受けない） */}
+        {/* ▼ 枠：横幅いっぱい＆帯の高さぎりぎり */}
         <div
           style={{
             position: 'relative',
-            width: '100vw', // 黒帯いっぱい
-            aspectRatio: '10 / 3', // 必要に応じて 11/3 や 3.3/1 に微調整
+            width: '100vw',                 // 全幅
+            height: '100%',                 // 帯の高さをフルで
             backgroundImage: 'url(/images/ui_comment_window_base.png)',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            backgroundSize: '100% 100%',
+            backgroundSize: '100% 100%',    // 容器にピッタリ貼る（余白無視）
           }}
         >
-          {/* テキスト（枠上に重ねる） */}
+          {/* テキスト */}
           <p
             style={{
               position: 'absolute',
-              left: '8%',
-              right: '8%',
-              top: '18%',        // 文字の縦位置はここで調整
-              fontSize: 16,
+              left: '7.5%',
+              right: '7.5%',
+              top: '18%',
+              fontSize: 'clamp(14px, 2.6vw, 18px)', // 端末幅で少し可変
               lineHeight: 1.6,
               fontWeight: 700,
               color: '#111',
               whiteSpace: 'pre-line',
+              textShadow: '0 1px 0 rgba(255,255,255,.35)', // 薄く読みやすく
             }}
           >
             {message}
@@ -91,7 +92,7 @@ export default function IntroNarration({ onNext, character }: Props) {
             aria-label="次へ"
             style={{
               position: 'absolute',
-              right: '6%',
+              right: '5%',
               bottom: '10%',
               padding: '10px 14px',
               fontWeight: 700,
