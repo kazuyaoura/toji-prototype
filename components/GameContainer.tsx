@@ -19,7 +19,6 @@ export default function GameContainer() {
   const [selectedPolishing, setSelectedPolishing] = useState('');
   const [selectedWater, setSelectedWater] = useState('');
 
-  // ★ 所持金は「マップ以降」で表示（= step >= 4）
   const showMoney = step >= 4;
 
   return (
