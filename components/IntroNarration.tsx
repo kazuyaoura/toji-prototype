@@ -5,7 +5,7 @@ type Props = { onNext: () => void; character: '隆介' | '鈴' };
 
 // ===== 調整つまみ =====
 const PANEL_VH = 33.333;       // 下帯の高さ（%）
-const FRAME_WIDTH_VW = 120;      // 枠の横幅（vw）
+const FRAME_WIDTH_VW = 100;      // 枠の横幅（vw）
 const FRAME_MAX_W = 900;        // 枠の最大横幅（px）
 const FRAME_ASPECT = 10 / 4;  // 枠の比率（横/縦）→ 分母を大きくすると“縦厚”
 const TEXT_SIZE = 18;           // 本文フォント（px）
