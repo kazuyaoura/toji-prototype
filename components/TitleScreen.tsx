@@ -3,13 +3,13 @@
 import Image from 'next/image';
 
 type Props = {
-  onNext: () => void;
+  onStart: () => void;
 };
 
-export default function NoticeScreen({ onNext }: Props) {
+export default function TitleScreen({ onStart }: Props) {
   return (
     <div
-      onClick={onNext}
+      onClick={onStart}
       className="
         fixed
         inset-0
@@ -22,12 +22,12 @@ export default function NoticeScreen({ onNext }: Props) {
       "
     >
 
-      {/* 注意画像 */}
+      {/* タイトル画像 */}
       <Image
-        src="/images/ui_notice_game_disclaimer.png"
-        alt="ご注意"
+        src="/images/title_main_with_start.png"
+        alt="今日から杜氏！"
         width={900}
-        height={1400}
+        height={1200}
         priority
         className="
           max-w-full
@@ -38,7 +38,7 @@ export default function NoticeScreen({ onNext }: Props) {
         "
       />
 
-      {/* TAP TO NEXT */}
+      {/* TAP TO START */}
       <div
         className="
           absolute
@@ -54,7 +54,7 @@ export default function NoticeScreen({ onNext }: Props) {
           pointer-events-none
         "
       >
-        ▶ TAP TO NEXT
+        ▶ TAP TO START
       </div>
 
     </div>
