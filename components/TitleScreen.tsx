@@ -58,4 +58,3 @@ export default function TitleScreen({ onStart }: Props) {
     </div>
   );
 }
-```
