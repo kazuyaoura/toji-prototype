@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import DialogueBox from './DialogueBox';
 
 type Props = {
@@ -24,23 +25,30 @@ export default function IntroNarration({
       : '/characters/character_main_suzue_transparent.png';
 
   return (
-    <div className="w-screen h-screen flex flex-col bg-black overflow-hidden">
+    <div
+      onClick={onNext}
+      className="fixed inset-0 bg-black flex flex-col overflow-hidden cursor-pointer"
+    >
       {/* 上：背景 */}
-      <div className="relative flex-1">
-        <img
+      <div className="relative flex-1 min-h-0">
+        <Image
           src="/images/bg_narration_kichizaemon_intro.png"
           alt="本蔵の外観"
-          className="absolute inset-0 w-full h-full object-cover"
+          fill
+          priority
+          className="object-cover pointer-events-none"
         />
       </div>
 
-      {/* 下：DialogueBox */}
-      <DialogueBox
-        speaker={character}
-        text={message}
-        portrait={portrait}
-        onNext={onNext}
-      />
+      {/* 下：会話UI */}
+      <div onClick={(e) => e.stopPropagation()}>
+        <DialogueBox
+          speaker={character}
+          text={message}
+          portrait={portrait}
+          onNext={onNext}
+        />
+      </div>
     </div>
   );
 }
