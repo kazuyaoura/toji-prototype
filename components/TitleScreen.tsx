@@ -10,19 +10,19 @@ export default function TitleScreen({ onStart }: Props) {
   return (
     <div className="w-screen h-screen bg-black flex flex-col overflow-hidden">
 
-      {/* 上：ゴエモン風タイトル画像 */}
-      <div className="relative flex-1">
+      {/* 上：タイトル画像 */}
+      <div className="relative flex-1 flex items-center justify-center bg-black">
         <Image
           src="/images/title_main_with_start.png"
           alt="今日から杜氏！ タイトル画面"
           fill
-          className="object-cover pointer-events-none"
+          className="object-contain pointer-events-none"
           priority
         />
       </div>
 
       {/* 下：パワプロ風UI */}
-      <div className="bg-[#1b1b1b] border-t-4 border-white px-4 py-4">
+      <div className="bg-[#1b1b1b] border-t-4 border-white px-4 py-4 shrink-0">
 
         {/* メッセージ */}
         <div className="text-white text-center text-sm mb-3">
