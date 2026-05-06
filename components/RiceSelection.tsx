@@ -2,7 +2,7 @@
 
 import React, { useState, useContext } from 'react';
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
+import DialogueBox from './DialogueBox';
 import { MoneyContext } from '@/contexts/MoneyContext';
 
 type Props = {
@@ -13,17 +13,17 @@ const riceOptions = [
   {
     name: '播磨産 山田錦',
     cost: 5000,
-    description: '値は張るが最高の酒ができるぞ。評判重視ならこれやな。',
+    description: '値は張るが最高の酒ができるぞ。',
   },
   {
     name: '西宮の米',
     cost: 3000,
-    description: '地元産でコスパ良し！バランスの取れた選択や。',
+    description: '地元産でコスパ良し！',
   },
   {
     name: '飯米',
     cost: 1000,
-    description: '安さが魅力やけど、クセが出るかもな…。腕の見せどころや。',
+    description: '安さが魅力や。',
   },
 ];
 
@@ -38,12 +38,6 @@ export default function RiceSelection({ onSelect }: Props) {
     'さて、どのお米にする？',
   ];
 
-  const handleClick = () => {
-    if (messageIndex < messages.length - 1) {
-      setMessageIndex(messageIndex + 1);
-    }
-  };
-
   const isChoiceStep = messageIndex === messages.length - 1;
 
   const handleSelect = (rice: string, cost: number) => {
@@ -56,68 +50,82 @@ export default function RiceSelection({ onSelect }: Props) {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden font-sans">
-      {/* 背景画像（クリック判定を遮らないように pointer-events-none） */}
-      <Image
-        src="/bg_rice_storage_room.png"
-        alt="米蔵"
-        fill
-        className="object-cover pointer-events-none"
-        priority
-      />
+    <div className="w-screen h-screen bg-black flex flex-col overflow-hidden">
 
-      {/* キャラ画像 */}
-      <div className="absolute bottom-0 left-0 w-1/3 max-w-[240px] z-10">
+      {/* 上：背景＋キャラ */}
+      <div className="relative flex-1">
+
+        {/* 背景 */}
         <Image
-          src="/character_rice_saburo_transparent.png"
-          alt="三郎"
-          width={300}
-          height={300}
+          src="/bg_rice_storage_room.png"
+          alt="米蔵"
+          fill
+          className="object-cover pointer-events-none"
+          priority
         />
+
+        {/* キャラ */}
+        <div className="absolute bottom-0 left-0 w-1/3 max-w-[240px] z-10">
+          <Image
+            src="/character_rice_saburo_transparent.png"
+            alt="三郎"
+            width={300}
+            height={300}
+          />
+        </div>
+
       </div>
 
-      {/* コメントボックス */}
-      {!isChoiceStep && (
-        <div className="absolute bottom-0 w-full px-4 pb-4 z-20" onClick={handleClick}>
-          <div className="relative mx-auto max-w-2xl">
-            <Image
-              src="/ui/ui_comment_window_base.png"
-              alt="コメントボックス"
-              width={768}
-              height={200}
-            />
-            <p className="absolute top-6 left-6 right-6 text-lg leading-relaxed whitespace-pre-line text-black drop-shadow-sm">
-              {messages[messageIndex]}
-            </p>
-          </div>
-        </div>
-      )}
+      {/* 下：UI */}
+      {!isChoiceStep ? (
+        <DialogueBox
+          speaker="三郎"
+          text={messages[messageIndex]}
+          onNext={() => setMessageIndex(messageIndex + 1)}
+        />
+      ) : (
+        <div className="bg-[#1b1b1b] border-t-4 border-white px-4 py-4 text-white">
 
-      {/* 選択肢 */}
-      {isChoiceStep && (
-        <div className="absolute bottom-0 w-full px-4 pb-4 z-30">
-          <div className="relative mx-auto max-w-2xl text-center space-y-4">
-            <Image
-              src="/ui/ui_choices_panel_3options.png"
-              alt="選択肢パネル"
-              width={768}
-              height={300}
-            />
-            <div className="absolute top-6 left-0 right-0 px-6 space-y-3">
-              <p className="text-lg font-bold drop-shadow-sm">
-                お米を選んでください（所持金：{money.toLocaleString()}円）
-              </p>
-              {riceOptions.map((option) => (
-                <Button
-                  key={option.name}
-                  onClick={() => handleSelect(option.name, option.cost)}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 text-sm rounded shadow"
-                >
-                  {option.name}（{option.cost.toLocaleString()}円） - {option.description}
-                </Button>
-              ))}
-            </div>
+          <div className="text-center mb-4">
+            お米を選んでください
+            <br />
+            所持金：{money.toLocaleString()}円
           </div>
+
+          <div className="space-y-3">
+            {riceOptions.map((option) => (
+              <button
+                key={option.name}
+                onClick={() => handleSelect(option.name, option.cost)}
+                className="
+                  w-full
+                  rounded-xl
+                  bg-blue-600
+                  border-2
+                  border-white
+                  px-4
+                  py-3
+                  text-left
+                  shadow-lg
+                  active:scale-95
+                  transition
+                "
+              >
+                <div className="font-bold text-lg">
+                  {option.name}
+                </div>
+
+                <div className="text-sm opacity-90">
+                  {option.cost.toLocaleString()}円
+                </div>
+
+                <div className="text-sm mt-1">
+                  {option.description}
+                </div>
+              </button>
+            ))}
+          </div>
+
         </div>
       )}
     </div>
