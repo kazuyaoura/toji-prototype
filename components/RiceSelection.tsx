@@ -50,12 +50,9 @@ export default function RiceSelection({ onSelect }: Props) {
   };
 
   return (
-    <div className="w-screen h-screen bg-black flex flex-col overflow-hidden">
-
+    <div className="fixed inset-0 bg-black flex flex-col overflow-hidden">
       {/* 上：背景＋キャラ */}
-      <div className="relative flex-1">
-
-        {/* 背景 */}
+      <div className="relative flex-1 min-h-0">
         <Image
           src="/bg_rice_storage_room.png"
           alt="米蔵"
@@ -64,16 +61,15 @@ export default function RiceSelection({ onSelect }: Props) {
           priority
         />
 
-        {/* キャラ */}
-        <div className="absolute bottom-0 left-0 w-1/3 max-w-[240px] z-10">
+        <div className="absolute bottom-0 left-0 z-10">
           <Image
             src="/character_rice_saburo_transparent.png"
             alt="三郎"
-            width={300}
-            height={300}
+            width={260}
+            height={260}
+            className="object-contain"
           />
         </div>
-
       </div>
 
       {/* 下：UI */}
@@ -81,11 +77,11 @@ export default function RiceSelection({ onSelect }: Props) {
         <DialogueBox
           speaker="三郎"
           text={messages[messageIndex]}
+          portrait="/character_rice_saburo_transparent.png"
           onNext={() => setMessageIndex(messageIndex + 1)}
         />
       ) : (
-        <div className="bg-[#1b1b1b] border-t-4 border-white px-4 py-4 text-white">
-
+        <div className="bg-[#1b1b1b] border-t-4 border-white px-4 py-4 text-white shrink-0">
           <div className="text-center mb-4">
             お米を選んでください
             <br />
@@ -97,35 +93,16 @@ export default function RiceSelection({ onSelect }: Props) {
               <button
                 key={option.name}
                 onClick={() => handleSelect(option.name, option.cost)}
-                className="
-                  w-full
-                  rounded-xl
-                  bg-blue-600
-                  border-2
-                  border-white
-                  px-4
-                  py-3
-                  text-left
-                  shadow-lg
-                  active:scale-95
-                  transition
-                "
+                className="w-full rounded-xl bg-blue-600 border-2 border-white px-4 py-3 text-left shadow-lg active:scale-95 transition"
               >
-                <div className="font-bold text-lg">
-                  {option.name}
-                </div>
-
+                <div className="font-bold text-lg">{option.name}</div>
                 <div className="text-sm opacity-90">
                   {option.cost.toLocaleString()}円
                 </div>
-
-                <div className="text-sm mt-1">
-                  {option.description}
-                </div>
+                <div className="text-sm mt-1">{option.description}</div>
               </button>
             ))}
           </div>
-
         </div>
       )}
     </div>
