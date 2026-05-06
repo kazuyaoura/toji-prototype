@@ -2,13 +2,16 @@
 
 import Image from 'next/image';
 
-type Props = { onNext: () => void };
+type Props = {
+  onNext: () => void;
+};
 
 export default function NoticeScreen({ onNext }: Props) {
   return (
-    <div className="fixed inset-0 z-[999] bg-black">
-      {/* 背景画像（中央に等比） */}
-      <div className="absolute inset-0">
+    <div className="w-screen h-screen bg-black flex flex-col overflow-hidden">
+
+      {/* 上：説明画像 */}
+      <div className="relative flex-1 bg-black">
         <Image
           src="/images/ui_notice_game_disclaimer.png"
           alt="ご注意"
@@ -18,24 +21,40 @@ export default function NoticeScreen({ onNext }: Props) {
         />
       </div>
 
-      {/* ボタン：縦が反転して効く環境向けに top を小さく */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '5%',                // ← 小さい top で“画面の下寄り”に出る環境向け
-          right: '50%',             // ← 中央寄せ（左右も反転環境想定）
-          transform: 'translateX(50%)',
-          width: 'min(75vw, 520px)',
-          zIndex: 1000,
-        }}
-      >
-        <button
-          onClick={onNext}
-          className="w-full h-12 bg-blue-600 text-white font-bold rounded-lg shadow"
-        >
-          ▶ 次へ
-        </button>
+      {/* 下：パワプロ風UI */}
+      <div className="bg-[#1b1b1b] border-t-4 border-white px-4 py-4">
+
+        {/* メッセージ */}
+        <div className="text-white text-center text-sm mb-3">
+          内容をご確認のうえ、次へ進んでください。
+        </div>
+
+        {/* ボタン */}
+        <div className="flex justify-center">
+          <button
+            onClick={onNext}
+            className="
+              w-full
+              max-w-sm
+              h-14
+              rounded-lg
+              bg-blue-600
+              text-white
+              text-xl
+              font-bold
+              shadow-lg
+              border-2
+              border-white
+              active:scale-95
+              transition
+            "
+          >
+            ▶ 次へ
+          </button>
+        </div>
+
       </div>
+
     </div>
   );
 }
