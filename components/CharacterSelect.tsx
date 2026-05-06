@@ -11,10 +11,10 @@ type Props = {
 
 export default function CharacterSelect({ onSelect }: Props) {
   return (
-    <div className="w-screen h-screen bg-black flex flex-col overflow-hidden">
+    <div className="fixed inset-0 bg-black flex flex-col overflow-hidden">
       {/* 上：キャラクター選択エリア */}
-      <div className="flex-1 bg-[#f7efe3] flex flex-col items-center justify-center px-4">
-        <h1 className="text-2xl font-bold mb-6 text-[#2b1d12]">
+      <div className="flex-1 min-h-0 bg-[#f7efe3] flex flex-col items-center justify-center px-4 py-4">
+        <h1 className="text-2xl font-bold mb-4 text-[#2b1d12]">
           主人公を選んでください
         </h1>
 
@@ -36,9 +36,9 @@ export default function CharacterSelect({ onSelect }: Props) {
       </div>
 
       {/* 下：パワプロ風UI */}
-      <div className="bg-[#1b1b1b] border-t-4 border-white px-4 py-4">
+      <div className="bg-[#1b1b1b] border-t-4 border-white px-4 py-4 shrink-0">
         <div className="text-white text-center text-sm">
-          選んだ主人公で、物語が少し変わります。
+          主人公をタップして選んでください。
         </div>
       </div>
     </div>
@@ -60,14 +60,27 @@ function CharacterCard({
     <button
       type="button"
       onClick={onClick}
-      className="bg-white rounded-xl border-4 border-[#2b1d12] p-3 flex flex-col items-center shadow-lg active:scale-95 transition"
+      className="
+        bg-white
+        rounded-xl
+        border-4
+        border-[#2b1d12]
+        p-3
+        flex
+        flex-col
+        items-center
+        shadow-lg
+        active:scale-95
+        transition
+        min-h-[260px]
+      "
     >
-      <div className="relative w-28 h-36 mb-2">
+      <div className="relative w-full h-36 mb-2">
         <Image
           src={imgSrc}
           alt={name}
           fill
-          className="object-contain"
+          className="object-contain pointer-events-none"
         />
       </div>
 
@@ -75,7 +88,7 @@ function CharacterCard({
         {name}
       </div>
 
-      <div className="text-xs text-[#4b3a2a] leading-relaxed">
+      <div className="text-xs text-[#4b3a2a] leading-relaxed min-h-[34px]">
         {description}
       </div>
 
