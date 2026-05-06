@@ -18,9 +18,13 @@ export default function IntroNarration({
       : `いよいよ今日から、杜氏として本蔵に入ることになった。
 西宮の老舗酒蔵「本蔵」で、日本一のお酒を造ってみせる……！`;
 
+  const portrait =
+    character === '隆介'
+      ? '/characters/character_main_ryusuke_transparent.png'
+      : '/characters/character_main_suzue_transparent.png';
+
   return (
     <div className="w-screen h-screen flex flex-col bg-black overflow-hidden">
-
       {/* 上：背景 */}
       <div className="relative flex-1">
         <img
@@ -34,9 +38,9 @@ export default function IntroNarration({
       <DialogueBox
         speaker={character}
         text={message}
+        portrait={portrait}
         onNext={onNext}
       />
-
     </div>
   );
 }
