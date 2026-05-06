@@ -2,7 +2,7 @@
 
 import React, { useState, useContext } from 'react';
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
+import DialogueBox from './DialogueBox';
 import { MoneyContext } from '@/contexts/MoneyContext';
 
 export interface RicePolishingChoiceProps {
@@ -43,14 +43,12 @@ const RicePolishingChoice: React.FC<RicePolishingChoiceProps> = ({
   };
 
   const polishingDialogues = [
-    'まずは「足踏み」やな。\n人の力でゴリゴリと精米する昔ながらの方法や。\n手間もかかるし、何より疲れる！ それでも200円でできるのは魅力やな。',
-    '次は「水車」や。\n近くの夙川（しゅくがわ）にある水車小屋を使うてな、\n自然の力で力強く精米できるんやで。\nただな……ちょっと離れとるから、米の運搬が手間や。400円や。',
-    '続いて「蒸気機関」や。\n石炭さえくべれば動いてくれるから、天気に関係なく安定しとる。\n精米のスピードも速いし、仕上がりもなかなかええ。\n800円とちょい高めやけどな。',
-    '最後は「機械精米」や！\nこれはもう、最新鋭の技術やで。\n均一に精米できて、味も見た目も上等や。\n…せやけど、1500円。初めての仕込みにはちょっと贅沢かもしれへんな。',
-    'それぞれええとこ悪いとこあるさかい、よう考えて決めてな！\nどの方法で精米する？',
+    'まずは「足踏み」やな。\n人の力でゴリゴリと精米する昔ながらの方法や。',
+    '次は「水車」や。\n自然の力で力強く精米できるんやで。',
+    '続いて「蒸気機関」や。\n安定して精米できる近代技術や。',
+    '最後は「機械精米」や！\n最新鋭の高精度精米やで。',
+    'それぞれええとこ悪いとこあるさかい、よう考えて決めてな！',
   ];
-
-  const handleNext = () => setStep((prev) => prev + 1);
 
   const polishingOptions = [
     { method: '足踏み', label: '足踏み（伝統の人力）', cost: 200 },
@@ -58,6 +56,12 @@ const RicePolishingChoice: React.FC<RicePolishingChoiceProps> = ({
     { method: '蒸気機関', label: '蒸気機関（近代の力）', cost: 800 },
     { method: '機械精米', label: '機械精米（高精度・高コスト）', cost: 1500 },
   ];
+
+  const handleNext = () => {
+    setStep((prev) => prev + 1);
+  };
+
+  const isSelectionStep = step > polishingDialogues.length;
 
   const handleSelect = (method: string, cost: number) => {
     if (money >= cost) {
@@ -68,83 +72,102 @@ const RicePolishingChoice: React.FC<RicePolishingChoiceProps> = ({
     }
   };
 
-  const renderDialogue = () => {
-    const imageSrc = step === 0 ? characterImage : '/characters/character_rice_saburo_transparent.png';
-    const speakerName = step === 0 ? character : '三郎';
-    const isSelectionStep = step === polishingDialogues.length;
+  const currentText =
+    step === 0
+      ? getFirstDialogue()
+      : polishingDialogues[step - 1];
 
-    return (
-      <div className="relative w-full h-full">
+  return (
+    <div className="w-screen h-screen bg-black flex flex-col overflow-hidden">
+
+      {/* 上：背景＋キャラ */}
+      <div className="relative flex-1">
+
+        {/* 背景 */}
         <Image
           src="/backgrounds/bg_rice_storage_room.png"
           alt="背景"
           fill
           priority
-          className="z-0 pointer-events-none" // ← 背景画像にこれを追加
+          className="object-cover pointer-events-none"
         />
 
-        <div className="absolute bottom-1/4 w-full flex justify-center items-end">
+        {/* キャラ */}
+        <div className="absolute bottom-0 left-0 w-1/3 max-w-[240px] z-10">
           <Image
-            src={imageSrc}
-            alt={speakerName}
-            width={220}
-            height={220}
-            className="z-10"
+            src={
+              step === 0
+                ? characterImage
+                : '/characters/character_rice_saburo_transparent.png'
+            }
+            alt="キャラクター"
+            width={300}
+            height={300}
           />
         </div>
 
-        {!isSelectionStep && (
-          <div className="absolute bottom-0 w-full flex justify-center items-end z-20">
-            <div className="relative w-[80%] max-w-md">
-              <Image
-                src="/ui/ui_comment_window_base.png"
-                alt="コメント枠"
-                width={800}
-                height={200}
-              />
-              <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center px-6 text-base font-bold leading-relaxed text-black whitespace-pre-line drop-shadow-[1px_1px_1px_rgba(255,255,255,0.8)]">
-                {step === 0 ? getFirstDialogue() : polishingDialogues[step - 1]}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {!isSelectionStep && (
-          <div className="absolute bottom-2 right-4 z-30">
-            <Button onClick={handleNext}>▶</Button>
-          </div>
-        )}
-
-        {isSelectionStep && (
-          <div className="absolute bottom-8 w-full flex flex-col items-center space-y-4 z-30">
-            <Image
-              src="/ui/ui_choices_panel_3options.png"
-              alt="選択肢パネル"
-              width={500}
-              height={200}
-            />
-            <div className="absolute flex flex-col space-y-2">
-              {polishingOptions.map((option) => (
-                <Button
-                  key={option.method}
-                  onClick={() => handleSelect(option.method, option.cost)}
-                  disabled={option.method === '機械精米' && isFirstPlay}
-                >
-                  {`${option.label} - ¥${option.cost}`}
-                </Button>
-              ))}
-              {isFirstPlay && (
-                <div className="text-xs text-white mt-1">※ 初回は機械精米は選べません</div>
-              )}
-              <div className="text-sm mt-2 text-white">所持金：¥{money}</div>
-            </div>
-          </div>
-        )}
       </div>
-    );
-  };
 
-  return <div className="relative w-full h-screen overflow-hidden">{renderDialogue()}</div>;
+      {/* 下：UI */}
+      {!isSelectionStep ? (
+        <DialogueBox
+          speaker={step === 0 ? character : '三郎'}
+          text={currentText}
+          onNext={handleNext}
+        />
+      ) : (
+        <div className="bg-[#1b1b1b] border-t-4 border-white px-4 py-4 text-white">
+
+          <div className="text-center mb-4">
+            精米方法を選んでください
+            <br />
+            所持金：¥{money.toLocaleString()}
+          </div>
+
+          <div className="space-y-3">
+            {polishingOptions.map((option) => (
+              <button
+                key={option.method}
+                onClick={() => handleSelect(option.method, option.cost)}
+                disabled={
+                  option.method === '機械精米' && isFirstPlay
+                }
+                className="
+                  w-full
+                  rounded-xl
+                  bg-blue-600
+                  border-2
+                  border-white
+                  px-4
+                  py-3
+                  text-left
+                  shadow-lg
+                  active:scale-95
+                  transition
+                  disabled:opacity-40
+                "
+              >
+                <div className="font-bold text-lg">
+                  {option.label}
+                </div>
+
+                <div className="text-sm mt-1">
+                  ¥{option.cost.toLocaleString()}
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {isFirstPlay && (
+            <div className="text-xs mt-3 text-center opacity-80">
+              ※ 初回は機械精米は選べません
+            </div>
+          )}
+
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default RicePolishingChoice;
