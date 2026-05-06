@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useContext } from 'react';
 import { MoneyContext } from '@/contexts/MoneyContext';
 
@@ -8,18 +7,27 @@ export default function MoneyDisplay() {
   const { money } = useContext(MoneyContext);
 
   return (
-    <div className="absolute top-2 right-2 w-[120px] z-50">
-      <div className="relative w-full">
-        <Image
-          src="/ui_money_display_board.png"
-          alt="所持金"
-          width={120}
-          height={100}
-          className="w-full h-auto"
-        />
-        <span className="absolute top-[58%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-[18px] text-black drop-shadow-text">
+    <div className="absolute top-3 right-3 z-50">
+      <div
+        className="
+          bg-[#1b1b1b]
+          border-4
+          border-white
+          rounded-xl
+          px-4
+          py-2
+          shadow-lg
+          min-w-[140px]
+          text-center
+        "
+      >
+        <div className="text-xs text-gray-300 font-bold tracking-wide">
+          所持金
+        </div>
+
+        <div className="text-yellow-300 text-xl font-extrabold">
           ¥{money.toLocaleString()}
-        </span>
+        </div>
       </div>
     </div>
   );
