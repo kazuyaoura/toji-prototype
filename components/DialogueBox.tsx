@@ -1,57 +1,53 @@
 'use client';
 
+import Image from 'next/image';
+
 type Props = {
-  speaker?: string;
-  text: string;
-  onNext?: () => void;
-  buttonText?: string;
+  onNext: () => void;
+  character: '隆介' | '鈴';
 };
 
-export default function DialogueBox({
-  speaker = '',
-  text,
+export default function IntroNarration({
   onNext,
-  buttonText = '次へ',
+  character,
 }: Props) {
-  return (
-    <div className="bg-[#1b1b1b] border-t-4 border-white px-4 py-4 text-white shrink-0">
-      {/* 名前 */}
-      {speaker && (
-        <div className="inline-block bg-blue-700 border-2 border-white rounded-md px-3 py-1 text-sm font-bold mb-3">
-          {speaker}
-        </div>
-      )}
+  const message =
+    character === '隆介'
+      ? `いよいよ今日から、杜氏として本蔵に入ることになった。
+西宮の老舗酒蔵「本蔵」で、日本一の酒を目指すんや。`
+      : `いよいよ今日から、杜氏として本蔵に入ることになった。
+西宮の老舗酒蔵「本蔵」で、日本一のお酒を造ってみせる……！`;
 
-      {/* 本文 */}
-      <div className="bg-[#f8f1df] text-[#2b1d12] border-4 border-white rounded-xl p-4 shadow-lg">
-        <p className="text-base leading-relaxed font-medium whitespace-pre-line">
-          {text}
-        </p>
+  return (
+    <div className="fixed inset-0 bg-black flex flex-col overflow-hidden">
+      {/* 背景 */}
+      <div className="relative flex-1">
+        <Image
+          src="/images/bg_narration_kichizaemon_intro.png"
+          alt="背景"
+          fill
+          priority
+          className="object-cover"
+        />
       </div>
 
-      {/* ボタン */}
-      {onNext && (
-        <div className="flex justify-end mt-3">
-          <button
-            onClick={onNext}
-            className="
-              min-w-32
-              h-11
-              rounded-lg
-              bg-blue-600
-              text-white
-              font-bold
-              border-2
-              border-white
-              shadow-lg
-              active:scale-95
-              transition
-            "
-          >
-            ▶ {buttonText}
-          </button>
+      {/* 仮UI */}
+      <div className="bg-black text-white p-4 border-t-4 border-white">
+        <div className="font-bold mb-2">
+          {character}
         </div>
-      )}
+
+        <div className="mb-4 whitespace-pre-line">
+          {message}
+        </div>
+
+        <button
+          onClick={onNext}
+          className="bg-blue-600 px-4 py-2 rounded border-2 border-white"
+        >
+          ▶ 次へ
+        </button>
+      </div>
     </div>
   );
 }
