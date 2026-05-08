@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import DialogueBox from './DialogueBox';
 
 type Props = {
   onNext: () => void;
@@ -20,24 +19,71 @@ export default function IntroNarration({
 西宮の老舗酒蔵「本蔵」で、日本一のお酒を造ってみせる……！`;
 
   return (
-    <div className="fixed inset-0 bg-black flex flex-col overflow-hidden">
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'black',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+      }}
+    >
       {/* 上：背景 */}
-      <div className="relative flex-1 min-h-0">
+      <div
+        style={{
+          position: 'relative',
+          flex: 1,
+          minHeight: 0,
+          zIndex: 1,
+        }}
+      >
         <Image
           src="/images/bg_narration_kichizaemon_intro.png"
-          alt="本蔵の外観"
+          alt="背景"
           fill
           priority
-          className="object-cover pointer-events-none"
+          style={{
+            objectFit: 'cover',
+            zIndex: 1,
+          }}
         />
       </div>
 
-      {/* 下：会話UI */}
-      <DialogueBox
-        speaker={character}
-        text={message}
-        onNext={onNext}
-      />
+      {/* 下：仮UI */}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 9999,
+          flexShrink: 0,
+          background: 'black',
+          color: 'white',
+          padding: 16,
+          borderTop: '4px solid white',
+        }}
+      >
+        <div style={{ fontWeight: 'bold', marginBottom: 8 }}>
+          {character}
+        </div>
+
+        <div style={{ whiteSpace: 'pre-line', marginBottom: 12 }}>
+          {message}
+        </div>
+
+        <button
+          onClick={onNext}
+          style={{
+            background: '#2563eb',
+            color: 'white',
+            padding: '10px 16px',
+            border: '2px solid white',
+            borderRadius: 8,
+            fontWeight: 'bold',
+          }}
+        >
+          ▶ 次へ
+        </button>
+      </div>
     </div>
   );
 }
