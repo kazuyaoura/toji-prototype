@@ -40,49 +40,84 @@ export default function IntroNarration({
       >
         <Image
           src="/images/bg_narration_kichizaemon_intro.png"
-          alt="背景"
+          alt="本蔵の外観"
           fill
           priority
           style={{
             objectFit: 'cover',
-            zIndex: 1,
           }}
         />
       </div>
 
-      {/* 下：仮UI */}
+      {/* 下：会話UI */}
       <div
         style={{
           position: 'relative',
-          zIndex: 9999,
+          zIndex: 10,
           flexShrink: 0,
-          background: 'black',
+          background: '#1b1b1b',
           color: 'white',
-          padding: 16,
+          padding: '14px 16px',
           borderTop: '4px solid white',
         }}
       >
-        <div style={{ fontWeight: 'bold', marginBottom: 8 }}>
+        <div
+          style={{
+            display: 'inline-block',
+            background: '#1d4ed8',
+            color: 'white',
+            fontWeight: 700,
+            fontSize: 14,
+            padding: '4px 12px',
+            borderRadius: 6,
+            border: '2px solid white',
+            marginBottom: 8,
+          }}
+        >
           {character}
         </div>
 
-        <div style={{ whiteSpace: 'pre-line', marginBottom: 12 }}>
+        <div
+          style={{
+            background: '#f8f1df',
+            color: '#2b1d12',
+            border: '4px solid white',
+            borderRadius: 12,
+            padding: 14,
+            fontSize: 15,
+            fontWeight: 700,
+            lineHeight: 1.6,
+            whiteSpace: 'pre-line',
+            boxShadow: '0 3px 10px rgba(0,0,0,.25)',
+          }}
+        >
           {message}
         </div>
 
-        <button
-          onClick={onNext}
+        <div
           style={{
-            background: '#2563eb',
-            color: 'white',
-            padding: '10px 16px',
-            border: '2px solid white',
-            borderRadius: 8,
-            fontWeight: 'bold',
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginTop: 10,
           }}
         >
-          ▶ 次へ
-        </button>
+          <button
+            onClick={onNext}
+            style={{
+              background: '#2563eb',
+              color: 'white',
+              padding: '10px 18px',
+              border: '2px solid white',
+              borderRadius: 10,
+              fontWeight: 700,
+              fontSize: 15,
+              boxShadow: '0 3px 8px rgba(0,0,0,.25)',
+              cursor: 'pointer',
+            }}
+          >
+            ▶ 次へ
+          </button>
+        </div>
       </div>
     </div>
   );
